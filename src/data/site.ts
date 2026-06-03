@@ -49,8 +49,8 @@ export const audiences = {
     description:
       "Com os dados do comércio local, o município direciona campanhas públicas de verdade — vacinação, matrícula escolar, cursos e vagas — economizando em publicidade de plataformas estrangeiras.",
     bullets: [
-      { title: "Campanhas direcionadas", desc: "Vacinação, matrículas e saúde para o público certo." },
-      { title: "Vagas de emprego", desc: "Conecte a demanda dos negócios locais aos cidadãos." },
+      { title: "Campanhas direcionadas", desc: "Vacinação, matrículas e eventos para o público certo." },
+      { title: "Cursos profissionalizantes", desc: "Conecte a demanda dos negócios locais aos cidadãos." },
       { title: "Dashboard de indicadores", desc: "Visualize o desenvolvimento do comércio da cidade." },
       { title: "Menos gasto com mídia", desc: "Economize com anúncios em redes estrangeiras." },
     ],
