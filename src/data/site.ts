@@ -35,9 +35,9 @@ export const audiences = {
     description:
       "Um HUB de aplicativos feito para barbearias, manicures, lava-jatos e academias. Automatize agendamento, atendimento e financeiro — e pague uma fração do que custam as ferramentas comuns.",
     bullets: [
-      { title: "Agenda automática", desc: "Clientes marcam sozinhos pelo link, 24h por dia." },
-      { title: "Financeiro no controle", desc: "Caixa, recebimentos e inadimplência em uma tela." },
-      { title: "Atendimento ágil", desc: "Lembretes e confirmações automáticas no WhatsApp." },
+      { title: "Agenda automática", desc: "Clientes marcam sozinhos direto no aplicativo, 24h por dia." },
+      { title: "Financeiro no controle", desc: "Caixa, recebimentos, pagamentos e inadimplência em uma única tela, com poucos cliques." },
+      { title: "Dados protegidos (LGPD)", desc: "Informações criptografadas, termos de uso claros e exclusão dos dados quando quiser — tudo em conformidade com a LGPD." },
       { title: "Economia real", desc: "R$400/ano contra ~R$1.600 das ferramentas comuns." },
     ],
     cta: { label: "Quero para meu negócio", href: "#preco" },
