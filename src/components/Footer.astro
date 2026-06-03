@@ -1,0 +1,71 @@
+---
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+import { company, navLinks, whatsappUrl } from "../data/site";
+const year = new Date().getFullYear();
+const wa = whatsappUrl("Olá! Quero conhecer a MicroSertão.");
+---
+
+<footer class="border-t border-white/8 bg-ink-950">
+  <div class="container-x py-14">
+    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <div class="lg:col-span-1">
+        <Logo />
+        <p class="mt-4 text-sm text-white/55 max-w-xs">{company.slogan}</p>
+        <p class="mt-4 text-xs text-white/40">{company.cnpjNote}</p>
+      </div>
+
+      <div>
+        <h4 class="font-display font-semibold text-white text-sm">Navegue</h4>
+        <ul class="mt-4 space-y-2.5">
+          {navLinks.map((l) => (
+            <li><a href={l.href} class="text-sm text-white/55 hover:text-white transition-colors">{l.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-display font-semibold text-white text-sm">Contato</h4>
+        <ul class="mt-4 space-y-3">
+          <li>
+            <a href={wa} target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-white/55 hover:text-white transition-colors">
+              <Icon name="whatsapp" class="w-4 h-4 text-brand-400" /> {company.whatsappLabel}
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${company.email}`} class="flex items-center gap-2.5 text-sm text-white/55 hover:text-white transition-colors">
+              <Icon name="mail" class="w-4 h-4 text-brand-400" /> {company.email}
+            </a>
+          </li>
+          <li class="flex items-center gap-2.5 text-sm text-white/55">
+            <Icon name="pin" class="w-4 h-4 text-brand-400" /> {company.city}
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-display font-semibold text-white text-sm">Comece agora</h4>
+        <p class="mt-4 text-sm text-white/55">Tire suas dúvidas e configure sua ferramenta com a gente.</p>
+        <a href={wa} target="_blank" rel="noopener" class="btn btn-primary w-full mt-4">
+          <Icon name="whatsapp" class="w-4 h-4" /> Falar no WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-xs text-white/40">© {year} {company.name} · {company.tagline}. Todos os direitos reservados.</p>
+      <p class="text-xs text-white/40">Feito em {company.city} 🧡</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp flutuante -->
+<a
+  href={wa}
+  target="_blank"
+  rel="noopener"
+  class="fixed bottom-5 right-5 z-50 grid place-items-center w-14 h-14 rounded-full bg-green-500 text-white shadow-[0_10px_30px_-6px_rgba(34,197,94,.6)] hover:scale-105 transition-transform"
+  aria-label="Falar no WhatsApp"
+>
+  <Icon name="whatsapp" class="w-7 h-7" />
+</a>

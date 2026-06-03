@@ -1,0 +1,36 @@
+---
+import Icon from "./Icon.astro";
+import { faqs, whatsappUrl } from "../data/site";
+const wa = whatsappUrl("Olá! Fiquei com uma dúvida sobre a MicroSertão.");
+---
+
+<section id="faq" class="py-20 md:py-28 bg-ink-950">
+  <div class="container-x grid lg:grid-cols-[0.8fr_1.2fr] gap-12">
+    <div class="reveal">
+      <span class="eyebrow">Dúvidas frequentes</span>
+      <h2 class="mt-3 font-display font-bold text-white text-3xl sm:text-4xl tracking-tight text-balance">
+        Ficou com alguma dúvida?
+      </h2>
+      <p class="mt-4 text-white/60">
+        Reunimos as perguntas mais comuns. Se a sua não estiver aqui, fale com a gente — respondemos rápido.
+      </p>
+      <a href={wa} target="_blank" rel="noopener" class="btn btn-ghost mt-6">
+        <Icon name="whatsapp" class="w-4 h-4" /> Conversar com a gente
+      </a>
+    </div>
+
+    <div class="divide-y divide-white/8 reveal">
+      {faqs.map((f, i) => (
+        <details class="group py-4" open={i === 0}>
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none">
+            <span class="font-display font-medium text-white text-lg">{f.q}</span>
+            <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg border border-white/10 text-white/70 group-open:bg-brand-500 group-open:text-white group-open:border-brand-500 transition-colors">
+              <svg class="w-4 h-4 group-open:rotate-45 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+          </summary>
+          <p class="mt-3 text-white/60 leading-relaxed pr-12">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

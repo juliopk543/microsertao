@@ -1,0 +1,30 @@
+---
+import Icon from "./Icon.astro";
+import { whatsappUrl, company } from "../data/site";
+const wa = whatsappUrl("Olá! Quero começar com a MicroSertão.");
+---
+
+<section class="py-16 md:py-24 bg-ink-900">
+  <div class="container-x">
+    <div class="relative overflow-hidden rounded-3xl border border-brand-500/30 bg-gradient-to-br from-brand-600/20 via-ink-850 to-ink-900 p-8 md:p-14 reveal">
+      <div class="absolute -right-10 -top-10 w-64 h-64 stripes opacity-[0.08] rotate-12"></div>
+      <div class="relative max-w-2xl">
+        <h2 class="font-display font-extrabold text-white text-3xl sm:text-4xl tracking-tight text-balance">
+          Pronto para deixar seu negócio no automático?
+        </h2>
+        <p class="mt-4 text-white/70 text-lg">
+          Comece hoje com a MicroSertão. A gente ajuda na configuração e no treinamento,
+          passo a passo — fale com a gente pelo WhatsApp.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <a href={wa} target="_blank" rel="noopener" class="btn btn-primary text-base px-6 py-3.5">
+            <Icon name="whatsapp" class="w-5 h-5" /> {company.whatsappLabel}
+          </a>
+          <a href={`mailto:${company.email}`} class="btn btn-ghost text-base px-6 py-3.5">
+            <Icon name="mail" class="w-5 h-5" /> {company.email}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
