@@ -5,9 +5,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  // Domínio personalizado
-  site: 'https://www.microsertao.com.br',
-  base: '/',
+  site: 'https://juliopk543.github.io',
+  base: '/microsertao',
   vite: {
     plugins: [tailwindcss()]
   }
