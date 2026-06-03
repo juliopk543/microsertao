@@ -1,15 +1,11 @@
 ---
 interface Props { class?: string }
 const { class: className = "" } = Astro.props;
+const icon = `${import.meta.env.BASE_URL}/logo-icon.png`.replace(/\/+/g, "/");
 ---
 <a href="#top" class={`group inline-flex items-center gap-2.5 ${className}`} aria-label="MicroSertão — início">
-  <span class="relative grid place-items-center w-9 h-9 rounded-xl bg-brand-500 shadow-[0_8px_24px_-8px_rgba(255,106,26,.8)] overflow-hidden">
-    <!-- marca: monograma 'M' estilizado -->
-    <svg viewBox="0 0 24 24" class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M4 19V7l5 6 5-6v12" />
-      <path d="M18 7v12" />
-    </svg>
-    <span class="absolute inset-x-0 bottom-0 h-1 stripes opacity-60"></span>
+  <span class="relative grid place-items-center w-9 h-9 rounded-xl bg-ink-900 overflow-hidden">
+    <img src={icon} alt="" aria-hidden="true" class="w-full h-full object-contain p-0.5" />
   </span>
   <span class="leading-none">
     <span class="block font-display font-extrabold tracking-tight text-white text-lg">
