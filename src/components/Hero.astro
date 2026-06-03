@@ -1,114 +1,127 @@
 ---
 import Icon from "./Icon.astro";
-import { hero, heroPills, whatsappUrl } from "../data/site";
+import { whatsappUrl } from "../data/site";
 const wa = whatsappUrl("Olá! Quero conhecer os aplicativos da MicroSertão.");
-// duplica as pills para o loop contínuo do carrossel
-const pills = [...heroPills, ...heroPills];
 ---
 
-<section id="top" class="section-full relative overflow-hidden bg-pattern pt-32 pb-0 md:pt-36">
-  <!-- detalhe de faixas diagonais -->
-  <div class="absolute top-24 right-[-6rem] -z-0 w-80 h-80 stripes opacity-[0.06] rotate-12 hidden md:block"></div>
+<section id="top" class="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
+  <!-- background glow + grid -->
+  <div class="absolute inset-0 -z-10 bg-grid opacity-60"></div>
+  <div class="absolute -top-40 -left-32 -z-10 w-[40rem] h-[40rem] rounded-full bg-brand-600/20 blur-[120px]"></div>
+  <div class="absolute -top-24 right-0 -z-10 w-[30rem] h-[30rem] rounded-full bg-teal-500/10 blur-[120px]"></div>
+  <!-- diagonal stripes accent -->
+  <div class="absolute top-1/3 right-[-6rem] -z-10 w-72 h-72 stripes opacity-[0.07] rotate-12 hidden md:block"></div>
 
-  <div class="container-x">
-    <div class="grid lg:grid-cols-2 gap-12 items-center pb-16 md:pb-24">
-      <!-- Copy -->
-      <div class="reveal">
-        <p class="eyebrow mb-2">{hero.eyebrow}</p>
+  <div class="container-x grid lg:grid-cols-2 gap-12 items-center">
+    <!-- Copy -->
+    <div class="reveal">
+      <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>
+        HUB de aplicativos para microempreendedores
+      </span>
 
-        <h1 class="font-display font-semibold text-white tracking-tight text-4xl sm:text-5xl lg:text-[64px] leading-[1.02] text-balance">
-          {hero.title}
-        </h1>
+      <h1 class="mt-5 font-display font-extrabold tracking-tight text-white text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-balance">
+        Gestão digital que faz seu negócio
+        <span class="text-brand-500"> render mais</span>.
+      </h1>
 
-        <p class="mt-5 text-lg text-paragraph max-w-xl text-balance">
-          {hero.description}
-        </p>
+      <p class="mt-5 text-lg text-white/65 max-w-xl text-balance">
+        Aplicativos completos para <strong class="text-white/90">barbearias, manicures, lava-jatos e academias</strong>.
+        Automatize agendamento, atendimento e financeiro — por uma fração do preço das ferramentas comuns.
+      </p>
 
-        <div class="mt-8 flex flex-col sm:flex-row gap-3">
-          <a href={wa} target="_blank" rel="noopener" class="btn btn-primary text-base px-6 py-4">
-            <Icon name="whatsapp" class="w-5 h-5" />
-            {hero.primary.label}
-          </a>
-          <a href={hero.secondary.href} class="btn btn-secondary text-base px-6 py-4">
-            {hero.secondary.label}
-            <Icon name="arrow" class="w-4 h-4" />
-          </a>
-        </div>
+      <div class="mt-8 flex flex-col sm:flex-row gap-3">
+        <a href={wa} target="_blank" rel="noopener" class="btn btn-primary text-base px-6 py-3.5">
+          <Icon name="whatsapp" class="w-5 h-5" />
+          Começar agora
+        </a>
+        <a href="#aplicativos" class="btn btn-ghost text-base px-6 py-3.5">
+          Ver aplicativos
+          <Icon name="arrow" class="w-4 h-4" />
+        </a>
       </div>
 
-      <!-- Visual: dashboard flutuante (análogo ao mockup do MRP) -->
-      <div class="relative reveal">
-        <div class="card overflow-hidden shadow-2xl">
-          <div class="flex items-center gap-1.5 px-4 py-3 border-b border-white/8 bg-ink-850">
-            <span class="w-3 h-3 rounded-full bg-red-400/80"></span>
-            <span class="w-3 h-3 rounded-full bg-yellow-400/80"></span>
-            <span class="w-3 h-3 rounded-full bg-green-400/80"></span>
-            <span class="ml-3 text-xs text-white/40 truncate">app.microsertao.com.br</span>
-          </div>
-          <div class="p-5 bg-ink-850">
-            <div class="flex items-center justify-between">
-              <div>
-                <p class="text-xs text-white/40">Faturamento do mês</p>
-                <p class="text-2xl font-display font-bold text-white mt-0.5">R$ 9.540,00</p>
-              </div>
-              <span class="inline-flex items-center gap-1 text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded-lg">
-                <Icon name="arrow" class="w-3 h-3 -rotate-45" /> +18%
-              </span>
-            </div>
-            <div class="mt-5 flex items-end gap-2 h-28">
-              {[40, 62, 48, 75, 58, 88, 70].map((h) => (
-                <div class="flex-1 rounded-t-md bg-gradient-to-t from-brand-600/30 to-brand-500" style={`height:${h}%`}></div>
-              ))}
-            </div>
-            <div class="mt-5 space-y-2.5">
-              {["Corte + Barba — 14:30", "Manicure — 15:00", "Lavagem completa — 16:15"].map((t) => (
-                <div class="flex items-center justify-between rounded-xl bg-white/5 px-3 py-2.5">
-                  <span class="text-sm text-white/80">{t}</span>
-                  <span class="text-xs text-brand-400">confirmado</span>
-                </div>
-              ))}
-            </div>
-          </div>
+      <!-- mini stats -->
+      <dl class="mt-10 grid grid-cols-3 gap-4 max-w-md">
+        <div>
+          <dt class="text-2xl font-display font-bold text-white">R$ 400<span class="text-base text-white/50">/ano</span></dt>
+          <dd class="text-xs text-white/50 mt-1">Ferramenta completa</dd>
         </div>
-
-        <!-- cartão flutuante 1 -->
-        <div class="absolute -left-4 sm:-left-8 top-24 card bg-ink-800/95 backdrop-blur px-4 py-3 shadow-xl w-44 hidden sm:block">
-          <div class="flex items-center gap-2">
-            <span class="grid place-items-center w-8 h-8 rounded-lg bg-green-500/15 text-green-400">
-              <Icon name="check" class="w-4 h-4" />
-            </span>
-            <div>
-              <p class="text-xs text-white/50">Recebido via Pix</p>
-              <p class="text-sm font-semibold text-white">R$ 75,00</p>
-            </div>
-          </div>
+        <div>
+          <dt class="text-2xl font-display font-bold text-white">~75%</dt>
+          <dd class="text-xs text-white/50 mt-1">de economia</dd>
         </div>
-
-        <!-- cartão flutuante 2 -->
-        <div class="absolute -right-3 sm:-right-6 bottom-10 card bg-ink-800/95 backdrop-blur px-4 py-3 shadow-xl w-48 hidden sm:block">
-          <div class="flex items-center gap-2">
-            <span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-500/15 text-brand-400">
-              <Icon name="calendar" class="w-4 h-4" />
-            </span>
-            <div>
-              <p class="text-xs text-white/50">Novo agendamento</p>
-              <p class="text-sm font-semibold text-white">Cliente marcou sozinho</p>
-            </div>
-          </div>
+        <div>
+          <dt class="text-2xl font-display font-bold text-white">24h</dt>
+          <dd class="text-xs text-white/50 mt-1">Agenda automática</dd>
         </div>
-      </div>
+      </dl>
     </div>
-  </div>
 
-  <!-- Carrossel de pills (igual ao "carrossel" do MRP) -->
-  <div class="border-t border-white/8 py-6 marquee-mask overflow-hidden">
-    <div class="marquee gap-10">
-      {pills.map((p) => (
-        <div class="flex items-center gap-2.5 shrink-0">
-          <Icon name={p.icon} class="w-5 h-5 text-brand-500" />
-          <span class="text-sm font-medium text-white whitespace-nowrap">{p.label}</span>
+    <!-- Mockup -->
+    <div class="relative reveal">
+      <!-- browser dashboard -->
+      <div class="card overflow-hidden shadow-2xl">
+        <div class="flex items-center gap-1.5 px-4 py-3 border-b border-white/8 bg-ink-850">
+          <span class="w-3 h-3 rounded-full bg-red-400/80"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-400/80"></span>
+          <span class="w-3 h-3 rounded-full bg-green-400/80"></span>
+          <span class="ml-3 text-xs text-white/40 truncate">app.microsertao.com.br</span>
         </div>
-      ))}
+        <div class="p-5 bg-ink-900">
+          <!-- header row -->
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs text-white/40">Faturamento do mês</p>
+              <p class="text-2xl font-display font-bold text-white mt-0.5">R$ 9.540,00</p>
+            </div>
+            <span class="inline-flex items-center gap-1 text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded-lg">
+              <Icon name="arrow" class="w-3 h-3 -rotate-45" /> +18%
+            </span>
+          </div>
+          <!-- chart -->
+          <div class="mt-5 flex items-end gap-2 h-28">
+            {[40, 62, 48, 75, 58, 88, 70].map((h) => (
+              <div class="flex-1 rounded-t-md bg-gradient-to-t from-brand-600/30 to-brand-500" style={`height:${h}%`}></div>
+            ))}
+          </div>
+          <!-- list -->
+          <div class="mt-5 space-y-2.5">
+            {["Corte + Barba — 14:30", "Manicure — 15:00", "Lavagem completa — 16:15"].map((t) => (
+              <div class="flex items-center justify-between rounded-xl bg-white/5 px-3 py-2.5">
+                <span class="text-sm text-white/80">{t}</span>
+                <span class="text-xs text-brand-400">confirmado</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- floating card 1 -->
+      <div class="absolute -left-4 sm:-left-8 top-24 card bg-ink-850/95 backdrop-blur px-4 py-3 shadow-xl w-44 hidden sm:block">
+        <div class="flex items-center gap-2">
+          <span class="grid place-items-center w-8 h-8 rounded-lg bg-green-500/15 text-green-400">
+            <Icon name="check" class="w-4 h-4" />
+          </span>
+          <div>
+            <p class="text-xs text-white/50">Recebido via Pix</p>
+            <p class="text-sm font-semibold text-white">R$ 75,00</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- floating card 2 -->
+      <div class="absolute -right-3 sm:-right-6 bottom-10 card bg-ink-850/95 backdrop-blur px-4 py-3 shadow-xl w-48 hidden sm:block">
+        <div class="flex items-center gap-2">
+          <span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-500/15 text-brand-400">
+            <Icon name="calendar" class="w-4 h-4" />
+          </span>
+          <div>
+            <p class="text-xs text-white/50">Novo agendamento</p>
+            <p class="text-sm font-semibold text-white">Cliente marcou sozinho</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -1,46 +1,43 @@
 @import "tailwindcss";
 
 /* ===========================================================
-   MicroSertão — Design system (Tailwind v4 @theme)
-   Visual base: MRP Mobi (Epilogue + laranja #ff842a)
-   Padrão: hero escuro → seções claras → CTA laranja → footer escuro
+   MicroSertão — Design tokens (Tailwind v4 @theme)
+   Visual: dark base + orange accent (ref: MRP Mobi)
    =========================================================== */
 @theme {
-  /* Fonts — Epilogue em tudo, como o MRP Mobi */
-  --font-display: "Epilogue", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Epilogue", ui-sans-serif, system-ui, sans-serif;
+  /* Fonts */
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  /* Brand — laranja MRP (#ff842a) */
+  /* Brand — orange accent */
   --color-brand-50: #fff4ec;
-  --color-brand-100: #ffe5d2;
-  --color-brand-200: #ffc7a1;
-  --color-brand-300: #ffaa70;
-  --color-brand-400: #ff9d52;
-  --color-brand-500: #ff842a; /* primary */
-  --color-brand-600: #e67726; /* hover */
-  --color-brand-700: #c0611e;
-  --color-brand-800: #964c18;
-  --color-brand-900: #6f3a14;
+  --color-brand-100: #ffe3cf;
+  --color-brand-200: #ffc29e;
+  --color-brand-300: #ff9d63;
+  --color-brand-400: #ff7e33;
+  --color-brand-500: #ff6a1a; /* primary */
+  --color-brand-600: #ed5500;
+  --color-brand-700: #c44400;
+  --color-brand-800: #9c3705;
+  --color-brand-900: #7e2f08;
 
-  /* Dark surfaces (#121212 family) */
-  --color-ink-950: #0d0d0d;
-  --color-ink-900: #121212; /* fundo escuro principal */
-  --color-ink-850: #171717;
-  --color-ink-800: #1c1c1c; /* botão secundário / cartões escuros */
-  --color-ink-700: #2a2a2a; /* cartões claros sobre o escuro */
-  --color-ink-600: #3a3a3a;
+  /* Dark surfaces */
+  --color-ink-950: #08090c;
+  --color-ink-900: #0c0e13;
+  --color-ink-850: #111319;
+  --color-ink-800: #15171e;
+  --color-ink-700: #1c1f28;
+  --color-ink-600: #272b36;
 
-  /* Texto neutro */
-  --color-paragraph: #717171;
-  --color-lightgrey: #a0a0a0;
+  /* Cream (light sections) */
+  --color-cream-50: #fbf8f2;
+  --color-cream-100: #f5f0e6;
+  --color-cream-200: #ebe3d4;
 
-  /* Seções claras */
-  --color-cream-50: #fffaf5;
-  --color-cream-100: #fff3ea; /* tom laranja claro do MRP */
-  --color-cream-200: #ffe7d6;
-
-  /* Estados */
-  --color-success-500: #4d933c;
+  /* Secondary brand colors (Coruripe palette accents) */
+  --color-teal-500: #168a9c;
+  --color-navy-700: #103a4d;
+  --color-sun-400: #f4b53f;
 }
 
 @layer base {
@@ -48,10 +45,9 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    scroll-padding-top: 96px;
   }
   body {
-    background-color: var(--color-ink-900);
+    background-color: var(--color-ink-950);
     color: #e7e8ec;
     font-family: var(--font-sans);
   }
@@ -61,9 +57,9 @@
   }
   /* Custom scrollbar */
   ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: var(--color-ink-950); }
+  ::-webkit-scrollbar-track { background: var(--color-ink-900); }
   ::-webkit-scrollbar-thumb {
-    background: var(--color-ink-700);
+    background: var(--color-ink-600);
     border-radius: 999px;
   }
   ::-webkit-scrollbar-thumb:hover { background: var(--color-brand-600); }
@@ -80,19 +76,18 @@
     .container-x { padding-inline: 2rem; }
   }
 
-  /* ---- Botões (radius 4px estilo MRP) ---------------------- */
+  /* Buttons */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 4px;
-    padding: 0.9rem 1.4rem;
-    font-family: var(--font-display);
+    border-radius: 0.85rem;
+    padding: 0.8rem 1.4rem;
     font-weight: 600;
     font-size: 0.95rem;
-    line-height: 1.2;
-    transition: transform .15s ease, background-color .2s ease, box-shadow .2s ease, border-color .2s ease, color .2s ease;
+    line-height: 1;
+    transition: transform .15s ease, background-color .2s ease, box-shadow .2s ease, border-color .2s ease;
     will-change: transform;
   }
   .btn:active { transform: translateY(1px); }
@@ -100,70 +95,56 @@
   .btn-primary {
     background-color: var(--color-brand-500);
     color: #fff;
+    box-shadow: 0 10px 30px -10px rgba(255, 106, 26, .6);
   }
-  .btn-primary:hover { background-color: var(--color-brand-600); }
-
-  /* Secundário escuro (#1c1c1c) — para fundos escuros */
-  .btn-secondary {
-    background-color: var(--color-ink-800);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, .12);
+  .btn-primary:hover {
+    background-color: var(--color-brand-400);
+    box-shadow: 0 14px 36px -10px rgba(255, 106, 26, .75);
   }
-  .btn-secondary:hover { background-color: #0f0f0f; }
-
-  /* Botão claro com contorno — para fundos brancos */
-  .btn-outline {
-    background-color: #fff;
-    color: var(--color-ink-900);
-    border: 1px solid rgba(18, 18, 18, .14);
-  }
-  .btn-outline:hover { border-color: var(--color-brand-500); color: var(--color-brand-600); }
 
   .btn-ghost {
     background-color: rgba(255, 255, 255, .05);
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, .14);
+    border: 1px solid rgba(255, 255, 255, .12);
   }
   .btn-ghost:hover {
-    background-color: rgba(255, 255, 255, .1);
-    border-color: rgba(255, 255, 255, .24);
+    background-color: rgba(255, 255, 255, .09);
+    border-color: rgba(255, 255, 255, .22);
   }
 
-  /* ---- Eyebrow (rótulo pequeno laranja) -------------------- */
+  .btn-dark {
+    background-color: var(--color-ink-900);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.1);
+  }
+  .btn-dark:hover { background-color: var(--color-ink-800); }
+
+  /* Eyebrow label */
   .eyebrow {
-    display: inline-block;
     color: var(--color-brand-500);
-    font-family: var(--font-display);
     font-weight: 600;
-    font-size: 0.875rem;
-    line-height: 1.5;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
-  /* ---- Cartões --------------------------------------------- */
+  /* Card */
   .card {
-    background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
+    background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
     border: 1px solid rgba(255,255,255,.08);
-    border-radius: 1rem;
-  }
-  /* Cartão claro (seções brancas) */
-  .card-light {
-    background: #fff;
-    border: 1px solid rgba(18, 18, 18, .08);
-    border-radius: 1rem;
+    border-radius: 1.25rem;
   }
 }
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
-
-  /* Padrão diagonal laranja (fundo das seções escuras MRP) */
-  .bg-pattern {
-    background-color: var(--color-ink-900);
+  .bg-grid {
     background-image:
-      radial-gradient(120% 120% at 100% 0%, rgba(255,132,42,.16) 0%, transparent 45%),
-      radial-gradient(90% 90% at 0% 100%, rgba(255,132,42,.10) 0%, transparent 50%);
+      linear-gradient(to right, rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 64px 64px;
   }
-  /* Faixas diagonais laranja (detalhe do MRP) */
+  /* Diagonal stripes accent (ref look) */
   .stripes {
     background-image: repeating-linear-gradient(
       -45deg,
@@ -173,14 +154,6 @@
       transparent 44px
     );
   }
-  .bg-grid {
-    background-image:
-      linear-gradient(to right, rgba(255,255,255,.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255,255,255,.035) 1px, transparent 1px);
-    background-size: 64px 64px;
-  }
-
-  /* Reveal on scroll */
   .reveal {
     opacity: 0;
     transform: translateY(22px);
@@ -189,23 +162,5 @@
   .reveal.is-visible {
     opacity: 1;
     transform: none;
-  }
-
-  /* Carrossel de pills do hero */
-  .marquee {
-    display: flex;
-    width: max-content;
-    animation: marquee 28s linear infinite;
-  }
-  .marquee-mask {
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-  }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .marquee { animation: none; }
   }
 }

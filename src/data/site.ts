@@ -19,30 +19,11 @@ export const whatsappUrl = (msg: string) =>
 // Navegação do header
 export const navLinks = [
   { label: "Para quem é", href: "#publicos" },
-  { label: "Economia", href: "#economia" },
-  { label: "Setores", href: "#setores" },
+  { label: "Aplicativos", href: "#aplicativos" },
+  { label: "Recursos", href: "#recursos" },
+  { label: "Preço", href: "#preco" },
   { label: "Prefeituras", href: "#prefeituras" },
   { label: "Dúvidas", href: "#faq" },
-];
-
-// ---- Hero ---------------------------------------------------
-export const hero = {
-  eyebrow: "Comece em minutos, sem instalar nada.",
-  title: "Gestão digital que faz seu negócio render mais",
-  description:
-    "Aplicativos completos para barbearias, manicures, lava-jatos e academias. Automatize agendamento, atendimento e financeiro — por uma fração do preço das ferramentas comuns.",
-  primary: { label: "Falar no WhatsApp", href: "#whatsapp" },
-  secondary: { label: "Ver economia", href: "#economia" },
-};
-
-// Pills que correm no carrossel do hero
-export const heroPills = [
-  { icon: "wallet", label: "Financeiro no controle" },
-  { icon: "calendar", label: "Agenda automática 24h" },
-  { icon: "whatsapp", label: "Confirmações no WhatsApp" },
-  { icon: "bag", label: "Loja e serviços" },
-  { icon: "box", label: "Estoque com alertas" },
-  { icon: "chart", label: "Relatórios claros" },
 ];
 
 // ---- Públicos (toggle) -------------------------------------
@@ -83,25 +64,21 @@ export const apps = [
     name: "Barbearias",
     icon: "scissors",
     desc: "Agenda, fila, comissão de barbeiros e fidelidade do cliente.",
-    status: "Disponível",
   },
   {
     name: "Manicures & Salões",
     icon: "sparkles",
     desc: "Horários, pacotes, catálogo de serviços e lembretes.",
-    status: "Disponível",
   },
   {
     name: "Lava-Jatos",
     icon: "droplet",
     desc: "Ordens de serviço, controle de veículos e equipe.",
-    status: "Disponível",
   },
   {
     name: "Academias de Artes Marciais",
     icon: "shield",
     desc: "Alunos, professores, turmas, graduações e mensalidades.",
-    status: "Disponível",
   },
 ];
 
@@ -134,22 +111,6 @@ export const cityBenefits = [
   "Vacinação, matrícula escolar, saúde e eventos culturais",
 ];
 
-// ---- Prefeituras (3 cards, layout escuro) ------------------
-export const prefeituraCards = [
-  {
-    title: "Campanhas direcionadas",
-    desc: "Vacinação, matrículas e saúde chegam ao público certo, na hora certa.",
-  },
-  {
-    title: "Vagas e cursos",
-    desc: "Conecte a demanda dos negócios locais aos cidadãos da cidade.",
-  },
-  {
-    title: "Dashboard de indicadores",
-    desc: "Acompanhe MEI e ME ativos por setor e o desenvolvimento do comércio.",
-  },
-];
-
 // ---- FAQ ----------------------------------------------------
 export const faqs = [
   {
@@ -176,22 +137,4 @@ export const faqs = [
     q: "Como começo?",
     a: "Fale com a gente pelo WhatsApp. Ajudamos na configuração inicial e no treinamento de uso, passo a passo.",
   },
-];
-
-// FAQ em abas (estilo MRP: duas modalidades) — índices da lista acima
-export const faqGroups = [
-  { key: "negocios", label: "Negócios", icon: "bag", items: [0, 1, 2, 5] },
-  { key: "prefeituras", label: "Prefeituras", icon: "megaphone", items: [3, 4] },
-];
-
-// ---- Rodapé: contatos e transparência ----------------------
-export const footerContacts = [
-  { role: "Atendimento e vendas", value: company.whatsappLabel, type: "whatsapp" },
-  { role: "Suporte e soluções", value: company.email, type: "mail" },
-  { role: "Localização", value: company.city, type: "pin" },
-];
-
-export const footerLegal = [
-  { label: "Política de Privacidade", href: "#" },
-  { label: "Termos de Uso", href: "#" },
 ];

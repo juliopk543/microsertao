@@ -1,88 +1,36 @@
 ---
 import Icon from "./Icon.astro";
-import { faqs, faqGroups, company, whatsappUrl } from "../data/site";
+import { faqs, whatsappUrl } from "../data/site";
 const wa = whatsappUrl("Olá! Fiquei com uma dúvida sobre a MicroSertão.");
 ---
 
-<section id="faq" class="bg-white text-ink-900 py-20 md:py-28">
-  <div class="container-x grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16 items-start">
-    <!-- Coluna esquerda: título + contatos -->
+<section id="faq" class="py-20 md:py-28 bg-ink-950">
+  <div class="container-x grid lg:grid-cols-[0.8fr_1.2fr] gap-12">
     <div class="reveal">
-      <p class="eyebrow mb-1">O que você precisa saber</p>
-      <h2 class="font-display font-bold text-ink-900 text-3xl sm:text-[40px] leading-tight tracking-tight text-balance">
-        Ficou em dúvida? Confira as perguntas frequentes
+      <span class="eyebrow">Dúvidas frequentes</span>
+      <h2 class="mt-3 font-display font-bold text-white text-3xl sm:text-4xl tracking-tight text-balance">
+        Ficou com alguma dúvida?
       </h2>
-
-      <div class="mt-8">
-        <h3 class="font-display font-semibold text-ink-900 text-lg">Dúvidas persistem?</h3>
-        <p class="mt-1 text-paragraph">Fale com a nossa equipe para uma orientação personalizada.</p>
-      </div>
-
-      <!-- Frame de contato (WhatsApp | e-mail) -->
-      <div class="mt-5 flex flex-col sm:flex-row items-stretch gap-3">
-        <a href={wa} target="_blank" rel="noopener" class="flex items-center gap-2.5 rounded-xl bg-cream-100 hover:bg-cream-200 px-4 py-3.5 transition-colors">
-          <Icon name="whatsapp" class="w-5 h-5 text-brand-600" />
-          <span class="text-sm font-medium text-ink-900">Converse com a gente</span>
-        </a>
-        <a href={`mailto:${company.email}`} class="flex items-center gap-2.5 rounded-xl bg-cream-100 hover:bg-cream-200 px-4 py-3.5 transition-colors">
-          <Icon name="mail" class="w-5 h-5 text-brand-600" />
-          <span class="text-sm font-medium text-ink-900">{company.email}</span>
-        </a>
-      </div>
+      <p class="mt-4 text-white/60">
+        Reunimos as perguntas mais comuns. Se a sua não estiver aqui, fale com a gente — respondemos rápido.
+      </p>
+      <a href={wa} target="_blank" rel="noopener" class="btn btn-ghost mt-6">
+        <Icon name="whatsapp" class="w-4 h-4" /> Conversar com a gente
+      </a>
     </div>
 
-    <!-- Coluna direita: abas + accordion -->
-    <div class="reveal">
-      <p class="text-sm text-paragraph mb-3">Selecione um tema</p>
-      <div class="inline-flex p-1 rounded-lg bg-cream-100 border border-ink-900/8" role="tablist">
-        {faqGroups.map((g, i) => (
-          <button
-            class="faq-tab inline-flex items-center gap-2 rounded-md px-5 py-2.5 text-sm font-semibold transition-colors text-paragraph"
-            data-tab={g.key}
-            role="tab"
-            aria-selected={i === 0 ? "true" : "false"}
-          >
-            <Icon name={g.icon} class="w-4 h-4" />
-            {g.label}
-          </button>
-        ))}
-      </div>
-
-      <div class="mt-6">
-        {faqGroups.map((g, gi) => (
-          <div class="faq-panel divide-y divide-ink-900/10 border-t border-ink-900/10" data-panel={g.key} hidden={gi !== 0}>
-            {g.items.map((idx, i) => (
-              <details class="group py-5" open={gi === 0 && i === 0}>
-                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none">
-                  <span class="font-display font-medium text-ink-900 text-lg">{faqs[idx].q}</span>
-                  <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg border border-ink-900/15 text-paragraph group-open:bg-brand-500 group-open:text-white group-open:border-brand-500 transition-colors">
-                    <svg class="w-4 h-4 group-open:rotate-45 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-                  </span>
-                </summary>
-                <p class="mt-3 text-paragraph leading-relaxed pr-12">{faqs[idx].a}</p>
-              </details>
-            ))}
-          </div>
-        ))}
-      </div>
+    <div class="divide-y divide-white/8 reveal">
+      {faqs.map((f, i) => (
+        <details class="group py-4" open={i === 0}>
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none">
+            <span class="font-display font-medium text-white text-lg">{f.q}</span>
+            <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg border border-white/10 text-white/70 group-open:bg-brand-500 group-open:text-white group-open:border-brand-500 transition-colors">
+              <svg class="w-4 h-4 group-open:rotate-45 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+          </summary>
+          <p class="mt-3 text-white/60 leading-relaxed pr-12">{f.a}</p>
+        </details>
+      ))}
     </div>
   </div>
 </section>
-
-<script>
-  const tabs = document.querySelectorAll<HTMLButtonElement>(".faq-tab");
-  const panels = document.querySelectorAll<HTMLElement>(".faq-panel");
-  const activate = (key: string) => {
-    tabs.forEach((t) => {
-      const on = t.dataset.tab === key;
-      t.setAttribute("aria-selected", String(on));
-      t.classList.toggle("bg-white", on);
-      t.classList.toggle("shadow-sm", on);
-      t.classList.toggle("text-brand-600", on);
-      t.classList.toggle("text-paragraph", !on);
-    });
-    panels.forEach((p) => { p.hidden = p.dataset.panel !== key; });
-  };
-  tabs.forEach((t) => t.addEventListener("click", () => activate(t.dataset.tab!)));
-  activate(tabs[0]?.dataset.tab ?? "negocios");
-</script>
