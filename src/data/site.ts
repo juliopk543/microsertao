@@ -20,7 +20,6 @@ export const whatsappUrl = (msg: string) =>
 export const navLinks = [
   { label: "Para quem é", href: "#publicos" },
   { label: "Aplicativos", href: "#aplicativos" },
-  { label: "Recursos", href: "#recursos" },
   { label: "Preço", href: "#preco" },
   { label: "Prefeituras", href: "#prefeituras" },
   { label: "Dúvidas", href: "#faq" },
