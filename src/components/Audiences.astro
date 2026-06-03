@@ -4,7 +4,7 @@ import { audiences } from "../data/site";
 const list = [audiences.empreendedor, audiences.prefeitura];
 ---
 
-<section id="publicos" class="relative py-20 md:py-28 bg-ink-950">
+<section id="publicos" class="relative py-20 md:py-28 bg-ink-950 transition-colors duration-500">
   <div class="container-x">
     <div class="max-w-2xl reveal">
       <span class="eyebrow">Para quem é</span>
@@ -47,8 +47,8 @@ const list = [audiences.empreendedor, audiences.prefeitura];
 
           <div class="grid sm:grid-cols-2 gap-4">
             {a.bullets.map((b) => (
-              <div class="card p-5 hover:border-brand-500/40 transition-colors">
-                <span class="grid place-items-center w-10 h-10 rounded-xl bg-brand-500/12 text-brand-400">
+              <div class="aud-card card p-5 hover:border-brand-500/40 transition-colors">
+                <span class="aud-ico grid place-items-center w-10 h-10 rounded-xl bg-brand-500/12 text-brand-400 transition-colors">
                   <Icon name="check" class="w-5 h-5" />
                 </span>
                 <h4 class="mt-3 font-semibold text-white">{b.title}</h4>
@@ -63,13 +63,19 @@ const list = [audiences.empreendedor, audiences.prefeitura];
 </section>
 
 <script>
+  const section = document.getElementById("publicos");
   const tabs = document.querySelectorAll<HTMLButtonElement>(".aud-tab");
   const panels = document.querySelectorAll<HTMLElement>(".aud-panel");
 
   const activate = (key: string) => {
+    const isPref = key === "prefeitura";
+    // troca de paleta: azul/dourado para Prefeitura, escuro/laranja para Empreendedor
+    section?.classList.toggle("theme-navy", isPref);
+
     tabs.forEach((t) => {
       const on = t.dataset.tab === key;
       t.setAttribute("aria-selected", String(on));
+      // a aba ativa usa laranja (empreendedor) — no tema azul o CSS sobrescreve para dourado
       t.classList.toggle("bg-brand-500", on);
       t.classList.toggle("text-white", on);
       t.classList.toggle("text-white/60", !on);
@@ -83,3 +89,24 @@ const list = [audiences.empreendedor, audiences.prefeitura];
   // estado inicial
   activate("empreendedor");
 </script>
+
+<style is:global>
+  /* Tema azul/dourado quando a aba Prefeitura está ativa (igual à seção de municípios) */
+  #publicos.theme-navy { background-color: var(--color-navy-700); }
+  #publicos.theme-navy .eyebrow { color: var(--color-sun-400); }
+  #publicos.theme-navy .aud-tab[aria-selected="true"] {
+    background-color: var(--color-sun-400);
+    color: #0c2733;
+  }
+  #publicos.theme-navy .btn-primary {
+    background-color: var(--color-sun-400);
+    color: #0c2733;
+    box-shadow: 0 10px 30px -10px rgba(244, 181, 63, .55);
+  }
+  #publicos.theme-navy .btn-primary:hover { background-color: #f0ad2e; }
+  #publicos.theme-navy .aud-ico {
+    background-color: rgba(244, 181, 63, .16);
+    color: var(--color-sun-400);
+  }
+  #publicos.theme-navy .aud-card:hover { border-color: rgba(244, 181, 63, .4); }
+</style>
