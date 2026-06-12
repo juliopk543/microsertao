@@ -32,7 +32,7 @@ export const audiences = {
     label: "Empreendedor",
     title: "Economize até 75%. Sem mensalidade.",
     description:
-      "Um HUB de aplicativos feito para barbearias, manicures, lava-jatos, academias e restaurantes. Automatize agendamento, atendimento, estoque e financeiro — pagando uma fração do que custam seu aplicativo atual.",
+      "Um HUB de aplicativos feito para barbearias, manicures, lava-jatos, academias e restaurantes. Automatize agendamento, atendimento, estoque e financeiro — pagando uma fração do preço atual.",
     bullets: [
       { title: "Agenda automática", desc: "Clientes marcam sozinhos direto no aplicativo, 24h por dia." },
       { title: "Financeiro no controle", desc: "Caixa, recebimentos, pagamentos e inadimplência em uma única tela, com poucos cliques." },
