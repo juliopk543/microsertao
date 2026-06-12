@@ -45,7 +45,7 @@ const list = [audiences.empreendedor, audiences.prefeitura];
             </a>
           </div>
 
-          <div class="grid sm:grid-cols-2 gap-4">
+          <div class="aud-cards grid sm:grid-cols-2 gap-4">
             {a.bullets.map((b) => (
               <div class="aud-card card p-5 hover:border-brand-500/40 transition-colors">
                 <span class="aud-ico grid place-items-center w-10 h-10 rounded-xl bg-brand-500/12 text-brand-400 transition-colors">
@@ -109,4 +109,31 @@ const list = [audiences.empreendedor, audiences.prefeitura];
     color: var(--color-sun-400);
   }
   #publicos.theme-navy .aud-card:hover { border-color: rgba(244, 181, 63, .4); }
+
+  /* ===== Scroll stacking dos cards de benefício — somente mobile (cobertura total) ===== */
+  @media (max-width: 639.98px) {
+    /* desfaz o grid: coluna única empilhável */
+    .aud-cards { display: block; }
+    .aud-cards .aud-card + .aud-card { margin-top: 1rem; }
+
+    .aud-cards .aud-card {
+      position: sticky;
+      top: 5.5rem;            /* fixa logo abaixo do header fixo */
+      min-height: 12rem;      /* altura uniforme p/ o card de cima cobrir 100% o de baixo */
+      /* fundo opaco para cobrir totalmente o card anterior */
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .02)),
+        var(--color-ink-900);
+      box-shadow: 0 -12px 30px -12px rgba(0, 0, 0, .65);
+    }
+
+    /* respeita quem prefere menos movimento: volta ao empilhamento normal */
+    @media (prefers-reduced-motion: reduce) {
+      .aud-cards .aud-card {
+        position: static;
+        min-height: 0;
+        box-shadow: none;
+      }
+    }
+  }
 </style>
