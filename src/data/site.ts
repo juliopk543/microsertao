@@ -44,9 +44,9 @@ export const audiences = {
   prefeitura: {
     key: "prefeitura",
     label: "Prefeitura",
-    title: "Comunicação pública que chega a quem importa.",
+    title: "Município Digital, comunicação baseada em dados.",
     description:
-      "Com os dados do comércio local, o município direciona campanhas públicas de verdade — vacinação, matrícula escolar, cursos e vagas — economizando em publicidade de plataformas estrangeiras.",
+      "Com espaço exclusivo nos aplicativos do comércio local, a prefeitura divulga campanhas de vacinação, matrículas escolares e cursos profissionalizantes, utilizando dados da demanda regional para direcionar ações que realmente atendem à população.",
     bullets: [
       { title: "Campanhas direcionadas", desc: "Vacinação, matrículas e eventos para o público certo." },
       { title: "Cursos profissionalizantes", desc: "Conecte a demanda dos negócios locais aos cidadãos." },
