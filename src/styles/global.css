@@ -163,28 +163,4 @@
     opacity: 1;
     transform: none;
   }
-
-  /* Números flutuantes do hero: entrada + flutuação */
-  .stat-pop {
-    opacity: 0;
-    transform: translateY(14px) scale(.9);
-    transition: opacity .55s ease, transform .55s cubic-bezier(.2,.8,.2,1);
-    transition-delay: var(--d, 0s);
-  }
-  .stat-pop.is-visible {
-    opacity: 1;
-    transform: none;
-  }
-  /* elemento interno faz a flutuação contínua (não conflita com a entrada) */
-  .stat-float {
-    animation: float-bob var(--dur, 5s) ease-in-out var(--fd, 0s) infinite;
-  }
-  @keyframes float-bob {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .stat-float { animation: none; }
-    .stat-pop { transition: opacity .3s ease; transform: none; }
-  }
 }
