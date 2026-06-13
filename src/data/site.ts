@@ -36,7 +36,7 @@ export const audiences = {
     bullets: [
       { title: "Agenda automática", desc: "Clientes marcam sozinhos direto no aplicativo, 24h por dia.", img: "app-stack.png" },
       { title: "Financeiro no controle", desc: "Caixa, recebimentos, pagamentos e inadimplência em uma única tela, com poucos cliques.", img: "stack-emp-2.png" },
-      { title: "Dados protegidos (LGPD)", desc: "Informações criptografadas, termos de uso claros e exclusão dos dados quando quiser — tudo em conformidade com a LGPD.", img: "app-stack.png" },
+      { title: "Dados protegidos (LGPD)", desc: "Informações criptografadas, termos de uso claros e exclusão dos dados quando quiser — tudo em conformidade com a LGPD.", img: "stack-emp-3.png" },
       { title: "Economia real", desc: "R$400/ano contra ~R$1.600 das ferramentas comuns.", img: "app-stack.png" },
     ],
     cta: { label: "Quero para meu negócio", href: "#preco" },
