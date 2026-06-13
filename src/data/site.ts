@@ -102,7 +102,7 @@ export const pricing = {
 
 // ---- Vantagens para prefeituras ----------------------------
 export const cityBenefits = [
-  { icon: "key", text: "Liberação de acesso a dados restritos para a Prefeitura" },
+  { icon: "key", text: "Liberação de acesso a dados anonimizados e restritos para a Prefeitura" },
   { icon: "chart", text: "Dashboard de indicadores para o desenvolvimento da cidade" },
   { icon: "megaphone", text: "Notificações de campanhas públicas personalizadas e filtradas" },
   { icon: "bag", text: "Quantidade de MEI e ME regulares por setor" },
