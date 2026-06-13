@@ -34,10 +34,10 @@ export const audiences = {
     description:
       "Um HUB de aplicativos feito para barbearias, manicures, lava-jatos, academias e restaurantes. Automatize agendamento, atendimento, estoque e financeiro — pagando uma fração do preço atual.",
     bullets: [
-      { title: "Agenda automática", desc: "Clientes marcam sozinhos direto no aplicativo, 24h por dia.", img: "app-stack.png" },
-      { title: "Financeiro no controle", desc: "Caixa, recebimentos, pagamentos e inadimplência em uma única tela, com poucos cliques.", img: "stack-emp-2.png" },
-      { title: "Dados protegidos (LGPD)", desc: "Informações criptografadas, termos de uso claros e exclusão dos dados quando quiser — tudo em conformidade com a LGPD.", img: "stack-emp-3.png" },
-      { title: "Economia real", desc: "R$400/ano contra ~R$1.600 das ferramentas comuns.", img: "" },
+      { title: "Agenda automática", desc: "Clientes marcam sozinhos direto no aplicativo, 24h por dia.", icon: "calendar", img: "app-stack.png" },
+      { title: "Financeiro no controle", desc: "Caixa, recebimentos, pagamentos e inadimplência em uma única tela, com poucos cliques.", icon: "wallet", img: "stack-emp-2.png" },
+      { title: "Dados protegidos (LGPD)", desc: "Informações criptografadas, termos de uso claros e exclusão dos dados quando quiser — tudo em conformidade com a LGPD.", icon: "shieldCheck", img: "stack-emp-3.png" },
+      { title: "Economia real", desc: "R$400/ano contra ~R$1.600 das ferramentas comuns.", icon: "coins", img: "" },
     ],
     cta: { label: "Quero para meu negócio", href: "#preco" },
   },
@@ -48,10 +48,10 @@ export const audiences = {
     description:
       "Com espaço exclusivo nos aplicativos do comércio local, a prefeitura divulga campanhas de vacinação, matrículas escolares e cursos profissionalizantes, utilizando dados da demanda regional para direcionar ações que realmente atendem à população.",
     bullets: [
-      { title: "Campanhas direcionadas", desc: "Vacinação, matrículas e eventos para o público certo.", img: "stack-pref-1.png" },
-      { title: "Menos gasto com mídia", desc: "Economize com anúncios em redes estrangeiras.", img: "stack-pref-4.png" },
-      { title: "Cursos profissionalizantes", desc: "Conecte a demanda dos negócios locais aos cidadãos.", img: "" },
-      { title: "Dashboard de indicadores", desc: "Visualize o desenvolvimento do comércio da cidade.", img: "" },
+      { title: "Campanhas direcionadas", desc: "Vacinação, matrículas e eventos para o público certo.", icon: "megaphone", img: "stack-pref-1.png" },
+      { title: "Menos gasto com mídia", desc: "Economize com anúncios em redes estrangeiras.", icon: "trendDown", img: "stack-pref-4.png" },
+      { title: "Cursos profissionalizantes", desc: "Conecte a demanda dos negócios locais aos cidadãos.", icon: "cap", img: "" },
+      { title: "Dashboard de indicadores", desc: "Visualize o desenvolvimento do comércio da cidade.", icon: "chart", img: "" },
     ],
     cta: { label: "Falar sobre parceria pública", href: "#prefeituras" },
   },
