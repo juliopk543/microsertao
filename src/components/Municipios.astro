@@ -40,9 +40,9 @@ const campaigns = ["Setores em crescimento", "Demanda por mão de obra", "Faixa 
       {cityBenefits.map((b) => (
         <li class="flex items-start gap-3 rounded-2xl bg-white/5 border border-white/10 p-4">
           <span class="grid place-items-center shrink-0 w-7 h-7 rounded-lg bg-sun-400/20 text-sun-400">
-            <Icon name="check" class="w-4 h-4" />
+            <Icon name={b.icon} class="w-4 h-4" />
           </span>
-          <span class="text-sm text-white/85 leading-relaxed">{b}</span>
+          <span class="text-sm text-white/85 leading-relaxed">{b.text}</span>
         </li>
       ))}
     </ul>
