@@ -48,10 +48,10 @@ export const audiences = {
     description:
       "Com espaço exclusivo nos aplicativos do comércio local, a prefeitura divulga campanhas de vacinação, matrículas escolares e cursos profissionalizantes, utilizando dados da demanda regional para direcionar ações que realmente atendem à população.",
     bullets: [
-      { title: "Campanhas direcionadas", desc: "Vacinação, matrículas e eventos para o público certo.", img: "app-stack.png" },
+      { title: "Campanhas direcionadas", desc: "Vacinação, matrículas e eventos para o público certo.", img: "stack-pref-1.png" },
       { title: "Cursos profissionalizantes", desc: "Conecte a demanda dos negócios locais aos cidadãos.", img: "app-stack.png" },
       { title: "Dashboard de indicadores", desc: "Visualize o desenvolvimento do comércio da cidade.", img: "app-stack.png" },
-      { title: "Menos gasto com mídia", desc: "Economize com anúncios em redes estrangeiras.", img: "app-stack.png" },
+      { title: "Menos gasto com mídia", desc: "Economize com anúncios em redes estrangeiras.", img: "stack-pref-4.png" },
     ],
     cta: { label: "Falar sobre parceria pública", href: "#prefeituras" },
   },
