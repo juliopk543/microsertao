@@ -128,7 +128,7 @@ export const faqs = [
   },
   {
     q: "Meus dados ficam seguros?",
-    a: "Sim. Os dados dos clientes pertencem ao empreendedor, e o acesso público/restrito é liberado conforme regras de cada perfil.",
+    a: "Sim. Os dados dos clientes pertencem aos clientes, que podem deletar suas contas a qualquer momento.",
   },
   {
     q: "Como começo?",
