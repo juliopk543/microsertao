@@ -2,8 +2,8 @@
 import Icon from "./Icon.astro";
 import { audiences } from "../data/site";
 const list = [audiences.empreendedor, audiences.prefeitura];
-// imagem do app exibida no stacking intercalado (mobile)
-const stackImg = `${import.meta.env.BASE_URL}/app-stack.png`.replace(/\/+/g, "/");
+// monta a URL de um asset em /public respeitando o BASE_URL
+const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\/+/g, "/");
 ---
 
 <section id="publicos" class="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-ink-950 transition-colors duration-500">
@@ -50,9 +50,9 @@ const stackImg = `${import.meta.env.BASE_URL}/app-stack.png`.replace(/\/+/g, "/"
           <div class="aud-cards grid sm:grid-cols-2 gap-4">
             {a.bullets.map((b) => (
               <Fragment>
-                <!-- imagem fixa do app (intercalada) — só aparece no stacking mobile -->
+                <!-- imagem fixa do app (intercalada, uma por card) — só aparece no stacking mobile -->
                 <div class="stack-img sm:hidden">
-                  <img src={stackImg} alt="" aria-hidden="true" width="1800" height="768" loading="lazy" />
+                  <img src={asset(b.img)} alt="" aria-hidden="true" width="1800" height="768" loading="lazy" />
                 </div>
                 <div class="aud-card card p-5 hover:border-brand-500/40 transition-colors">
                   <span class="aud-ico grid place-items-center w-10 h-10 rounded-xl bg-brand-500/12 text-brand-400 transition-colors">
