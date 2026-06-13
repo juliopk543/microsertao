@@ -48,23 +48,38 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
           </div>
 
           <div class="aud-cards grid sm:grid-cols-2 gap-4">
-            {a.bullets.map((b) => (
-              <Fragment>
-                {/* imagem fixa do app (intercalada, uma por card) — só aparece no stacking mobile; opcional por card */}
-                {b.img && (
+            {/* Bloco 1: cards COM imagem — ganham o efeito de empilhamento (mobile) */}
+            <div class="stack-block">
+              {a.bullets.filter((b) => b.img).map((b) => (
+                <Fragment>
                   <div class="stack-img sm:hidden">
                     <img src={asset(b.img)} alt="" aria-hidden="true" width="1800" height="768" loading="lazy" />
                   </div>
-                )}
-                <div class:list={["aud-card card p-5 hover:border-brand-500/40 transition-colors", { "aud-card--flat": !b.img }]}>
-                  <span class="aud-ico grid place-items-center w-10 h-10 rounded-xl bg-brand-500/12 text-brand-400 transition-colors">
-                    <Icon name="check" class="w-5 h-5" />
-                  </span>
-                  <h4 class="mt-3 font-semibold text-white">{b.title}</h4>
-                  <p class="mt-1 text-sm text-white/55">{b.desc}</p>
-                </div>
-              </Fragment>
-            ))}
+                  <div class="aud-card card p-5 hover:border-brand-500/40 transition-colors">
+                    <span class="aud-ico grid place-items-center w-10 h-10 rounded-xl bg-brand-500/12 text-brand-400 transition-colors">
+                      <Icon name="check" class="w-5 h-5" />
+                    </span>
+                    <h4 class="mt-3 font-semibold text-white">{b.title}</h4>
+                    <p class="mt-1 text-sm text-white/55">{b.desc}</p>
+                  </div>
+                </Fragment>
+              ))}
+            </div>
+
+            {/* Bloco 2: cards SEM imagem — normais, por último, fora do empilhamento */}
+            {a.bullets.some((b) => !b.img) && (
+              <div class="flat-block">
+                {a.bullets.filter((b) => !b.img).map((b) => (
+                  <div class="aud-card card p-5 hover:border-brand-500/40 transition-colors">
+                    <span class="aud-ico grid place-items-center w-10 h-10 rounded-xl bg-brand-500/12 text-brand-400 transition-colors">
+                      <Icon name="check" class="w-5 h-5" />
+                    </span>
+                    <h4 class="mt-3 font-semibold text-white">{b.title}</h4>
+                    <p class="mt-1 text-sm text-white/55">{b.desc}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       ))}
@@ -120,20 +135,26 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
   }
   #publicos.theme-navy .aud-card:hover { border-color: rgba(244, 181, 63, .4); }
 
+  /* blocos: no desktop fluem no mesmo grid (contents); no mobile viram contextos separados */
+  .stack-block, .flat-block { display: contents; }
+
   /* ===== Scroll stacking intercalado (imagem + card) — somente mobile ===== */
   @media (max-width: 639.98px) {
-    /* desfaz o grid: coluna única empilhável (imagem, card, imagem, card...) */
+    /* a área de cards vira coluna; dentro dela, dois blocos empilhados */
     .aud-cards { display: block; }
-    .aud-cards > * + * { margin-top: 1rem; }
+
+    /* Bloco 1 (com imagem): coluna única empilhável (imagem, card, imagem, card...) */
+    .stack-block { display: block; }
+    .stack-block > * + * { margin-top: 1rem; }
 
     /* imagem fixa (print do app) acima de cada card */
-    .aud-cards .stack-img {
+    .stack-block .stack-img {
       position: sticky;
       top: 5.5rem;            /* fixa logo abaixo do header fixo */
       overflow: hidden;
       background: var(--color-ink-950);
     }
-    .aud-cards .stack-img img {
+    .stack-block .stack-img img {
       display: block;
       width: 100%;
       height: 16rem;
@@ -141,16 +162,16 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       object-position: top;
     }
     /* gradiente escuro embaixo: esconde o que sobrar da imagem antes do próximo subir */
-    .aud-cards .stack-img::after {
+    .stack-block .stack-img::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, transparent 50%, var(--color-ink-950) 78%);
+      background: linear-gradient(to bottom, transparent 55%, var(--color-ink-950) 100%);
       pointer-events: none;
     }
 
-    /* cards: fixam e cobrem totalmente (fundo opaco) */
-    .aud-cards .aud-card {
+    /* cards do empilhamento: fixam e cobrem totalmente (fundo opaco) */
+    .stack-block .aud-card {
       position: sticky;
       top: 5.5rem;
       min-height: 12rem;
@@ -160,31 +181,28 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       box-shadow: 0 -12px 30px -12px rgba(0, 0, 0, .65);
     }
 
-    /* card sem imagem: fora do empilhamento, fluxo normal logo abaixo do anterior */
-    .aud-cards .aud-card.aud-card--flat {
-      position: static;
-      min-height: 0;
-      box-shadow: none;
-    }
+    /* Bloco 2 (sem imagem): cards normais, por último, fora do empilhamento */
+    .flat-block { display: block; margin-top: 1rem; }
+    .flat-block > * + * { margin-top: 1rem; }
 
     /* ===== Tema Prefeitura (navy): tudo precisa fundir com o azul, não com o preto ===== */
     /* imagem e gradiente de máscara desaparecem no navy (em vez de no ink) */
-    #publicos.theme-navy .aud-cards .stack-img { background: var(--color-navy-700); }
-    #publicos.theme-navy .aud-cards .stack-img::after {
-      background: linear-gradient(to bottom, transparent 50%, var(--color-navy-700) 78%);
+    #publicos.theme-navy .stack-block .stack-img { background: var(--color-navy-700); }
+    #publicos.theme-navy .stack-block .stack-img::after {
+      background: linear-gradient(to bottom, transparent 55%, var(--color-navy-700) 100%);
     }
     /* cards em painel navy (levemente mais claro que o fundo da seção) */
-    #publicos.theme-navy .aud-cards .aud-card {
+    #publicos.theme-navy .stack-block .aud-card {
       background:
         linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .025)),
         #15485e;
     }
 
-    /* respeita quem prefere menos movimento: volta ao empilhamento normal */
+    /* respeita quem prefere menos movimento: sem sticky */
     @media (prefers-reduced-motion: reduce) {
-      .aud-cards .stack-img,
-      .aud-cards .aud-card { position: static; box-shadow: none; }
-      .aud-cards .aud-card { min-height: 0; }
+      .stack-block .stack-img,
+      .stack-block .aud-card { position: static; box-shadow: none; }
+      .stack-block .aud-card { min-height: 0; }
     }
   }
 </style>
