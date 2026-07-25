@@ -18,7 +18,7 @@ export const whatsappUrl = (msg: string) =>
 
 // Navegação do header
 export const navLinks = [
-  { label: "Para quem é", href: "#publicos" },
+  { label: "Para quem é", href: "#centelha" },
   { label: "Aplicativos", href: "#aplicativos" },
   { label: "Preço", href: "#preco" },
   { label: "Prefeituras", href: "#prefeituras" },

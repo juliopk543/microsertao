@@ -1,6 +1,6 @@
 ---
-interface Props { class?: string }
-const { class: className = "" } = Astro.props;
+interface Props { class?: string; light?: boolean }
+const { class: className = "", light = false } = Astro.props;
 const icon = `${import.meta.env.BASE_URL}/logo-icon.png`.replace(/\/+/g, "/");
 ---
 <a href="#top" class={`group inline-flex items-center gap-2.5 ${className}`} aria-label="MicroSertão — início">
@@ -8,9 +8,9 @@ const icon = `${import.meta.env.BASE_URL}/logo-icon.png`.replace(/\/+/g, "/");
     <img src={icon} alt="" aria-hidden="true" class="w-full h-full object-contain p-0.5" />
   </span>
   <span class="leading-none">
-    <span class="block font-display font-extrabold tracking-tight text-white text-lg">
+    <span class={`block font-display font-extrabold tracking-tight text-lg ${light ? "text-ink-900" : "text-white"}`}>
       Micro<span class="text-brand-500">Sertão</span>
     </span>
-    <span class="block text-[10px] tracking-[0.22em] uppercase text-white/40 font-medium">Software Company</span>
+    <span class={`block text-[10px] tracking-[0.22em] uppercase font-medium ${light ? "text-ink-900/40" : "text-white/40"}`}>Software Company</span>
   </span>
 </a>

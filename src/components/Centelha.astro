@@ -1,0 +1,86 @@
+---
+import Icon from "./Icon.astro";
+import { audiences } from "../data/site";
+const list = [audiences.empreendedor, audiences.prefeitura];
+
+// monta a URL de um asset em /public respeitando o BASE_URL
+const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\/+/g, "/");
+---
+
+<section id="centelha" class="relative pt-32 pb-16 md:pt-40 md:pb-24 bg-cream-50 text-ink-900 overflow-hidden">
+  <!-- Selos decorativos (cores oficiais do programa Centelha/MCTI) -->
+  <img
+    src={asset("centelha/circulo-laranja.png")}
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none select-none absolute -top-8 -left-10 w-36 h-36 md:w-52 md:h-52 mix-blend-multiply"
+    loading="lazy"
+  />
+  <img
+    src={asset("centelha/circulo-verde.png")}
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none select-none absolute -top-4 -right-8 w-32 h-32 md:w-44 md:h-44 mix-blend-multiply"
+    loading="lazy"
+  />
+  <img
+    src={asset("centelha/ponto-amarelo.png")}
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none select-none absolute bottom-10 right-8 md:right-14 w-10 h-10 md:w-14 md:h-14 mix-blend-multiply"
+    loading="lazy"
+  />
+
+  <div class="container-x">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <!-- Coluna esquerda: selo Centelha AL 2026 -->
+      <div class="max-w-md md:max-w-2xl lg:max-w-none mx-auto lg:mx-0 text-center reveal">
+        <span class="inline-flex items-center gap-2 rounded-full border border-ink-900/10 bg-white px-3 py-1 text-xs font-semibold text-brand-600">
+          <Icon name="bolt" class="w-3.5 h-3.5" /> Centelha AL · MCTI
+        </span>
+
+        <h2 class="mt-4 font-display font-bold text-xl sm:text-2xl lg:text-xl xl:text-2xl leading-tight tracking-tight">
+          Projeto Microsertão em Coruripe<br />
+          está inscrito no programa<br />
+          <span class="text-brand-600">Centelha AL 2026.</span>
+        </h2>
+
+        <div class="mt-8 mx-auto max-w-xs sm:max-w-sm md:max-w-md aspect-[4/3] overflow-hidden rounded-2xl">
+          <img
+            src={asset("centelha/personagem.png")}
+            alt="Ilustração do programa Centelha AL 2026: ícones de inovação e tecnologia — foguete, satélite, drone e robótica — ao redor de um personagem inspirado em Santos Dumont"
+            class="w-full h-full object-cover object-bottom mix-blend-multiply"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- Coluna direita: Para quem é -->
+      <div class="max-w-2xl reveal">
+        <span class="eyebrow">Para quem é</span>
+        <h2 class="mt-3 font-display font-bold text-ink-900 text-3xl sm:text-4xl tracking-tight text-balance">
+          Uma plataforma, dois mundos conectados.
+        </h2>
+        <p class="mt-4 text-ink-900/60 text-lg">
+          O empreendedor ganha gestão e economia. O município ganha um canal direto e inteligente com os cidadãos.
+          Escolha o seu lado:
+        </p>
+
+        <!-- Toggle -->
+        <div class="mt-8 inline-flex p-1 rounded-2xl bg-ink-900 shadow-sm" role="tablist" aria-label="Escolha o público">
+          {list.map((a, i) => (
+            <button
+              class="aud-tab inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-colors text-white/60"
+              data-tab={a.key}
+              role="tab"
+              aria-selected={i === 0 ? "true" : "false"}
+            >
+              <Icon name={a.key === "empreendedor" ? "bag" : "megaphone"} class="w-4 h-4" />
+              {a.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
