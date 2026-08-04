@@ -106,6 +106,13 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
   /* blocos: no desktop fluem no mesmo grid (contents); no mobile viram contextos separados */
   .stack-block, .flat-block { display: contents; }
 
+  /* vidro fosco em todos os cards, não só no empilhamento mobile */
+  .aud-card {
+    background: linear-gradient(to bottom, transparent, #262626 2rem);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
   /* ===== Scroll stacking intercalado (imagem + card) — somente mobile ===== */
   @media (max-width: 639.98px) {
     /* a área de cards vira coluna; dentro dela, dois blocos empilhados */
@@ -138,14 +145,11 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       pointer-events: none;
     }
 
-    /* cards do empilhamento: fixam e cobrem a imagem enquanto rola, com transição suave (vidro fosco) */
+    /* cards do empilhamento: fixam e cobrem a imagem enquanto rola */
     .stack-block .aud-card {
       position: sticky;
       top: 5.5rem;
       min-height: 12rem;
-      background: linear-gradient(to bottom, transparent, #262626 2rem);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
     }
 
     /* Bloco 2 (sem imagem): cards normais, por último, fora do empilhamento */
