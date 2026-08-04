@@ -30,9 +30,11 @@ export const audiences = {
   empreendedor: {
     key: "empreendedor",
     label: "Empreendedor",
-    title: "Economize até 75%. Sem mensalidade.",
-    description:
-      "Um HUB de aplicativos feito para barbearias, manicures, lava-jatos, academias e restaurantes. Automatize agendamento, atendimento, estoque e financeiro — pagando uma fração do preço atual.",
+    title: 'Pague <span class="text-brand-500">4 meses</span> e use por <span class="text-brand-500">12 meses</span> sem mensalidades.',
+    description: [
+      "Um hub de aplicativos feitos para barbeiros, manicures, lava-jatos e academias, por uma fração do preço comercial: custando apenas 33% (R$ 400,00/ano).",
+      "Nossas soluções para melhorar a qualidade do seu trabalho:",
+    ],
     bullets: [
       { title: "Agenda automática", desc: "Clientes marcam sozinhos direto no aplicativo, 24h por dia.", icon: "calendar", img: "app-stack.png" },
       { title: "Financeiro no controle", desc: "Caixa, recebimentos, pagamentos e inadimplência em uma única tela, com poucos cliques.", icon: "wallet", img: "stack-emp-2.png" },
@@ -45,8 +47,9 @@ export const audiences = {
     key: "prefeitura",
     label: "Prefeitura",
     title: "Município Digital, comunicação baseada em dados.",
-    description:
-      "Com espaço exclusivo nos aplicativos do comércio local, a prefeitura divulga campanhas de vacinação, matrículas escolares e cursos profissionalizantes, utilizando dados da demanda regional para direcionar ações que realmente atendem à população.",
+    description: [
+      "Na tela dos aplicativos usados no comércio, divulgamos campanhas de vacinação, matrículas escolares e cursos profissionalizantes aos clientes. Também realizamos pesquisas regionais para direcionar a tecnologia a serviço da população.",
+    ],
     bullets: [
       { title: "Campanhas direcionadas", desc: "Vacinação, matrículas e eventos para o público certo.", icon: "megaphone", img: "stack-pref-1.png" },
       { title: "Menos gasto com mídia", desc: "Economize com anúncios em redes estrangeiras.", icon: "trendDown", img: "stack-pref-4.png" },

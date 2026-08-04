@@ -13,8 +13,10 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       {list.map((a, i) => (
         <div class="aud-panel grid lg:grid-cols-2 gap-10 lg:gap-16 items-center" data-panel={a.key} hidden={i !== 0}>
           <div>
-            <h3 class="font-display font-bold text-2xl sm:text-3xl text-white tracking-tight text-balance">{a.title}</h3>
-            <p class="mt-4 text-white/60 text-lg">{a.description}</p>
+            <h3 class="font-display font-bold text-2xl sm:text-3xl text-white tracking-tight text-balance" set:html={a.title}></h3>
+            {a.description.map((p, i) => (
+              <p class={`text-white/60 text-lg text-pretty ${i === 0 ? "mt-4" : "mt-3"}`}>{p}</p>
+            ))}
             <a href={a.cta.href} class="btn btn-primary mt-7">
               {a.cta.label}
               <Icon name="arrow" class="w-4 h-4" />
