@@ -138,12 +138,14 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       pointer-events: none;
     }
 
-    /* cards do empilhamento: fixam e cobrem a imagem enquanto rola */
+    /* cards do empilhamento: fixam e cobrem a imagem enquanto rola, com transição suave (vidro fosco) */
     .stack-block .aud-card {
       position: sticky;
       top: 5.5rem;
       min-height: 12rem;
-      background: #262626;
+      background: linear-gradient(to bottom, transparent, #262626 2rem);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     /* Bloco 2 (sem imagem): cards normais, por último, fora do empilhamento */
