@@ -31,7 +31,7 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
                   <div class="stack-img sm:hidden">
                     <img src={asset(b.img)} alt="" aria-hidden="true" width="1800" height="768" loading="lazy" />
                   </div>
-                  <div class="aud-card card p-5 hover:border-brand-500/40 transition-colors">
+                  <div class="aud-card p-5">
                     <span class="aud-ico grid place-items-center w-10 h-10 rounded-xl bg-brand-500/12 text-brand-400 transition-colors">
                       <Icon name={b.icon} class="w-5 h-5" />
                     </span>
@@ -46,7 +46,7 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
             {a.bullets.some((b) => !b.img) && (
               <div class="flat-block">
                 {a.bullets.filter((b) => !b.img).map((b) => (
-                  <div class="aud-card card p-5 hover:border-brand-500/40 transition-colors">
+                  <div class="aud-card p-5">
                     <span class="aud-ico grid place-items-center w-10 h-10 rounded-xl bg-brand-500/12 text-brand-400 transition-colors">
                       <Icon name={b.icon} class="w-5 h-5" />
                     </span>
@@ -109,10 +109,6 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
     background-color: rgba(244, 181, 63, .16);
     color: var(--color-sun-400);
   }
-  #publicos.theme-navy .aud-card:hover { border-color: rgba(244, 181, 63, .4); }
-
-  .aud-card { background: #15485e; }
-
   /* blocos: no desktop fluem no mesmo grid (contents); no mobile viram contextos separados */
   .stack-block, .flat-block { display: contents; }
 
@@ -148,12 +144,11 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       pointer-events: none;
     }
 
-    /* cards do empilhamento: fixam e cobrem totalmente (fundo opaco) */
+    /* cards do empilhamento: fixam acima da imagem enquanto rola */
     .stack-block .aud-card {
       position: sticky;
       top: 5.5rem;
       min-height: 12rem;
-      box-shadow: 0 -12px 30px -12px rgba(0, 0, 0, .65);
     }
 
     /* Bloco 2 (sem imagem): cards normais, por último, fora do empilhamento */
@@ -166,15 +161,6 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
     #publicos.theme-navy .stack-block .stack-img::after {
       background: linear-gradient(to bottom, transparent 55%, var(--color-navy-700) 100%);
     }
-    /* cards em painel navy (levemente mais claro que o fundo da seção) */
-    #publicos.theme-navy .stack-block .aud-card {
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .025)),
-        #15485e;
-    }
-    #publicos.theme-navy .stack-block .aud-card h4 { color: #fff; }
-    #publicos.theme-navy .stack-block .aud-card p { color: rgba(255, 255, 255, .55); }
-
     /* respeita quem prefere menos movimento: sem sticky */
     @media (prefers-reduced-motion: reduce) {
       .stack-block .stack-img,
