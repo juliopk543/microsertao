@@ -106,9 +106,9 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
   /* blocos: no desktop fluem no mesmo grid (contents); no mobile viram contextos separados */
   .stack-block, .flat-block { display: contents; }
 
-  /* vidro fosco em todos os cards, não só no empilhamento mobile */
+  /* vidro fosco em todos os cards, preenchendo o card inteiro (não só o topo) */
   .aud-card {
-    background: linear-gradient(to bottom, transparent, #262626 2rem);
+    background: rgba(38, 38, 38, .82);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
   }
