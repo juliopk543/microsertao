@@ -9,42 +9,73 @@ const included = [
   "Funcionários e comissões",
   "Suporte e treinamento",
 ];
+// monta a URL de um asset em /public respeitando o BASE_URL
+const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\/+/g, "/");
 ---
 
 <section id="preco" class="relative py-20 md:py-28 bg-ink-950 overflow-hidden">
   <div class="absolute -bottom-32 left-1/2 -translate-x-1/2 -z-10 w-[42rem] h-[42rem] rounded-full bg-brand-600/15 blur-[130px]"></div>
 
   <div class="container-x">
-    <div class="max-w-2xl mx-auto text-center reveal">
-      <span class="eyebrow">Preço justo</span>
-      <h2 class="mt-3 font-display font-bold text-white text-3xl sm:text-4xl tracking-tight text-balance">
-        <span class="text-brand-500">R$800,00</span> mais barato.
-      </h2>
-    </div>
+    <div class="pricing-grid">
+      <img
+        src={asset("Gratuito.png")}
+        alt="Comece hoje com a MicroSertão"
+        class="pricing-img mx-auto w-full max-w-sm rounded-3xl reveal"
+        loading="lazy"
+      />
 
-    <div class="mt-12 grid gap-5 max-w-md mx-auto items-stretch">
-      <!-- MicroSertão -->
-      <div class="relative card p-8 border-brand-500/40 bg-gradient-to-b from-brand-500/10 to-transparent reveal">
-        <span class="absolute -top-3 right-6 inline-flex items-center gap-1 rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold text-white shadow-lg">
-          <Icon name="bolt" class="w-3.5 h-3.5" /> Apenas Coruripe Região
-        </span>
-        <p class="mt-4 text-5xl font-display font-extrabold text-white text-[40px]">{pricing.ours.yearly}</p>
-        <p class="text-sm text-brand-400 font-medium">{pricing.ours.note}</p>
-        <ul class="mt-6 space-y-3">
-          {included.map((t) => (
-            <li class="flex items-center gap-3 text-sm text-white/80">
-              <span class="grid place-items-center w-5 h-5 rounded-full bg-brand-500/20 text-brand-400">
-                <Icon name="check" class="w-3.5 h-3.5" />
-              </span>
-              {t}
-            </li>
-          ))}
-        </ul>
-        <a href={wa} target="_blank" rel="noopener" class="btn btn-primary w-full mt-8">
-          <Icon name="whatsapp" class="w-5 h-5" />
-          Contratar agora
-        </a>
+      <div class="pricing-heading max-w-2xl mx-auto text-center reveal">
+        <span class="eyebrow">Preço justo</span>
+        <h2 class="mt-3 font-display font-bold text-white text-3xl sm:text-4xl tracking-tight text-balance">
+          <span class="text-brand-500">R$800,00</span> mais barato.
+        </h2>
+      </div>
+
+      <div class="pricing-card-wrap mt-12 grid gap-5 max-w-md mx-auto items-stretch">
+        <!-- MicroSertão -->
+        <div class="relative card p-8 border-brand-500/40 bg-gradient-to-b from-brand-500/10 to-transparent reveal">
+          <span class="absolute -top-3 right-6 inline-flex items-center gap-1 rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold text-white shadow-lg">
+            <Icon name="bolt" class="w-3.5 h-3.5" /> Apenas Coruripe Região
+          </span>
+          <p class="mt-4 text-5xl font-display font-extrabold text-white text-[40px]">{pricing.ours.yearly}</p>
+          <p class="text-sm text-brand-400 font-medium">{pricing.ours.note}</p>
+          <ul class="mt-6 space-y-3">
+            {included.map((t) => (
+              <li class="flex items-center gap-3 text-sm text-white/80">
+                <span class="grid place-items-center w-5 h-5 rounded-full bg-brand-500/20 text-brand-400">
+                  <Icon name="check" class="w-3.5 h-3.5" />
+                </span>
+                {t}
+              </li>
+            ))}
+          </ul>
+          <a href={wa} target="_blank" rel="noopener" class="btn btn-primary w-full mt-8">
+            <Icon name="whatsapp" class="w-5 h-5" />
+            Contratar agora
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* mobile: ordem natural do DOM — imagem, título, card (empilhados) */
+  .pricing-grid { display: grid; gap: 2rem; }
+
+  /* desktop: título ocupa a linha toda; imagem e card dividem o espaço lado a lado */
+  @media (min-width: 1024px) {
+    .pricing-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "heading heading"
+        "img     card";
+      align-items: center;
+      gap: 3rem;
+    }
+    .pricing-heading { grid-area: heading; }
+    .pricing-img { grid-area: img; }
+    .pricing-card-wrap { grid-area: card; margin-top: 0; }
+  }
+</style>
