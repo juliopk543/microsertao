@@ -47,7 +47,7 @@ export const audiences = {
     label: "Prefeitura",
     title: "Município Digital, comunicação baseada em dados.",
     description: [
-      "Na tela dos aplicativos usados no comércio, divulgamos campanhas de vacinação, matrículas escolares e cursos profissionalizantes aos clientes. Também realizamos pesquisas regionais para direcionar a tecnologia a serviço da população.",
+      "Na tela dos aplicativos usados no comércio, queremos divulgar campanhas de vacinação, matrículas escolares e cursos profissionalizantes aos clientes (cidadãos). Realizaremos pesquisas regionais para direcionar a tecnologia a serviço da população.",
     ],
     bullets: [
       { title: "Campanhas direcionadas", desc: "Vacinação, matrículas e eventos para o público certo.", icon: "megaphone", img: "stack-pref-1.png" },
