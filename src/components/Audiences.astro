@@ -106,13 +106,6 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
   /* blocos: no desktop fluem no mesmo grid (contents); no mobile viram contextos separados */
   .stack-block, .flat-block { display: contents; }
 
-  /* vidro fosco em todos os cards, preenchendo o card inteiro (não só o topo) */
-  .aud-card {
-    background: rgba(38, 38, 38, .82);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-
   /* ===== Scroll stacking intercalado (imagem + card) — somente mobile ===== */
   @media (max-width: 639.98px) {
     /* a área de cards vira coluna; dentro dela, dois blocos empilhados */
@@ -145,11 +138,12 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       pointer-events: none;
     }
 
-    /* cards do empilhamento: fixam e cobrem a imagem enquanto rola */
+    /* cards do empilhamento: fluem normalmente, subindo por baixo da imagem
+       fixa — como a imagem já esmaece para o fundo antes de acabar, o texto
+       nunca aparece sobre o print do app, só sobre a área já escurecida */
     .stack-block .aud-card {
-      position: sticky;
-      top: 5.5rem;
-      min-height: 12rem;
+      position: relative;
+      margin-top: -3rem;
     }
 
     /* Bloco 2 (sem imagem): cards normais, por último, fora do empilhamento */
@@ -164,9 +158,7 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
     }
     /* respeita quem prefere menos movimento: sem sticky */
     @media (prefers-reduced-motion: reduce) {
-      .stack-block .stack-img,
-      .stack-block .aud-card { position: static; box-shadow: none; }
-      .stack-block .aud-card { min-height: 0; }
+      .stack-block .stack-img { position: static; }
     }
   }
 </style>
