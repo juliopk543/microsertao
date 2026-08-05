@@ -1,12 +1,8 @@
 ---
 interface Props { class?: string; light?: boolean }
 const { class: className = "", light = false } = Astro.props;
-const icon = `${import.meta.env.BASE_URL}/logo-icon.png`.replace(/\/+/g, "/");
 ---
 <a href="#top" class={`group inline-flex items-center gap-2.5 ${className}`} aria-label="MicroSertão — início">
-  <span class="relative grid place-items-center w-9 h-9 rounded-xl bg-ink-900 overflow-hidden">
-    <img src={icon} alt="" aria-hidden="true" class="w-full h-full object-contain p-0.5" />
-  </span>
   <span class="leading-none">
     <span class={`block font-display font-extrabold tracking-tight text-lg ${light ? "text-ink-900" : "text-white"}`}>
       Micro<span class="text-brand-500">Sertão</span>
