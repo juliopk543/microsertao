@@ -37,7 +37,7 @@ export const audiences = {
     ],
     bullets: [
       { title: "Agenda Online", desc: "Permita o seu celular agendar Clientes, e apresentar seus horários disponíveis e ocupados.", icon: "calendar", img: "app-stack.png" },
-      { title: "Veja seu Orçamento", desc: "Permita o seu celular calcular os pagamentos e acompanhe o desenvolvimento do seu negócio.", icon: "wallet", img: "stack-emp-2.png" },
+      { title: "Veja seu Orçamento", desc: "Permita o celular calcular pagamentos e acompanhe o desenvolvimento do seu negócio.", icon: "wallet", img: "stack-emp-2.png" },
       { title: "Dados protegidos (LGPD)", desc: "Informações criptografadas, termos de uso claros e exclusão dos dados quando quiser em conformidade com a LGPD.", icon: "shieldCheck", img: "stack-emp-3.png" },
     ],
     cta: { label: "Quero para meu negócio", href: "#preco" },

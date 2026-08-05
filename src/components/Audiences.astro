@@ -17,10 +17,12 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
             {a.description.map((p, i) => (
               <p class={`text-white/60 text-lg text-pretty ${i === 0 ? "mt-4" : "mt-3"}`}>{p}</p>
             ))}
-            <a href={a.cta.href} class="btn btn-primary mt-7">
-              {a.cta.label}
-              <Icon name="arrow" class="w-4 h-4" />
-            </a>
+            {a.key !== "empreendedor" && (
+              <a href={a.cta.href} class="btn btn-primary mt-7">
+                {a.cta.label}
+                <Icon name="arrow" class="w-4 h-4" />
+              </a>
+            )}
           </div>
 
           <div class="aud-cards grid sm:grid-cols-2 gap-4">
