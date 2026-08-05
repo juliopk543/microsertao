@@ -67,16 +67,21 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
   /* desktop: título ocupa a linha toda; imagem e card dividem o espaço lado a lado */
   @media (min-width: 1024px) {
     .pricing-grid {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       grid-template-areas:
         "heading heading"
         "img     card";
-      align-items: center;
       gap: 3rem;
     }
     .pricing-heading { grid-area: heading; }
-    .pricing-img { grid-area: img; justify-self: center; }
-    .pricing-card-wrap { grid-area: card; margin-top: 0; }
+    .pricing-img {
+      grid-area: img;
+      width: 100%;
+      max-width: none;
+      height: 28rem;
+      object-fit: cover;
+    }
+    .pricing-card-wrap { grid-area: card; margin-top: 0; max-width: none; height: 28rem; }
   }
 
   /* card claro, sobre o novo fundo #f5f0e6 */

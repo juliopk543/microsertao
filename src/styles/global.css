@@ -63,11 +63,6 @@
     border-radius: 999px;
   }
   ::-webkit-scrollbar-thumb:hover { background: var(--color-brand-600); }
-
-  /* versão desktop renderizada a 75% para caber mais conteúdo na tela */
-  @media (min-width: 1024px) {
-    html { zoom: 0.75; }
-  }
 }
 
 @layer components {
@@ -167,5 +162,13 @@
   .reveal.is-visible {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* fora de qualquer @layer para garantir prioridade máxima na cascata:
+   versão desktop renderizada a 75% para caber mais conteúdo na tela */
+@media (min-width: 1024px) {
+  html, body {
+    zoom: 0.75;
   }
 }
