@@ -32,8 +32,8 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
                     <img src={asset(b.img)} alt="" aria-hidden="true" width="1800" height="768" loading="lazy" />
                   </div>
                   <div class="aud-card p-5">
-                    <h4 class="font-semibold text-white">{b.title}</h4>
-                    <p class="mt-1 text-sm text-white/55">{b.desc}</p>
+                    <h4 class="font-semibold text-white text-[19px]">{b.title}</h4>
+                    <p class="mt-1 text-white/55 text-[18px]">{b.desc}</p>
                   </div>
                 </Fragment>
               ))}
@@ -44,8 +44,8 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
               <div class="flat-block">
                 {a.bullets.filter((b) => !b.img).map((b) => (
                   <div class="aud-card p-5">
-                    <h4 class="font-semibold text-white">{b.title}</h4>
-                    <p class="mt-1 text-sm text-white/55">{b.desc}</p>
+                    <h4 class="font-semibold text-white text-[19px]">{b.title}</h4>
+                    <p class="mt-1 text-white/55 text-[18px]">{b.desc}</p>
                   </div>
                 ))}
               </div>
