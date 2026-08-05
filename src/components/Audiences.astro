@@ -115,10 +115,10 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
     .stack-block { display: block; }
     .stack-block > * + * { margin-top: 1rem; }
 
-    /* imagem fixa (print do app) acima de cada card */
+    /* imagem (print do app) some no scroll normal, antes do texto chegar —
+       sem sticky, então nunca fica presa na tela para o texto passar por cima */
     .stack-block .stack-img {
-      position: sticky;
-      top: 5.5rem;            /* fixa logo abaixo do header fixo */
+      position: relative;
       overflow: hidden;
       background: var(--color-ink-950);
     }
@@ -129,21 +129,13 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       object-fit: cover;
       object-position: top;
     }
-    /* gradiente escuro embaixo: esconde o que sobrar da imagem antes do próximo subir */
+    /* gradiente escuro embaixo: transição suave para o texto que vem a seguir */
     .stack-block .stack-img::after {
       content: "";
       position: absolute;
       inset: 0;
       background: linear-gradient(to bottom, transparent 55%, var(--color-ink-950) 100%);
       pointer-events: none;
-    }
-
-    /* cards do empilhamento: fluem normalmente, subindo por baixo da imagem
-       fixa — como a imagem já esmaece para o fundo antes de acabar, o texto
-       nunca aparece sobre o print do app, só sobre a área já escurecida */
-    .stack-block .aud-card {
-      position: relative;
-      margin-top: -3rem;
     }
 
     /* Bloco 2 (sem imagem): cards normais, por último, fora do empilhamento */
@@ -155,10 +147,6 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
     #publicos.theme-navy .stack-block .stack-img { background: var(--color-navy-700); }
     #publicos.theme-navy .stack-block .stack-img::after {
       background: linear-gradient(to bottom, transparent 55%, var(--color-navy-700) 100%);
-    }
-    /* respeita quem prefere menos movimento: sem sticky */
-    @media (prefers-reduced-motion: reduce) {
-      .stack-block .stack-img { position: static; }
     }
   }
 </style>
