@@ -21,7 +21,7 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       <img
         src={asset("Gratuito.png")}
         alt="Comece hoje com a MicroSertão"
-        class="pricing-img mx-auto w-full max-w-sm rounded-3xl shadow-xl shadow-black/10 reveal"
+        class="pricing-img mx-auto w-full max-w-md rounded-3xl shadow-xl shadow-black/10 reveal"
         loading="lazy"
       />
 
@@ -71,17 +71,12 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       grid-template-areas:
         "heading heading"
         "img     card";
+      align-items: center;
       gap: 3rem;
     }
     .pricing-heading { grid-area: heading; }
-    .pricing-img {
-      grid-area: img;
-      width: 100%;
-      max-width: none;
-      height: 100%;
-      object-fit: cover;
-    }
-    .pricing-card-wrap { grid-area: card; margin-top: 0; height: 100%; max-width: none; }
+    .pricing-img { grid-area: img; justify-self: center; }
+    .pricing-card-wrap { grid-area: card; margin-top: 0; }
   }
 
   /* card claro, sobre o novo fundo #f5f0e6 */
