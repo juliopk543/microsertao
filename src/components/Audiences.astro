@@ -14,7 +14,7 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
         <div class="aud-panel grid lg:grid-cols-2 gap-10 lg:gap-16 items-center" data-panel={a.key} hidden={i !== 0}>
           <div>
             {a.key === "empreendedor" && (
-              <img src={asset("Onu.png")} alt="ODS 8.2 - ONU" class="h-24 sm:h-28 w-auto mx-auto mb-6" loading="lazy" />
+              <img src={asset("Onu.png")} alt="ODS 8.2 - ONU" class="w-full max-w-xs sm:max-w-sm mx-auto mb-6" loading="lazy" />
             )}
             <h3 class="font-display font-bold text-2xl sm:text-3xl text-white tracking-tight text-balance" set:html={a.title}></h3>
             {a.description.map((p, i) => (
