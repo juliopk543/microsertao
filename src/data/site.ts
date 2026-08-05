@@ -32,8 +32,8 @@ export const audiences = {
     label: "Empreendedor",
     title: 'Pague <span class="text-brand-500">4 meses</span> e use por <span class="text-brand-500">12 meses</span> sem mensalidades.',
     description: [
-      "Um hub de aplicativos feitos para barbeiros, manicures, lava-jatos e academias, por uma fração do preço comercial: custando apenas 33% (R$ 400,00/ano).",
-      "Nossas soluções para melhorar a qualidade do seu trabalho:",
+      "Oferecemos aplicativos feitos para barbeiros, manicures, lava-jatos e academias.",
+      "Se você é empreendedor, leia nossas soluções para melhorar a qualidade do seu trabalho:",
     ],
     bullets: [
       { title: "Agenda Online", desc: "Permita o seu celular agendar Clientes, e apresentar seus horários disponíveis e ocupados.", icon: "calendar", img: "app-stack.png" },
