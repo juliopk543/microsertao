@@ -64,24 +64,29 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
   /* mobile: ordem natural do DOM — imagem, título, card (empilhados) */
   .pricing-grid { display: grid; gap: 2rem; }
 
-  /* desktop: título ocupa a linha toda; imagem e card dividem o espaço lado a lado */
+  /* desktop: imagem + card juntos e inteiros à esquerda; texto à direita */
   @media (min-width: 1024px) {
     .pricing-grid {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       grid-template-areas:
-        "heading heading"
-        "img     card";
+        "img     heading"
+        "card    heading";
+      align-items: center;
       gap: 3rem;
     }
-    .pricing-heading { grid-area: heading; }
+    .pricing-heading {
+      grid-area: heading;
+      text-align: left;
+      margin-left: 0;
+      max-width: none;
+    }
     .pricing-img {
       grid-area: img;
       width: 100%;
       max-width: none;
-      height: 28rem;
-      object-fit: cover;
+      margin-left: 0;
     }
-    .pricing-card-wrap { grid-area: card; margin-top: 0; max-width: none; height: 28rem; }
+    .pricing-card-wrap { grid-area: card; margin-top: 0; max-width: none; }
   }
 
   /* card claro, sobre o novo fundo #f5f0e6 */
