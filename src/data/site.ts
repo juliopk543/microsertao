@@ -97,8 +97,7 @@ export const features = [
 
 // ---- Preço / economia --------------------------------------
 export const pricing = {
-  common: { label: "Ferramentas comuns", monthly: "R$ 100–180/mês", yearly: "≈ R$ 1.600/ano" },
-  ours: { label: "MicroSertão", yearly: "R$ 400/ano", note: "Ferramenta completa, sem surpresas." },
+  ours: { yearly: "R$ 400/ano", note: "Ferramenta completa." },
   savingsPercent: 75,
 };
 
