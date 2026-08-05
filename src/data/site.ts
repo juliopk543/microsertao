@@ -33,7 +33,7 @@ export const audiences = {
     title: 'Pague <span class="text-brand-500">4 meses</span> e use por <span class="text-brand-500">12 meses</span> sem mensalidades.',
     description: [
       "Oferecemos aplicativos feitos para barbeiros, manicures, lava-jatos e academias.",
-      "Se você é empreendedor, leia nossas soluções para melhorar a qualidade do seu trabalho:",
+      "Se você é empreendedor, leia nossas soluções para melhorar a qualidade do seu trabalho ODS 8.2:",
     ],
     bullets: [
       { title: "Agenda Online", desc: "Permita o seu celular agendar Clientes, e apresentar seus horários disponíveis e ocupados.", icon: "calendar", img: "app-stack.png" },
