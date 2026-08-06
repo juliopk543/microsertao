@@ -71,24 +71,19 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
   .pricing-grid { display: grid; gap: 2rem; }
   .pricing-cta { margin-inline: auto; }
 
-  /* desktop: botão no topo, imagem + card juntos e inteiros à esquerda; texto à direita */
+  /* desktop: imagem + card juntos e inteiros à esquerda; texto + botão à direita */
   @media (min-width: 1024px) {
     .pricing-grid {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       grid-template-areas:
-        "cta     cta"
         "img     heading"
-        "card    heading";
+        "card    cta";
       align-items: center;
-      gap: 3rem;
-    }
-    .pricing-cta {
-      grid-area: cta;
-      margin-inline: 0;
-      margin-bottom: 1rem;
+      gap: 2.5rem 3rem;
     }
     .pricing-heading {
       grid-area: heading;
+      align-self: end;
       text-align: left;
       margin-left: 0;
       max-width: none;
@@ -100,6 +95,12 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       margin-left: 0;
     }
     .pricing-card-wrap { grid-area: card; margin-top: 0; max-width: none; }
+    .pricing-cta {
+      grid-area: cta;
+      align-self: start;
+      justify-self: start;
+      margin-inline: 0;
+    }
   }
 
   /* card claro, sobre o novo fundo #f5f0e6 */
