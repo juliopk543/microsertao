@@ -19,11 +19,6 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
 
   <div class="container-x">
     <div class="pricing-grid">
-      <a href={waFila} target="_blank" rel="noopener" class="pricing-cta btn btn-dark reveal">
-        <Icon name="whatsapp" class="w-5 h-5" />
-        Saiba mais sobre a fila online
-      </a>
-
       <img
         src={asset("Gratuito.png")}
         alt="Comece hoje com a MicroSertão"
@@ -36,6 +31,11 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
         <h2 class="mt-3 font-display font-bold text-ink-950 text-3xl sm:text-4xl tracking-tight text-balance">
           <span class="text-brand-500">R$800,00</span> mais barato.
         </h2>
+
+        <a href={waFila} target="_blank" rel="noopener" class="pricing-cta btn btn-dark mt-6">
+          <Icon name="whatsapp" class="w-5 h-5" />
+          Saiba mais sobre a fila online
+        </a>
       </div>
 
       <div class="pricing-card-wrap mt-12 grid gap-5 max-w-md mx-auto items-stretch">
@@ -67,23 +67,22 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
 </section>
 
 <style>
-  /* mobile: ordem natural do DOM — botão, imagem, título, card (empilhados) */
+  /* mobile: ordem natural do DOM — imagem, título+botão, card (empilhados) */
   .pricing-grid { display: grid; gap: 2rem; }
   .pricing-cta { margin-inline: auto; }
 
-  /* desktop: imagem + card juntos e inteiros à esquerda; texto + botão à direita */
+  /* desktop: imagem + card juntos e inteiros à esquerda; texto + botão à direita, centralizados */
   @media (min-width: 1024px) {
     .pricing-grid {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       grid-template-areas:
         "img     heading"
-        "card    cta";
+        "card    heading";
       align-items: center;
-      gap: 2.5rem 3rem;
+      gap: 3rem;
     }
     .pricing-heading {
       grid-area: heading;
-      align-self: end;
       text-align: left;
       margin-left: 0;
       max-width: none;
@@ -95,12 +94,7 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       margin-left: 0;
     }
     .pricing-card-wrap { grid-area: card; margin-top: 0; max-width: none; }
-    .pricing-cta {
-      grid-area: cta;
-      align-self: start;
-      justify-self: start;
-      margin-inline: 0;
-    }
+    .pricing-cta { margin-inline: 0; }
   }
 
   /* card claro, sobre o novo fundo #f5f0e6 */
