@@ -64,14 +64,23 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
   .pricing-grid { display: grid; gap: 2rem; }
   .pricing-cta { margin-inline: auto; }
 
-  /* card com a mesma proporção da imagem (Gratuito.png é 1080×1350 = 4/5).
-     Como o card e a imagem têm a mesma largura (max-w-md), a altura também bate.
-     Sendo grid item, o min-height:auto deixa o card crescer se o conteúdo passar. */
+  /* Card com a mesma altura da imagem (Gratuito.png é 1080×1350 = 4/5).
+     Em vez de aspect-ratio no card — que, sendo grid item, transferiria a altura
+     do conteúdo para uma largura mínima e estouraria a tela — usamos um
+     espaçador com padding-top: 125%. Porcentagem de padding é sempre relativa à
+     LARGURA, então nunca vira largura mínima. O card é empilhado na mesma célula
+     e, com items-stretch, ocupa a maior altura entre o espaçador e o conteúdo. */
+  .pricing-card-wrap::before {
+    content: "";
+    grid-column: 1;
+    grid-row: 1;
+    padding-top: 125%;
+  }
   .pricing-card {
-    aspect-ratio: 4 / 5;
+    grid-column: 1;
+    grid-row: 1;
     display: flex;
     flex-direction: column;
-    padding: 2.5rem;
   }
 
   /* lista sempre compacta: gap fixo, nunca esticado. A folga do card fica num
@@ -124,8 +133,9 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       max-width: none;
       margin: 0;
     }
-    /* no desktop a altura vem do stretch na linha do grid, não da proporção */
-    .pricing-card { aspect-ratio: auto; padding: 2.5rem; }
+    /* no desktop a altura já vem do stretch na linha do grid — dispensa o espaçador */
+    .pricing-card-wrap::before { content: none; }
+    .pricing-card { padding: 2.5rem; }
     .pricing-card-cta { font-size: 1.05rem; padding-block: 0.95rem; }
 
     /* tipografia maior para preencher melhor o card no desktop */
