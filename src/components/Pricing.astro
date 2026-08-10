@@ -70,6 +70,13 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
      espaçador com padding-top: 125%. Porcentagem de padding é sempre relativa à
      LARGURA, então nunca vira largura mínima. O card é empilhado na mesma célula
      e, com items-stretch, ocupa a maior altura entre o espaçador e o conteúdo. */
+  .pricing-card-wrap {
+    /* width: 100% é obrigatório. Sendo grid item com margin-inline: auto (mx-auto),
+       as margens automáticas cancelam o stretch e a caixa vira fit-content — era
+       por isso que o card travava em 313px enquanto a imagem crescia. */
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+  }
   .pricing-card-wrap::before {
     content: "";
     grid-column: 1;
@@ -88,17 +95,32 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
   .pricing-list {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
-    margin-top: 1.75rem;
+    gap: 0.875rem;
+    margin-top: 1.25rem;
   }
   .pricing-list > li { margin-top: 0; }
   .pricing-card-cta { margin-top: auto; }
 
-  /* tipografia do card ampliada para o conteúdo ocupar mais da altura */
-  .pricing-note { font-size: 1rem; }
-  .pricing-item { font-size: 1rem; }
-  .pricing-check { width: 1.5rem; height: 1.5rem; flex: none; }
-  .pricing-check svg { width: 0.9375rem; height: 0.9375rem; }
+  /* No mobile o card precisa caber na caixa 4:5 da imagem: padding e tipografia
+     enxutos evitam que os itens da lista quebrem em duas linhas — é a quebra de
+     linha, não o tamanho da fonte, que estoura a altura em telas estreitas. */
+  .pricing-card { padding: 1.5rem; }
+  .pricing-price { font-size: 2.25rem; line-height: 1.1; margin-top: 0.75rem; }
+  .pricing-note { font-size: 0.9375rem; }
+  .pricing-item { font-size: 0.9375rem; gap: 0.625rem; }
+  .pricing-check { width: 1.25rem; height: 1.25rem; flex: none; }
+  .pricing-check svg { width: 0.8125rem; height: 0.8125rem; }
+
+  /* telas muito estreitas (≤ 359px): a caixa 4:5 encolhe para ~350px, então o
+     conteúdo precisa de mais um aperto para não estourar a altura da imagem. */
+  @media (max-width: 359px) {
+    .pricing-card { padding: 1.125rem; }
+    .pricing-price { font-size: 1.875rem; margin-top: 0.5rem; }
+    .pricing-note { font-size: 0.875rem; }
+    .pricing-list { gap: 0.625rem; margin-top: 0.875rem; }
+    .pricing-item { font-size: 0.875rem; }
+    .pricing-card-cta { font-size: 0.875rem; padding-block: 0.65rem; }
+  }
 
   /* desktop: botão sobre a imagem (esquerda); imagem e card dividem a mesma
      linha, então o card estica até a altura da imagem. */
