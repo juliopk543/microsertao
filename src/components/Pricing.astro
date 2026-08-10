@@ -67,19 +67,29 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
   /* card com a mesma proporção da imagem (Gratuito.png é 1080×1350 = 4/5).
      Como o card e a imagem têm a mesma largura (max-w-md), a altura também bate.
      Sendo grid item, o min-height:auto deixa o card crescer se o conteúdo passar. */
-  .pricing-card { aspect-ratio: 4 / 5; display: flex; flex-direction: column; }
-
-  /* a lista absorve a folga do card e distribui os itens por igual, em vez de
-     deixar um vão único acima do botão. O gap serve de espaçamento mínimo. */
-  .pricing-list {
-    flex: 1;
+  .pricing-card {
+    aspect-ratio: 4 / 5;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    gap: 0.75rem;
+    padding: 2.5rem;
+  }
+
+  /* lista sempre compacta: gap fixo, nunca esticado. A folga do card fica num
+     vão único antes do botão, que ancora no rodapé via margin-top: auto. */
+  .pricing-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 1.75rem;
   }
   .pricing-list > li { margin-top: 0; }
-  .pricing-card-cta { margin-top: 2rem; }
+  .pricing-card-cta { margin-top: auto; }
+
+  /* tipografia do card ampliada para o conteúdo ocupar mais da altura */
+  .pricing-note { font-size: 1rem; }
+  .pricing-item { font-size: 1rem; }
+  .pricing-check { width: 1.5rem; height: 1.5rem; flex: none; }
+  .pricing-check svg { width: 0.9375rem; height: 0.9375rem; }
 
   /* desktop: botão sobre a imagem (esquerda); imagem e card dividem a mesma
      linha, então o card estica até a altura da imagem. */
