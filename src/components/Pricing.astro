@@ -4,11 +4,11 @@ import { pricing, whatsappUrl } from "../data/site";
 const wa = whatsappUrl("Olá! Quero contratar o plano de R$400/ano da MicroSertão.");
 const waFila = whatsappUrl("Olá! Quero saber mais sobre a fila online.");
 const included = [
-  "Orçamento Financeiro",
-  "Agendamento online 24h",
-  "Loja e estoque",
-  "Funcionários e comissões",
-  "Suporte e treinamento",
+  { text: "Orçamento Financeiro", icon: "wallet" },
+  { text: "Agendamento online 24h", icon: "calendar" },
+  { text: "Loja e estoque", icon: "bag" },
+  { text: "Funcionários e comissões", icon: "users" },
+  { text: "Suporte e treinamento", icon: "cap" },
 ];
 // monta a URL de um asset em /public respeitando o BASE_URL
 const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\/+/g, "/");
@@ -40,12 +40,12 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
           <p class="pricing-price mt-4 text-5xl font-display font-extrabold text-ink-950 text-[40px]">{pricing.ours.yearly}</p>
           <p class="pricing-note text-sm text-brand-600 font-medium">{pricing.ours.note}</p>
           <ul class="pricing-list mt-6 space-y-3">
-            {included.map((t) => (
+            {included.map((f) => (
               <li class="pricing-item flex items-center gap-3 text-sm text-ink-800/80">
                 <span class="pricing-check grid place-items-center w-5 h-5 rounded-full bg-brand-500/15 text-brand-600">
-                  <Icon name="check" class="w-3.5 h-3.5" />
+                  <Icon name={f.icon} class="w-3.5 h-3.5" />
                 </span>
-                {t}
+                {f.text}
               </li>
             ))}
           </ul>
@@ -109,8 +109,25 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
      enxutos evitam que os itens da lista quebrem em duas linhas — é a quebra de
      linha, não o tamanho da fonte, que estoura a altura em telas estreitas. */
   .pricing-card { padding: 1.5rem; }
-  .pricing-price { font-size: 2.25rem; line-height: 1.1; margin-top: 0.75rem; }
-  .pricing-note { font-size: 0.9375rem; }
+  .pricing-note { font-size: 0.9375rem; text-align: center; }
+
+  /* preço centralizado e pulsando: transform não afeta o layout, então a
+     altura do card continua batendo com a da imagem */
+  .pricing-price {
+    font-size: 2.25rem;
+    line-height: 1.1;
+    margin-top: 0.75rem;
+    text-align: center;
+    transform-origin: center;
+    animation: pricing-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pricing-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pricing-price { animation: none; }
+  }
 
   /* Lista em Sora (mesma família do preço) com peso 600 e cor sólida: o Inter 400
      a 15px com 20% de transparência sumia no fundo claro do card. */
@@ -127,7 +144,9 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
     height: clamp(1.125rem, 5.6cqi, 1.5rem);
     flex: none;
   }
-  .pricing-check svg { width: 62%; height: 62%; }
+  /* ícones temáticos têm mais detalhe que o antigo check, então ocupam
+     um pouco mais do círculo para continuarem legíveis */
+  .pricing-check svg { width: 68%; height: 68%; }
 
   /* telas muito estreitas (≤ 359px): a caixa 4:5 encolhe para ~350px, então o
      conteúdo precisa de mais um aperto para não estourar a altura da imagem. */
