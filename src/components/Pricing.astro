@@ -64,6 +64,12 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
   .pricing-grid { display: grid; gap: 2rem; }
   .pricing-cta { margin-inline: auto; }
 
+  /* card com a mesma proporção da imagem (Gratuito.png é 1080×1350 = 4/5).
+     Como o card e a imagem têm a mesma largura (max-w-md), a altura também bate.
+     Sendo grid item, o min-height:auto deixa o card crescer se o conteúdo passar. */
+  .pricing-card { aspect-ratio: 4 / 5; display: flex; flex-direction: column; }
+  .pricing-card-cta { margin-top: auto; }
+
   /* desktop: botão sobre a imagem (esquerda); imagem e card dividem a mesma
      linha, então o card estica até a altura da imagem. */
   @media (min-width: 1024px) {
@@ -97,9 +103,9 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       max-width: none;
       margin: 0;
     }
-    /* card acompanha a altura da imagem — CTA ancorado no rodapé */
-    .pricing-card { display: flex; flex-direction: column; padding: 2.5rem; }
-    .pricing-card-cta { margin-top: auto; font-size: 1.05rem; padding-block: 0.95rem; }
+    /* no desktop a altura vem do stretch na linha do grid, não da proporção */
+    .pricing-card { aspect-ratio: auto; padding: 2.5rem; }
+    .pricing-card-cta { font-size: 1.05rem; padding-block: 0.95rem; }
 
     /* tipografia maior para preencher melhor o card no desktop */
     .pricing-badge { font-size: 0.8125rem; padding: 0.3rem 0.85rem; }
