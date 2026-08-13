@@ -1,15 +1,7 @@
 ---
 import Icon from "./Icon.astro";
-import { pricing, whatsappUrl } from "../data/site";
-const wa = whatsappUrl("Olá! Quero contratar o plano de R$400/ano da MicroSertão.");
-const waFila = whatsappUrl("Olá! Quero saber mais sobre a fila online.");
-const included = [
-  { text: "Orçamento Financeiro", icon: "wallet" },
-  { text: "Agendamento online 24h", icon: "calendar" },
-  { text: "Loja e estoque", icon: "bag" },
-  { text: "Funcionários e comissões", icon: "users" },
-  { text: "Suporte e treinamento", icon: "cap" },
-];
+import { whatsappUrl } from "../data/site";
+const waFila = whatsappUrl("Olá! Quero saber mais sobre as ferramentas gratuitas (fila online e cardápio online).");
 // monta a URL de um asset em /public respeitando o BASE_URL
 const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\/+/g, "/");
 ---
@@ -21,145 +13,42 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
     <div class="pricing-grid">
       <a href={waFila} target="_blank" rel="noopener" class="pricing-cta btn btn-dark reveal">
         <Icon name="whatsapp" class="w-5 h-5" />
-        Saiba mais sobre a fila online
+        Saiba mais sobre as ferramentas gratuitas
       </a>
 
       <img
         src={asset("Gratuito.png")}
-        alt="Comece hoje com a MicroSertão"
-        class="pricing-img mx-auto w-full max-w-md rounded-3xl shadow-xl shadow-black/10 reveal"
+        alt="Fila online da MicroSertão: é gratuita e poupa tempo dos seus clientes"
+        class="pricing-img pricing-img-a mx-auto w-full max-w-md rounded-3xl shadow-xl shadow-black/10 reveal"
         loading="lazy"
       />
 
-      <div class="pricing-card-wrap mt-12 grid gap-5 max-w-md mx-auto items-stretch">
-        <!-- MicroSertão -->
-        <div class="pricing-card relative card p-8 border-brand-500/30 reveal">
-          <span class="pricing-badge absolute -top-3 right-6 inline-flex items-center gap-1 rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold text-white shadow-lg">
-            <Icon name="bolt" class="w-3.5 h-3.5" /> Apenas Coruripe Região
-          </span>
-          <p class="pricing-price mt-4 text-5xl font-display font-extrabold text-ink-950 text-[40px]">{pricing.ours.yearly}</p>
-          <p class="pricing-note text-sm text-brand-600 font-medium">{pricing.ours.note}</p>
-          <ul class="pricing-list mt-6 space-y-3">
-            {included.map((f) => (
-              <li class="pricing-item flex items-center gap-3 text-sm text-ink-800/80">
-                <span class="pricing-check grid place-items-center w-5 h-5 rounded-full bg-brand-500/15 text-brand-600">
-                  <Icon name={f.icon} class="w-3.5 h-3.5" />
-                </span>
-                {f.text}
-              </li>
-            ))}
-          </ul>
-          <a href={wa} target="_blank" rel="noopener" class="pricing-card-cta btn btn-primary w-full mt-8">
-            <Icon name="whatsapp" class="w-5 h-5" />
-            Contratar agora
-          </a>
-        </div>
-      </div>
+      <img
+        src={asset("Gratuito2.png")}
+        alt="Cardápio online da MicroSertão: é gratuito e poupa tempo dos seus clientes"
+        class="pricing-img pricing-img-b mx-auto w-full max-w-md rounded-3xl shadow-xl shadow-black/10 reveal"
+        loading="lazy"
+      />
     </div>
   </div>
 </section>
 
 <style>
-  /* mobile: ordem natural do DOM — botão, imagem, card (empilhados) */
+  /* mobile: ordem natural do DOM — botão e as duas imagens, empilhados */
   .pricing-grid { display: grid; gap: 2rem; }
-  .pricing-cta { margin-inline: auto; }
-
-  /* Card com a mesma altura da imagem (Gratuito.png é 1080×1350 = 4/5).
-     Em vez de aspect-ratio no card — que, sendo grid item, transferiria a altura
-     do conteúdo para uma largura mínima e estouraria a tela — usamos um
-     espaçador com padding-top: 125%. Porcentagem de padding é sempre relativa à
-     LARGURA, então nunca vira largura mínima. O card é empilhado na mesma célula
-     e, com items-stretch, ocupa a maior altura entre o espaçador e o conteúdo. */
-  .pricing-card-wrap {
-    /* width: 100% é obrigatório. Sendo grid item com margin-inline: auto (mx-auto),
-       as margens automáticas cancelam o stretch e a caixa vira fit-content — era
-       por isso que o card travava em 313px enquanto a imagem crescia. */
-    width: 100%;
-    grid-template-columns: minmax(0, 1fr);
-    /* referência para as unidades cqi: a tipografia da lista escala com a
-       largura do card, que é a mesma da imagem — assim a proporção 4:5 se
-       mantém em qualquer tela sem precisar de breakpoint por tamanho. */
-    container-type: inline-size;
-  }
-  .pricing-card-wrap::before {
-    content: "";
-    grid-column: 1;
-    grid-row: 1;
-    padding-top: 125%;
-  }
-  .pricing-card {
-    grid-column: 1;
-    grid-row: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* lista sempre compacta: gap fixo, nunca esticado. A folga do card fica num
-     vão único antes do botão, que ancora no rodapé via margin-top: auto. */
-  .pricing-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.875rem;
-    margin-top: 1.25rem;
-  }
-  .pricing-list > li { margin-top: 0; }
-  .pricing-card-cta { margin-top: auto; }
-
-  /* No mobile o card precisa caber na caixa 4:5 da imagem: padding e tipografia
-     enxutos evitam que os itens da lista quebrem em duas linhas — é a quebra de
-     linha, não o tamanho da fonte, que estoura a altura em telas estreitas. */
-  .pricing-card { padding: 1.5rem; }
-  .pricing-note { font-size: 0.9375rem; text-align: center; }
-
-  /* preço centralizado e pulsando: transform não afeta o layout, então a
-     altura do card continua batendo com a da imagem */
-  .pricing-price {
-    font-size: 2.25rem;
-    line-height: 1.1;
-    margin-top: 0.75rem;
+  /* o rótulo é longo e quebra em telas estreitas: balance distribui as linhas
+     em vez de deixar uma palavra solta embaixo */
+  .pricing-cta {
+    margin-inline: auto;
     text-align: center;
-    transform-origin: center;
-    animation: pricing-pulse 2.4s ease-in-out infinite;
-  }
-  @keyframes pricing-pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.06); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .pricing-price { animation: none; }
+    text-wrap: balance;
+    /* .btn usa line-height: 1, que cola as linhas quando o rótulo quebra */
+    line-height: 1.3;
   }
 
-  /* Lista em Sora (mesma família do preço) com peso 600 e cor sólida: o Inter 400
-     a 15px com 20% de transparência sumia no fundo claro do card. */
-  .pricing-item {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: clamp(0.875rem, 4.6cqi, 1.1875rem);
-    line-height: 1.25;
-    color: var(--color-ink-900);
-    gap: 0.625rem;
-  }
-  .pricing-check {
-    width: clamp(1.125rem, 5.6cqi, 1.5rem);
-    height: clamp(1.125rem, 5.6cqi, 1.5rem);
-    flex: none;
-  }
-  /* ícones temáticos têm mais detalhe que o antigo check, então ocupam
-     um pouco mais do círculo para continuarem legíveis */
-  .pricing-check svg { width: 68%; height: 68%; }
-
-  /* telas muito estreitas (≤ 359px): a caixa 4:5 encolhe para ~350px, então o
-     conteúdo precisa de mais um aperto para não estourar a altura da imagem. */
-  @media (max-width: 359px) {
-    .pricing-card { padding: 1.125rem; }
-    .pricing-price { font-size: 1.875rem; margin-top: 0.5rem; }
-    .pricing-note { font-size: 0.875rem; }
-    .pricing-list { gap: 0.625rem; margin-top: 0.875rem; }
-    .pricing-card-cta { font-size: 0.875rem; padding-block: 0.65rem; }
-  }
-
-  /* desktop: botão sobre a imagem (esquerda); imagem e card dividem a mesma
-     linha, então o card estica até a altura da imagem. */
+  /* desktop: botão acima, à esquerda; as duas imagens dividem a mesma linha.
+     Ambas são 1080×1350 (4:5) e ocupam colunas iguais, então saem do mesmo
+     tamanho sem precisar de nenhum ajuste de altura. */
   @media (min-width: 1024px) {
     .pricing-grid {
       max-width: 56rem;
@@ -167,7 +56,7 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       grid-template-areas:
         "cta  ."
-        "img  card";
+        "img  img2";
       column-gap: 4rem;
       row-gap: 1.5rem;
     }
@@ -178,36 +67,12 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       margin-inline: 0;
     }
     .pricing-img {
-      grid-area: img;
       align-self: start;
       width: 100%;
       max-width: none;
       margin: 0;
     }
-    .pricing-card-wrap {
-      grid-area: card;
-      align-self: stretch;
-      width: 100%;
-      max-width: none;
-      margin: 0;
-    }
-    /* no desktop a altura já vem do stretch na linha do grid — dispensa o espaçador */
-    .pricing-card-wrap::before { content: none; }
-    .pricing-card { padding: 2.5rem; }
-    .pricing-card-cta { font-size: 1.05rem; padding-block: 0.95rem; }
-
-    /* tipografia maior para preencher melhor o card no desktop */
-    .pricing-badge { font-size: 0.8125rem; padding: 0.3rem 0.85rem; }
-    .pricing-price { font-size: 3.25rem; line-height: 1.05; }
-    .pricing-note { font-size: 1.125rem; }
-    .pricing-list { margin-top: 2.25rem; gap: 1rem; }
-    /* tamanho dos itens continua vindo do clamp em cqi definido acima */
-    .pricing-item { gap: 0.85rem; }
-  }
-
-  /* card claro, sobre o novo fundo #f5f0e6 */
-  .pricing-card {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.65));
-    box-shadow: 0 20px 45px -22px rgba(20, 15, 5, 0.35);
+    .pricing-img-a { grid-area: img; }
+    .pricing-img-b { grid-area: img2; }
   }
 </style>
