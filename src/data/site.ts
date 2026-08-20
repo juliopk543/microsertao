@@ -102,6 +102,14 @@ export const pricing = {
   savingsPercent: 75,
 };
 
+// ---- Clientes que já usam o sistema -------------------------
+export const clients = [
+  { name: "Ramon Barbearia", img: "clients/ramon-barbearia.png" },
+  { name: "Cliente MicroSertão", img: "clients/cliente-caveira.png" },
+  { name: "Garagem do Petisco", img: "clients/garagem-do-petisco.png" },
+  { name: "Valdemar Scarnera Advogados", img: "clients/valdemar-scarnera.png" },
+];
+
 // ---- Vantagens para prefeituras ----------------------------
 export const cityBenefits = [
   { icon: "key", text: "Liberação de acesso a dados anonimizados e restritos para a Prefeitura" },

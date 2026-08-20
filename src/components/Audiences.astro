@@ -1,6 +1,6 @@
 ---
 import Icon from "./Icon.astro";
-import { audiences } from "../data/site";
+import { audiences, clients } from "../data/site";
 const list = [audiences.empreendedor, audiences.prefeitura];
 // monta a URL de um asset em /public respeitando o BASE_URL
 const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\/+/g, "/");
@@ -56,6 +56,34 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
           </div>
         </div>
       ))}
+    </div>
+  </div>
+
+  <!-- Clientes que já usam o sistema -->
+  <div class="mt-20 md:mt-28 clients-section">
+    <div class="container-x">
+      <p class="text-center text-white/40 text-xs sm:text-sm font-semibold tracking-widest uppercase">
+        Já usado por negócios de Coruripe
+      </p>
+    </div>
+
+    <div class="clients-marquee-wrap mt-8">
+      <div class="clients-track">
+        <div class="clients-group">
+          {clients.map((c) => (
+            <div class="client-logo">
+              <img src={asset(c.img)} alt={c.name} loading="lazy" />
+            </div>
+          ))}
+        </div>
+        <div class="clients-group" aria-hidden="true">
+          {clients.map((c) => (
+            <div class="client-logo">
+              <img src={asset(c.img)} alt="" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -162,5 +190,64 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
     #publicos.theme-navy .stack-block .stack-img::after {
       background: linear-gradient(to bottom, transparent 55%, var(--color-navy-700) 100%);
     }
+  }
+
+  /* ===== Carrossel de clientes ===== */
+  .clients-section { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 3.5rem; }
+
+  .clients-marquee-wrap {
+    overflow: hidden;
+    /* fade nas bordas para o scroll infinito parecer contínuo, sem corte abrupto */
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  .clients-track {
+    display: flex;
+    width: max-content;
+    animation: clients-scroll 26s linear infinite;
+  }
+  /* pausa a rolagem para a pessoa examinar uma logo parada, em vez de em movimento */
+  .clients-marquee-wrap:hover .clients-track,
+  .clients-marquee-wrap:focus-within .clients-track {
+    animation-play-state: paused;
+  }
+
+  .clients-group { display: flex; align-items: center; gap: 1.5rem; flex-shrink: 0; padding-right: 1.5rem; }
+
+  .client-logo {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 9rem;
+    height: 5rem;
+    padding: 0.75rem 1.25rem;
+    background: #fff;
+    border-radius: 1rem;
+  }
+  .client-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    /* cor neutra por padrão; a cor real da logo só aparece no hover/foco */
+    filter: grayscale(1);
+    opacity: 0.65;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+  }
+  .client-logo:hover img,
+  .client-logo:focus-visible img {
+    filter: none;
+    opacity: 1;
+  }
+
+  @keyframes clients-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .clients-track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; }
+    .clients-group[aria-hidden="true"] { display: none; }
+    .clients-group { flex-wrap: wrap; justify-content: center; }
   }
 </style>
