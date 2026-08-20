@@ -47,7 +47,8 @@ export const audiences = {
     label: "Prefeitura",
     title: "Município Digital, comunicação baseada em dados.",
     description: [
-      "Na tela dos aplicativos usados no comércio diariamente, queremos divulgar campanhas de vacinação, matrículas escolares e cursos profissionalizantes aos clientes (cidadãos). Realizaremos pesquisas regionais para direcionar o foco da tecnologia a serviço da população.",
+      "Na tela dos aplicativos usados no comércio diariamente, queremos divulgar campanhas de vacinação, matrículas escolares e cursos profissionalizantes aos clientes (cidadãos).",
+      "Também realizaremos pesquisas regionais para direcionar o foco da tecnologia a serviço da população.",
     ],
     bullets: [
       { title: "Campanhas direcionadas", desc: "Vacinação, matrículas e eventos para o público de Coruripe, sempre visíveis nos aplicativos do comércio.", icon: "megaphone", img: "stack-pref-1.png" },
