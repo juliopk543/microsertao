@@ -2,6 +2,8 @@
 import Icon from "./Icon.astro";
 import { whatsappUrl } from "../data/site";
 const waFila = whatsappUrl("Olá! Quero saber mais sobre as ferramentas gratuitas (fila online e cardápio online).");
+const waQueroFila = whatsappUrl("Olá! Quero usar a fila online gratuita da MicroSertão.");
+const waQueroCardapio = whatsappUrl("Olá! Quero usar o cardápio online gratuito da MicroSertão.");
 // monta a URL de um asset em /public respeitando o BASE_URL
 const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\/+/g, "/");
 ---
@@ -16,26 +18,39 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
         Saiba mais sobre as ferramentas gratuitas
       </a>
 
-      <img
-        src={asset("Gratuito.png")}
-        alt="Fila online da MicroSertão: é gratuita e poupa tempo dos seus clientes"
-        class="pricing-img pricing-img-a mx-auto w-full max-w-md rounded-3xl shadow-xl shadow-black/10 reveal"
-        loading="lazy"
-      />
+      {/* o card inteiro é o link; o selo "Quero Usar" é só a parte visível dele */}
+      <a href={waQueroFila} target="_blank" rel="noopener" class="pricing-card pricing-card-a reveal">
+        <img
+          src={asset("Gratuito.png")}
+          alt="Fila online da MicroSertão: é gratuita e poupa tempo dos seus clientes"
+          class="pricing-img"
+          loading="lazy"
+        />
+        <span class="pricing-badge">
+          <Icon name="whatsapp" class="w-4 h-4" />
+          Quero Usar
+        </span>
+      </a>
 
-      <img
-        src={asset("Gratuito2.png")}
-        alt="Cardápio online da MicroSertão: é gratuito, atualize quando quiser"
-        class="pricing-img pricing-img-b mx-auto w-full max-w-md rounded-3xl shadow-xl shadow-black/10 reveal"
-        loading="lazy"
-      />
+      <a href={waQueroCardapio} target="_blank" rel="noopener" class="pricing-card pricing-card-b reveal">
+        <img
+          src={asset("Gratuito2.png")}
+          alt="Cardápio online da MicroSertão: é gratuito, atualize quando quiser"
+          class="pricing-img"
+          loading="lazy"
+        />
+        <span class="pricing-badge">
+          <Icon name="whatsapp" class="w-4 h-4" />
+          Quero Usar
+        </span>
+      </a>
     </div>
   </div>
 </section>
 
 <style>
-  /* mobile: ordem natural do DOM — botão e as duas imagens, empilhados */
-  .pricing-grid { display: grid; gap: 2rem; }
+  /* mobile: ordem natural do DOM — botão e os dois cards, empilhados */
+  .pricing-grid { display: grid; gap: 2.5rem; }
   /* o rótulo é longo e quebra em telas estreitas: balance distribui as linhas
      em vez de deixar uma palavra solta embaixo */
   .pricing-cta {
@@ -46,9 +61,72 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
     line-height: 1.3;
   }
 
-  /* desktop: botão acima, à esquerda; as duas imagens dividem a mesma linha.
-     Ambas são 1080×1350 (4:5) e ocupam colunas iguais, então saem do mesmo
-     tamanho sem precisar de nenhum ajuste de altura. */
+  .pricing-card {
+    position: relative;
+    display: block;
+    margin-inline: auto;
+    width: 100%;
+    max-width: 28rem;
+    /* abre a faixa por onde o selo sobe além da borda do card — metade da
+       altura do selo, para ele ficar montado exatamente em cima da borda */
+    padding-top: 1.15rem;
+  }
+  .pricing-img {
+    display: block;
+    width: 100%;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .pricing-badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    /* translateX aqui já centraliza; o hover só acrescenta o deslocamento em Y */
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    padding: 0.7rem 1.5rem;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--color-ink-950);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1;
+    box-shadow: 0 12px 26px -10px rgb(0 0 0 / 0.5);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.2s ease;
+  }
+
+  /* o card todo é clicável, então o hover em qualquer ponto dele acende o selo */
+  .pricing-card:hover .pricing-badge,
+  .pricing-card:focus-visible .pricing-badge {
+    transform: translateX(-50%) translateY(-4px);
+    box-shadow: 0 18px 34px -10px rgb(0 0 0 / 0.6);
+  }
+  .pricing-card:hover .pricing-img,
+  .pricing-card:focus-visible .pricing-img {
+    transform: translateY(-4px);
+    box-shadow: 0 28px 38px -10px rgb(0 0 0 / 0.22);
+  }
+  .pricing-card:focus-visible {
+    outline: 3px solid var(--color-brand-500);
+    outline-offset: 6px;
+    border-radius: 1.75rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pricing-img, .pricing-badge { transition: none; }
+    .pricing-card:hover .pricing-img { transform: none; }
+    .pricing-card:hover .pricing-badge { transform: translateX(-50%); }
+  }
+
+  /* desktop: botão acima, à esquerda; os dois cards dividem a mesma linha.
+     Ambas as imagens são 1080×1350 (4:5) e ocupam colunas iguais, então saem do
+     mesmo tamanho sem precisar de nenhum ajuste de altura. */
   @media (min-width: 1024px) {
     .pricing-grid {
       max-width: 56rem;
@@ -58,7 +136,8 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
         "cta  ."
         "img  img2";
       column-gap: 4rem;
-      row-gap: 1.5rem;
+      /* folga maior que antes: o selo agora ocupa o vão acima do card */
+      row-gap: 2.25rem;
     }
     .pricing-cta {
       grid-area: cta;
@@ -66,13 +145,12 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
       justify-self: start;
       margin-inline: 0;
     }
-    .pricing-img {
+    .pricing-card {
       align-self: start;
-      width: 100%;
       max-width: none;
-      margin: 0;
+      margin-inline: 0;
     }
-    .pricing-img-a { grid-area: img; }
-    .pricing-img-b { grid-area: img2; }
+    .pricing-card-a { grid-area: img; }
+    .pricing-card-b { grid-area: img2; }
   }
 </style>
