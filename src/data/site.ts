@@ -32,8 +32,8 @@ export const audiences = {
     label: "Empreendedor",
     title: 'Pague <span class="text-brand-500">4 meses</span> e use por <span class="text-brand-500">12 meses</span> sem mensalidades.',
     description: [
-      "Oferecemos aplicativos feitos para barbeiros, manicures, lava-jatos e academias.",
-      "Se você é empreendedor, leia nossas soluções para melhorar a qualidade do seu trabalho ODS 8.2:",
+      "Oferecemos aplicativos feitos para barbeiros, manicures, advogados, lava-jatos e academias.",
+      "Se você é empreendedor de Coruripe, leia nossas soluções para facilitar a qualidade do seu trabalho ODS 8.2:",
     ],
     bullets: [
       { title: "Agenda Online", desc: "Permita o seu celular agendar Clientes, e apresentar seus horários disponíveis e ocupados.", icon: "calendar", img: "app-stack.png" },
@@ -47,11 +47,11 @@ export const audiences = {
     label: "Prefeitura",
     title: "Município Digital, comunicação baseada em dados.",
     description: [
-      "Na tela dos aplicativos usados no comércio, queremos divulgar campanhas de vacinação, matrículas escolares e cursos profissionalizantes aos clientes (cidadãos). Realizaremos pesquisas regionais para direcionar a tecnologia a serviço da população.",
+      "Na tela dos aplicativos usados no comércio diariamente, queremos divulgar campanhas de vacinação, matrículas escolares e cursos profissionalizantes aos clientes (cidadãos). Realizaremos pesquisas regionais para direcionar o foco da tecnologia a serviço da população.",
     ],
     bullets: [
-      { title: "Campanhas direcionadas", desc: "Vacinação, matrículas e eventos para o público certo.", icon: "megaphone", img: "stack-pref-1.png" },
-      { title: "Menos gasto com mídia", desc: "Economize com anúncios em redes estrangeiras.", icon: "trendDown", img: "stack-pref-4.png" },
+      { title: "Campanhas direcionadas", desc: "Vacinação, matrículas e eventos para o público de Coruripe, sempre visíveis nos aplicativos do comércio.", icon: "megaphone", img: "stack-pref-1.png" },
+      { title: "Menos gasto com mídia", desc: "Economize o dinheiro do contribuinte sem pagar por anúncios em redes sociais estrangeiras.", icon: "trendDown", img: "stack-pref-4.png" },
       { title: "Cursos profissionalizantes", desc: "Conecte a demanda dos negócios locais aos cidadãos.", icon: "cap", img: "" },
       { title: "Dashboard de indicadores", desc: "Visualize o desenvolvimento do comércio da cidade.", icon: "chart", img: "" },
     ],
