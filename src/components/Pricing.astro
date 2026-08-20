@@ -1,7 +1,6 @@
 ---
 import Icon from "./Icon.astro";
 import { whatsappUrl } from "../data/site";
-const waFila = whatsappUrl("Olá! Quero saber mais sobre as ferramentas gratuitas (fila online e cardápio online).");
 const waQueroFila = whatsappUrl("Olá! Quero usar a fila online gratuita da MicroSertão.");
 const waQueroCardapio = whatsappUrl("Olá! Quero usar o cardápio online gratuito da MicroSertão.");
 // monta a URL de um asset em /public respeitando o BASE_URL
@@ -13,13 +12,8 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
 
   <div class="container-x">
     <div class="pricing-grid">
-      <a href={waFila} target="_blank" rel="noopener" class="pricing-cta btn btn-dark reveal">
-        <Icon name="whatsapp" class="w-5 h-5" />
-        Saiba mais sobre as ferramentas gratuitas
-      </a>
-
       {/* o card inteiro é o link; o selo "Quero Usar" é só a parte visível dele */}
-      <a href={waQueroFila} target="_blank" rel="noopener" class="pricing-card pricing-card-a reveal">
+      <a href={waQueroFila} target="_blank" rel="noopener" class="pricing-card reveal">
         <img
           src={asset("Gratuito.png")}
           alt="Fila online da MicroSertão: é gratuita e poupa tempo dos seus clientes"
@@ -32,7 +26,7 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
         </span>
       </a>
 
-      <a href={waQueroCardapio} target="_blank" rel="noopener" class="pricing-card pricing-card-b reveal">
+      <a href={waQueroCardapio} target="_blank" rel="noopener" class="pricing-card reveal">
         <img
           src={asset("Gratuito2.png")}
           alt="Cardápio online da MicroSertão: é gratuito, atualize quando quiser"
@@ -49,17 +43,8 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
 </section>
 
 <style>
-  /* mobile: ordem natural do DOM — botão e os dois cards, empilhados */
+  /* mobile: os dois cards empilhados */
   .pricing-grid { display: grid; gap: 2.5rem; }
-  /* o rótulo é longo e quebra em telas estreitas: balance distribui as linhas
-     em vez de deixar uma palavra solta embaixo */
-  .pricing-cta {
-    margin-inline: auto;
-    text-align: center;
-    text-wrap: balance;
-    /* .btn usa line-height: 1, que cola as linhas quando o rótulo quebra */
-    line-height: 1.3;
-  }
 
   .pricing-card {
     position: relative;
@@ -124,33 +109,20 @@ const asset = (file: string) => `${import.meta.env.BASE_URL}/${file}`.replace(/\
     .pricing-card:hover .pricing-badge { transform: translateX(-50%); }
   }
 
-  /* desktop: botão acima, à esquerda; os dois cards dividem a mesma linha.
-     Ambas as imagens são 1080×1350 (4:5) e ocupam colunas iguais, então saem do
-     mesmo tamanho sem precisar de nenhum ajuste de altura. */
+  /* desktop: os dois cards dividem a mesma linha. Ambas as imagens são
+     1080×1350 (4:5) e ocupam colunas iguais, então saem do mesmo tamanho sem
+     precisar de nenhum ajuste de altura. */
   @media (min-width: 1024px) {
     .pricing-grid {
       max-width: 56rem;
       margin-inline: auto;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      grid-template-areas:
-        "cta  ."
-        "img  img2";
       column-gap: 4rem;
-      /* folga maior que antes: o selo agora ocupa o vão acima do card */
-      row-gap: 2.25rem;
-    }
-    .pricing-cta {
-      grid-area: cta;
-      align-self: end;
-      justify-self: start;
-      margin-inline: 0;
     }
     .pricing-card {
       align-self: start;
       max-width: none;
       margin-inline: 0;
     }
-    .pricing-card-a { grid-area: img; }
-    .pricing-card-b { grid-area: img2; }
   }
 </style>
