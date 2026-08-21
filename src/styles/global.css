@@ -165,10 +165,3 @@
   }
 }
 
-/* fora de qualquer @layer para garantir prioridade máxima na cascata:
-   versão desktop renderizada a 75% para caber mais conteúdo na tela */
-@media (min-width: 1024px) {
-  html, body {
-    zoom: 0.75;
-  }
-}
