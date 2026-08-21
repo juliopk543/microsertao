@@ -42,15 +42,25 @@ const campaigns = ["Setores em crescimento", "Demanda por mão de obra", "Faixa 
       </a>
     </div>
 
-    <ul class="grid sm:grid-cols-2 gap-3 reveal">
-      {cityBenefits.map((b) => (
-        <li class="flex items-start gap-3 rounded-2xl bg-white/5 border border-white/10 p-4">
-          <span class="grid place-items-center shrink-0 w-7 h-7 rounded-lg bg-sun-400/20 text-sun-400">
-            <Icon name={b.icon} class="w-4 h-4" />
-          </span>
-          <span class="text-sm text-white/85 leading-relaxed">{b.text}</span>
-        </li>
-      ))}
-    </ul>
+    <div class="reveal">
+      <h3 class="font-display font-bold text-white text-2xl sm:text-3xl tracking-tight text-balance">
+        Uma rede de dados que cresce a cada município
+      </h3>
+      <p class="mt-4 text-white/70 text-lg text-pretty">
+        Cada novo município associado ao projeto contribui com os dados da sua economia local
+        e fortalece a rede AMA como um todo, ampliando os seguintes benefícios:
+      </p>
+
+      <ul class="mt-7 grid sm:grid-cols-2 gap-3">
+        {cityBenefits.map((b) => (
+          <li class="flex items-start gap-3 rounded-2xl bg-white/5 border border-white/10 p-4">
+            <span class="grid place-items-center shrink-0 w-7 h-7 rounded-lg bg-sun-400/20 text-sun-400">
+              <Icon name={b.icon} class="w-4 h-4" />
+            </span>
+            <span class="text-sm text-white/85 leading-relaxed">{b.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
 </section>
