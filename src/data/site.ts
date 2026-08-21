@@ -112,10 +112,10 @@ export const clients = [
 
 // ---- Vantagens para prefeituras ----------------------------
 export const cityBenefits = [
-  { icon: "key", text: "Liberação de acesso a dados anonimizados e restritos para a Prefeitura" },
-  { icon: "chart", text: "Dashboard de indicadores para o desenvolvimento da cidade" },
-  { icon: "megaphone", text: "Notificações de campanhas públicas personalizadas e filtradas" },
-  { icon: "bag", text: "Quantidade de MEI e ME regulares por setor" },
+  { icon: "key", text: "Painel estadual comparativo entre os municípios filiados, sob governança da AMA" },
+  { icon: "chart", text: "Dashboard de indicadores de desenvolvimento por município e por região" },
+  { icon: "megaphone", text: "Campanhas públicas segmentadas, disparadas por município ou por toda a rede AMA" },
+  { icon: "bag", text: "Quantidade de MEI e ME regulares por setor, em cada município" },
 ];
 
 // ---- FAQ ----------------------------------------------------
