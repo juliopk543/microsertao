@@ -1,10 +1,7 @@
-# build output
-dist/
-# generated types
-.astro/
-
-# dependencies
+# dependências e builds antigos (projeto Astro descontinuado)
 node_modules/
+dist/
+.astro/
 
 # logs
 npm-debug.log*
@@ -12,16 +9,19 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-
-# environment variables
+# variáveis de ambiente
 .env
 .env.production
 
-# macOS-specific files
+# arquivos de sistema
 .DS_Store
+Thumbs.db
 
-# jetbrains setting folder
+# editores
 .idea/
+
+# backups de edição
+*.bak
 
 # imagens de referência (não publicar)
 Referencia/
