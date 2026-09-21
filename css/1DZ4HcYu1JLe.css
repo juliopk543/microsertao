@@ -7733,7 +7733,7 @@ footer .f-items .f-item .social li.whatsapp a {
      Logo responsivo (mobile/tablet) menor
 =================================================================== */
 nav.navbar .navbar-brand img.logo.logo-responsive {
-  height: 34px !important;
+  height: 28px !important;
   width: auto;
   max-width: 100%;
 }
