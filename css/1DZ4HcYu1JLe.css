@@ -7649,8 +7649,8 @@ body.dark-layout .works-process-items .item .icon i {
     /* espaco entre a borda esquerda da tela e o inicio do .container */
     --brand-bleed: max(0px, (100vw - 960px) / 2);
     /* caixa da logo: menor que a faixa, centralizada nela */
-    --logo-w: 190px;
-    --logo-h: 52px;
+    --logo-w: 240px;
+    --logo-h: 70px;
     display: block;
     width: var(--brand-w);
     height: var(--brand-h);
