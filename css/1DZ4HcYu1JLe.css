@@ -7728,3 +7728,12 @@ body.dark-layout .works-process-items .item .icon i {
 footer .f-items .f-item .social li.whatsapp a {
   background: #25D366 none repeat scroll 0 0;
 }
+
+/* ===================================================================
+     Logo responsivo (mobile/tablet) menor
+=================================================================== */
+nav.navbar .navbar-brand img.logo.logo-responsive {
+  height: 34px !important;
+  width: auto;
+  max-width: 100%;
+}
