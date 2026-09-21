@@ -7648,8 +7648,9 @@ body.dark-layout .works-process-items .item .icon i {
     --brand-w: 300px;
     /* espaco entre a borda esquerda da tela e o inicio do .container */
     --brand-bleed: max(0px, (100vw - 960px) / 2);
-    /* caixa da logo: 30% menor que a faixa, centralizada nela */
-    --logo-w: 372px;
+    /* caixa da logo: menor que a faixa, centralizada nela */
+    --logo-w: 190px;
+    --logo-h: 52px;
     display: block;
     width: var(--brand-w);
     height: var(--brand-h);
@@ -7669,15 +7670,16 @@ body.dark-layout .works-process-items .item .icon i {
 
   nav.navbar.navbar-default.bootsnav.navbar-fixed-light a.navbar-brand img.logo {
     position: absolute;
-    top: 0;
+    /* centralizada na vertical dentro da faixa azul */
+    top: calc((var(--brand-h) - var(--logo-h)) / 2);
     /* centraliza no meio da faixa azul visivel (0 -> borda direita do brand) */
     right: calc((var(--brand-w) + var(--brand-bleed)) / 2 - var(--logo-w) / 2);
     /* !important para vencer o ".logo { height: 50px !important }" acima */
-    height: var(--brand-h) !important;
+    height: var(--logo-h) !important;
     width: var(--logo-w);
     max-width: none;
     display: block;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
   }
 }
