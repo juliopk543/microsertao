@@ -7739,3 +7739,72 @@ nav.navbar .navbar-brand img.logo.logo-responsive {
   width: auto;
   max-width: 100%;
 }
+
+/* ===================================================================
+     Titulo do banner: cores e estilos conforme a identidade IBRASO
+=================================================================== */
+.banner-area.text-combo h2 {
+  color: #0b1f44;
+}
+
+/* "EMANCIPACAO DIGITAL" - linha + texto azul, caixa alta e espacado */
+.banner-area.text-combo h2 span.banner-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: #437eeb;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.banner-area.text-combo h2 span.banner-eyebrow::before {
+  content: "";
+  display: block;
+  width: 55px;
+  height: 3px;
+  flex: 0 0 auto;
+  background: #437eeb;
+}
+
+/* "sistemas" em azul, ao lado de "IBRASO" */
+.banner-area.text-combo h2 span.brand-light {
+  color: #437eeb;
+}
+
+/* subtitulo em cinza, peso leve */
+.banner-area.text-combo h2 span.banner-sub {
+  display: block;
+  margin-top: 18px;
+  margin-bottom: 0;
+  color: #4a5568;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+@media only screen and (max-width: 991px) {
+  .banner-area.text-combo h2 span.banner-sub {
+    font-size: 26px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .banner-area.text-combo h2 span.banner-eyebrow {
+    font-size: 13px;
+    letter-spacing: 3px;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .banner-area.text-combo h2 span.banner-eyebrow::before {
+    width: 35px;
+  }
+
+  .banner-area.text-combo h2 span.banner-sub {
+    font-size: 22px;
+    margin-top: 12px;
+  }
+}
