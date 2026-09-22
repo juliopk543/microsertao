@@ -471,6 +471,27 @@
         .para-none p {
             display: none;
         }
+
+        /* Cards de solucoes com a mesma altura, botao alinhado embaixo. */
+        .services-area .services-items > .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .services-area .services-items > .row > .single-item {
+            display: flex;
+        }
+
+        .services-area .services-items > .row > .single-item > .item {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .services-area .services-items > .row > .single-item > .item .button {
+            margin-top: auto;
+            padding-top: 10px;
+        }
     </style>
     <noscript>
         <style>
@@ -979,8 +1000,12 @@
                                                 <img decoding="async" src="images/suwErDVsaggg.png" alt="Nuvem soberana">
                                                 <h4>Nuvem Soberana</h4>
                                                 <p>
-                                                    O Brasil investe 1 bilhão de reais para manter o armazenamento de dados
-                                                    no seu território nacional. Seu município está preparado?
+                                                    O Brasil prevê cerca de R$ 1 bilhão em investimentos para fortalecer
+                                                    sua infraestrutura digital e manter dados estratégicos do poder
+                                                    público sob controle nacional.
+                                                </p>
+                                                <p>
+                                                    Seu município está preparado para coletar esses dados?
                                                 </p>
                                                 <div class="button">
                                                     <a class="btn-standard"
