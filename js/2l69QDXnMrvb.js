@@ -228,7 +228,7 @@
             ],
             responsive: {
                 1000: {
-                    stagePadding: 0,
+                    stagePadding: 100,
                 }
             }
         });
