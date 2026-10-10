@@ -228,7 +228,14 @@
             ],
             responsive: {
                 1000: {
-                    stagePadding: 100,
+                    items: 3,
+                    margin: 20,
+                    stagePadding: 0,
+                    loop: false,
+                    autoplay: false,
+                    dots: false,
+                    mouseDrag: false,
+                    touchDrag: false
                 }
             }
         });
