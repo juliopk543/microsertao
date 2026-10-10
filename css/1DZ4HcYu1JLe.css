@@ -2584,6 +2584,13 @@ body,
   margin-top: 10px;
 }
 
+/* Todas as abas com a mesma altura de imagem (a da mais alta) */
+.center-tabs .tab-content .thumb img {
+  width: 100%;
+  aspect-ratio: 1280 / 1186;
+  object-fit: contain;
+}
+
 
 /* About Version Two */
 
