@@ -551,10 +551,10 @@
                 margin: 0;
             }
 
-            /* Desktop: o carrossel tem stagePadding de 100px; compensa para centralizar no card. */
+            /* Desktop: sem stagePadding, o card ocupa toda a coluna (sem card cortado ao lado). */
             @media (min-width: 1000px) {
-                .our-features-area .feature-items.feature-carousel.owl-carousel .owl-dots {
-                    margin-right: 200px;
+                .our-features-area .feature-items.feature-carousel.owl-carousel .owl-stage {
+                    left: 0 !important;
                 }
             }
 
