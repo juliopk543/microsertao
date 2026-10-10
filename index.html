@@ -532,6 +532,56 @@
             }
         }
 
+        /* Indicadores do carrossel de cards: acima dos cards, em barras coloridas (mobile). */
+        @media (max-width: 991px) {
+            .our-features-area .feature-items.feature-carousel.owl-carousel {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .our-features-area .feature-items.feature-carousel.owl-carousel .owl-dots {
+                order: -1;
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+
+            .our-features-area .feature-items.feature-carousel.owl-carousel .owl-dot {
+                margin: 0;
+            }
+
+            .our-features-area .feature-items.feature-carousel.owl-carousel .owl-dot span {
+                width: 48px;
+                height: 8px;
+                margin: 0;
+                border-radius: 4px;
+                box-shadow: none;
+                opacity: 0.3;
+                transition: opacity 0.25s ease-in-out;
+            }
+
+            .our-features-area .feature-items.feature-carousel.owl-carousel .owl-dot.active span {
+                opacity: 1;
+            }
+
+            .our-features-area .feature-items.feature-carousel.owl-carousel .owl-dot.active span::after {
+                display: none;
+            }
+
+            .our-features-area .feature-items.feature-carousel.owl-carousel .owl-dot:nth-child(1) span {
+                background: #9d1645;
+            }
+
+            .our-features-area .feature-items.feature-carousel.owl-carousel .owl-dot:nth-child(2) span {
+                background: #006d9a;
+            }
+
+            .our-features-area .feature-items.feature-carousel.owl-carousel .owl-dot:nth-child(3) span {
+                background: #412075;
+            }
+        }
+
         /* Card com banner no topo (ODS 8): cantos arredondados e botao a direita no desktop. */
         .our-features-area .feature-items .item.item-banner .icon img {
             border-radius: 10px 10px 0 0;
