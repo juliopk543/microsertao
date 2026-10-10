@@ -509,6 +509,22 @@
             margin-bottom: 10px;
         }
 
+        /* Botao Vantagens do banner: abaixo da imagem no mobile. */
+        .banner-btn-mobile {
+            display: none;
+        }
+
+        @media (max-width: 991px) {
+            .banner-btn-desktop {
+                display: none !important;
+            }
+
+            .banner-btn-mobile {
+                display: inline-block;
+                margin-top: 25px;
+            }
+        }
+
         /* Card com banner no topo (ODS 8): cantos arredondados e botao a direita no desktop. */
         .our-features-area .feature-items .item.item-banner .icon img {
             border-radius: 10px 10px 0 0;
@@ -690,13 +706,15 @@
                                                                 população, ofereça agilidade aos seus
                                                                 microempreendedores.</span>
                                                         </h2>
-                                                        <a class="btn circle btn-md btn-gradient wow fadeInUp"
+                                                        <a class="btn circle btn-md btn-gradient wow fadeInUp banner-btn-desktop"
                                                             data-wow-duration="1.8s" href="#service">Vantagens
                                                             <i class="fas fa-plus"></i></a>
                                                     </div>
                                                     <div class="col-lg-6 thumb wow fadeInRight" data-wow-duration="1s">
                                                         <img decoding="async" src="images/Header.png"
                                                             alt="Aplicativo IBRASO em uso no celular">
+                                                        <a class="btn circle btn-md btn-gradient banner-btn-mobile"
+                                                            href="#service">Vantagens <i class="fas fa-plus"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
