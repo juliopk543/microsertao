@@ -509,6 +509,28 @@
             margin-bottom: 10px;
         }
 
+        /* Trava o arraste lateral da pagina (mobile): sem rolagem horizontal. */
+        html,
+        body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        @media (max-width: 991px) {
+            html,
+            body {
+                touch-action: pan-y pinch-zoom;
+                overscroll-behavior-x: none;
+            }
+
+            .banner-area,
+            .our-features-area,
+            .wpb-content-wrapper {
+                overflow-x: clip;
+                max-width: 100%;
+            }
+        }
+
         /* Botao Vantagens do banner: abaixo da imagem no mobile. */
         .banner-btn-mobile {
             display: none;
