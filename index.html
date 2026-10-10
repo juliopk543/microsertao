@@ -514,6 +514,13 @@
             display: none;
         }
 
+        /* Ilustracao ao lado dos cards de recursos: oculta no mobile. */
+        @media (max-width: 991px) {
+            .our-features-area .col-lg-5:has(> .thumb) {
+                display: none;
+            }
+        }
+
         @media (max-width: 991px) {
             .banner-btn-desktop {
                 display: none !important;
