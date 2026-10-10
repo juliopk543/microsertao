@@ -589,6 +589,13 @@
             }
         }
 
+        /* Desktop em 100% de zoom: escala a secao para 80% para o card (com banner) caber na tela sem cortes. */
+        @media (min-width: 1367px) and (max-width: 2000px) {
+            .our-features-area {
+                zoom: 0.8;
+            }
+        }
+
         /* Card com banner no topo (ODS 8): cantos arredondados e botao a direita no desktop. */
         .our-features-area .feature-items .item.item-banner .icon img {
             border-radius: 10px 10px 0 0;
