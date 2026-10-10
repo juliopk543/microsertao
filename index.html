@@ -584,28 +584,8 @@
                 padding-bottom: 35px;
             }
 
-            /* Botao fixo no canto inferior direito; o texto desce ao lado dele (ver script no fim da pagina). */
-            .our-features-area .feature-items .item {
-                position: relative;
-            }
-
             .our-features-area .feature-items .item .bottom {
-                position: absolute;
-                right: 30px;
-                bottom: 35px;
-                margin: 0 !important;
                 padding-top: 0 !important;
-            }
-
-            .our-features-area .feature-items .item .btn-gap {
-                display: block;
-                float: right;
-                width: 0;
-            }
-
-            .our-features-area .feature-items .item .btn-gap.zone {
-                clear: right;
-                width: var(--btn-w, 210px);
             }
 
             .our-features-area .feature-items.feature-carousel .owl-stage {
@@ -1788,68 +1768,6 @@
         })(jQuery);
     </script>
 
-<script>
-    /* Desktop: faz o texto dos cards ocupar o espaco ao lado do botao "Saiba Mais" (botao fixo no canto inferior direito). */
-    (function () {
-        var MQ = window.matchMedia('(min-width: 1000px)');
-
-        function items() {
-            return Array.prototype.slice.call(document.querySelectorAll('.our-features-area .feature-items .item'));
-        }
-
-        function lastP(item) {
-            var ps = item.querySelectorAll('p');
-            return ps.length ? ps[ps.length - 1] : null;
-        }
-
-        function clear() {
-            Array.prototype.forEach.call(document.querySelectorAll('.our-features-area .btn-gap'), function (el) {
-                el.parentNode.removeChild(el);
-            });
-        }
-
-        function apply() {
-            clear();
-            if (!MQ.matches) { return; }
-            var list = items().map(function (item) {
-                var p = lastP(item), btn = item.querySelector('.bottom');
-                if (!p || !btn) { return null; }
-                var top = document.createElement('span'), zone = document.createElement('span');
-                top.className = 'btn-gap';
-                zone.className = 'btn-gap zone';
-                zone.style.setProperty('--btn-w', (btn.offsetWidth + 20) + 'px');
-                p.insertBefore(zone, p.firstChild);
-                p.insertBefore(top, p.firstChild);
-                return { p: p, btn: btn, top: top, zone: zone };
-            }).filter(Boolean);
-
-            for (var pass = 0; pass < 6; pass++) {
-                var changed = false;
-                list.forEach(function (o) {
-                    var pr = o.p.getBoundingClientRect(), br = o.btn.getBoundingClientRect();
-                    var h = Math.max(0, Math.round(br.top - 6 - pr.top));
-                    var zh = Math.round(br.height + 12);
-                    if (o.top.style.height !== h + 'px' || o.zone.style.height !== zh + 'px') {
-                        o.top.style.height = h + 'px';
-                        o.zone.style.height = zh + 'px';
-                        changed = true;
-                    }
-                });
-                if (!changed) { break; }
-            }
-        }
-
-        var timer;
-        function schedule() {
-            clearTimeout(timer);
-            timer = setTimeout(apply, 80);
-        }
-
-        window.addEventListener('load', function () { apply(); setTimeout(apply, 400); });
-        window.addEventListener('resize', schedule);
-        if (document.fonts && document.fonts.ready) { document.fonts.ready.then(apply); }
-    })();
-</script>
 </body>
 
 </html><!-- Page cached by LiteSpeed Cache 7.6.2 on 2026-08-29 07:18:02 -->
