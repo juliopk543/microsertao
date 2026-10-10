@@ -509,10 +509,17 @@
             margin-bottom: 10px;
         }
 
-        /* Trava o arraste lateral da pagina (mobile): sem rolagem horizontal. */
-        html,
-        body {
+        /* Trava o arraste lateral da pagina (mobile): sem rolagem horizontal.
+           "hidden" so no html (vai para a janela); no body usa "clip", que corta sem virar
+           area de rolagem. Com "hidden" no body ele passava a rolar no lugar da janela e as
+           animacoes de entrada (WOW) e o menu fixo deixavam de funcionar. */
+        html {
             overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        body {
+            overflow-x: clip;
             max-width: 100%;
         }
 
@@ -741,12 +748,201 @@
         </style>
     </noscript>
     <script src="js/L3F009mNeCO1.js" defer=""></script>
+
+    <!-- Tela de carregamento: cobre a pagina ate todas as imagens, fontes e estilos carregarem. -->
+    <style id="site-loader-css">
+        html.is-loading,
+        html.is-loading body {
+            overflow: hidden;
+        }
+
+        /* Segura as animacoes de entrada (WOW) para tocarem quando a tela de carregamento sair. */
+        html.is-loading .wow {
+            animation-play-state: paused !important;
+        }
+
+        #site-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            background: #f5f8fd;
+            transition: opacity .5s ease, visibility .5s ease;
+        }
+
+        #site-loader.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #site-loader .loader-mark {
+            position: relative;
+            width: 112px;
+            height: 112px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(67, 126, 235, .15);
+        }
+
+        #site-loader .loader-mark::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 3px solid rgba(67, 126, 235, .15);
+            border-top-color: #437eeb;
+            animation: site-loader-spin 1s linear infinite;
+        }
+
+        #site-loader .loader-mark img {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            animation: site-loader-pulse 1.6s ease-in-out infinite;
+        }
+
+        #site-loader .loader-bar {
+            width: 180px;
+            height: 4px;
+            border-radius: 4px;
+            background: rgba(67, 126, 235, .15);
+            overflow: hidden;
+        }
+
+        #site-loader .loader-bar span {
+            display: block;
+            width: 0;
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #2a5bd0, #437eeb);
+            transition: width .2s linear;
+        }
+
+        #site-loader .loader-text {
+            margin: -14px 0 0;
+            font-family: "Nunito", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #6b7280;
+        }
+
+        @keyframes site-loader-spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes site-loader-pulse {
+            50% {
+                transform: scale(.9);
+                opacity: .75;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #site-loader .loader-mark::before,
+            #site-loader .loader-mark img {
+                animation-duration: 3s;
+            }
+        }
+    </style>
+    <script>document.documentElement.classList.add('is-loading');</script>
+    <noscript>
+        <style>
+            #site-loader {
+                display: none;
+            }
+        </style>
+    </noscript>
 </head>
 
 <body
     class="page-template page-template-page-templates page-template-home page-template-page-templateshome-php page page-id-557 theme-ibraso woocommerce-js wpb-js-composer js-comp-ver-6.10.0 vc_responsive">
 
-    <!-- Header 
+    <!-- Tela de carregamento -->
+    <div id="site-loader" role="status" aria-live="polite">
+        <div class="loader-mark">
+            <img src="images/favicon.png" alt="">
+        </div>
+        <div class="loader-bar"><span></span></div>
+        <p class="loader-text">Carregando <span class="loader-pct">0%</span></p>
+    </div>
+    <script>
+        (function () {
+            var root = document.documentElement;
+            var loader = document.getElementById('site-loader');
+            var bar = loader.querySelector('.loader-bar span');
+            var pct = loader.querySelector('.loader-pct');
+            var target = 8, shown = 0, done = false;
+
+            function setTarget(p) {
+                target = Math.max(target, Math.min(p, 99));
+            }
+
+            function render(p) {
+                bar.style.width = p + '%';
+                pct.textContent = Math.round(p) + '%';
+            }
+
+            (function tick() {
+                if (done) return;
+                shown += (target - shown) * 0.12;
+                render(shown);
+                requestAnimationFrame(tick);
+            })();
+
+            // Progresso real: conta as imagens da pagina conforme terminam de baixar.
+            document.addEventListener('DOMContentLoaded', function () {
+                var imgs = [].slice.call(document.images);
+                var total = imgs.length, loaded = 0;
+                function step() {
+                    loaded++;
+                    setTarget(20 + 75 * loaded / total);
+                }
+                imgs.forEach(function (img) {
+                    if (img.complete) {
+                        loaded++;
+                    } else {
+                        img.addEventListener('load', step);
+                        img.addEventListener('error', step);
+                    }
+                });
+                setTarget(total ? 20 + 75 * loaded / total : 90);
+            });
+
+            function finish() {
+                if (done) return;
+                done = true;
+                render(100);
+                setTimeout(function () {
+                    loader.classList.add('is-hidden');
+                    root.classList.remove('is-loading');
+                    // Recalcula carrosseis/grades e dispara as animacoes visiveis.
+                    window.dispatchEvent(new Event('resize'));
+                    window.dispatchEvent(new Event('scroll'));
+                    setTimeout(function () {
+                        if (loader.parentNode) loader.parentNode.removeChild(loader);
+                    }, 600);
+                }, 250);
+            }
+
+            window.addEventListener('load', finish);
+            // Seguranca: em conexao muito lenta nao prende o visitante para sempre.
+            setTimeout(finish, 15000);
+        })();
+    </script>
+
+    <!-- Header
     ============================================= -->
     <header id="home">
 
