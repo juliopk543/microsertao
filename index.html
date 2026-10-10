@@ -526,8 +526,35 @@
             .banner-area,
             .our-features-area,
             .wpb-content-wrapper {
-                overflow-x: clip;
+                overflow-x: hidden;
                 max-width: 100%;
+            }
+        }
+
+        /* Painel lateral fechado fica fora da tela a direita e gerava rolagem lateral no iOS. */
+        .side:not(.on) {
+            visibility: hidden;
+        }
+
+        @media (max-width: 991px) {
+            .side {
+                width: 100%;
+                max-width: 400px;
+                right: -100%;
+            }
+
+            .side:not(.on) {
+                display: none;
+            }
+
+            .banner-area .thumb {
+                max-width: 100%;
+            }
+
+            /* Linhas do construtor tem margem negativa de 15px e passavam da largura da tela. */
+            .wpb-content-wrapper > .vc_row {
+                margin-left: 0;
+                margin-right: 0;
             }
         }
 
