@@ -593,6 +593,16 @@
             width: 100%;
         }
 
+        /* iPhone (principalmente no navegador do WhatsApp): o Owl poe cada card numa camada 3D
+           (translate3d + backface-visibility) e, com pouca memoria, o iOS deixa de pintar a imagem
+           do card. O deslize e feito pelo .owl-stage, entao os cards nao precisam dessa camada. */
+        .our-features-area .feature-carousel.owl-carousel .owl-item {
+            -webkit-backface-visibility: visible;
+            backface-visibility: visible;
+            -webkit-transform: none;
+            transform: none;
+        }
+
         /* Desktop: 3 cards visiveis lado a lado, dentro de um container centralizado. */
         @media (min-width: 1000px) {
             .our-features-area .container {
@@ -1379,7 +1389,7 @@
                                             <!-- Single Item -->
                                             <div class="item item-banner" data-thumb="images/lavajato.png">
                                                 <div class="icon" style="display: block; margin: -50px -50px 30px; line-height: 0;">
-                                                    <img src="images/ods8.png" alt="ODS 8" style="display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover;">
+                                                    <img src="images/ods8.jpg" alt="ODS 8" style="display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover;">
                                                 </div>
                                                 <h3>Gestão Digital Gratuita</h3>
                                                 <p>
@@ -1397,7 +1407,7 @@
                                             <!-- End Single Item --><!-- Single Item -->
                                             <div class="item item-banner" data-thumb="images/SEYlcgXkaRoy.png">
                                                 <div class="icon" style="display: block; margin: -50px -50px 30px; line-height: 0;">
-                                                    <img src="images/CPD.png" alt="Campanhas publicitárias" style="display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover;">
+                                                    <img src="images/CPD.jpg" alt="Campanhas publicitárias" style="display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover;">
                                                 </div>
                                                 <h3>Secretaria de Comunicação</h3>
                                                 <p>Durante o atendimento em barbearias, salões, lava-jatos e demais estabelecimentos, campanhas de vacinação, inscrições para transporte escolar, eventos culturais, ações de alerta e conscientização são apresentadas à população pelos aplicativos gratuitos dos microempreendedores, enquanto estiverem no ar.</p>
