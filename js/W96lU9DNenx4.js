@@ -75,6 +75,9 @@
 	};
 	
 	function formatter(value, settings) {
-		return value.toFixed(settings.decimals);
+		return value.toLocaleString('pt-BR', {
+			minimumFractionDigits: settings.decimals,
+			maximumFractionDigits: settings.decimals
+		});
 	}
 }(jQuery));
