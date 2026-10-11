@@ -12,21 +12,21 @@
 
     <title>IBRASO conexões – Emancipação Digital para Municípios</title>
     <meta name="description"
-        content="IBRASO é a plataforma de emancipação digital que mantém os dados do município no próprio território: comunicação pública, gestão do comércio local e inteligência artificial em conformidade com a LGPD.">
+        content="IBRASO é a plataforma de emancipação digital em que os dados do município são administrados no próprio território: comunicação pública, gestão do comércio local e inteligência artificial em conformidade com a LGPD.">
     <meta name="author" content="MicroSertão">
     <meta name="robots" content="max-image-preview:large">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="IBRASO Sistemas">
     <meta property="og:title" content="IBRASO Sistemas – Emancipação Digital para Municípios">
     <meta property="og:description"
-        content="Comunicação digital para a população e agilidade para os microempreendedores, com os dados mantidos no território do município.">
+        content="Comunicação digital para a população e agilidade para os microempreendedores, com os dados administrados no território do município.">
     <meta property="og:image" content="https://www.microsertao.com.br/images/Header.png">
     <meta property="og:url" content="https://www.microsertao.com.br/">
     <meta property="og:locale" content="pt_BR">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="IBRASO Sistemas – Emancipação Digital para Municípios">
     <meta name="twitter:description"
-        content="Comunicação digital para a população e agilidade para os microempreendedores, com os dados mantidos no território do município.">
+        content="Comunicação digital para a população e agilidade para os microempreendedores, com os dados administrados no território do município.">
     <meta name="twitter:image" content="https://www.microsertao.com.br/images/Header.png">
     <link rel="canonical" href="https://www.microsertao.com.br/">
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -743,6 +743,7 @@
         /* Secao Fundador: foto com cartao de contato sobreposto + texto e barras de competencias. */
         .founder-area .founder-media {
             position: relative;
+            align-self: flex-start;
             padding-bottom: 130px;
         }
 
@@ -831,37 +832,120 @@
             margin: 35px 0 20px;
         }
 
-        .founder-area .founder-skill {
-            margin-bottom: 22px;
+        .founder-area .founder-certs {
+            list-style: none;
+            margin: 0;
+            padding: 0;
         }
 
-        .founder-area .founder-skill-head {
+        .founder-area .founder-certs li {
             display: flex;
-            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 0;
+            border-bottom: 1px solid #e7e7e7;
+        }
+
+        .founder-area .founder-certs li:first-child {
+            padding-top: 0;
+        }
+
+        .founder-area .founder-certs li > i {
+            font-size: 26px;
+            color: #437eeb;
+            flex-shrink: 0;
+        }
+
+        .founder-area .founder-certs li > div {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .founder-area .founder-certs strong {
+            display: block;
             font-size: 14px;
             font-weight: 800;
             text-transform: uppercase;
             color: #555555;
-            margin-bottom: 12px;
         }
 
-        .founder-area .founder-skill-bar {
-            height: 3px;
-            background: #dddddd;
-        }
-
-        .founder-area .founder-skill-bar span {
+        .founder-area .founder-certs span {
             display: block;
-            height: 5px;
-            margin-top: -1px;
-            width: 0;
-            border-radius: 3px;
-            background: linear-gradient(90deg, #1f55c9, #437eeb);
-            transition: width 1.4s ease-out;
+            font-size: 13.5px;
+            line-height: 22px;
+            color: #888888;
         }
 
-        .founder-area .founder-skills.is-visible .founder-skill-bar span {
-            width: var(--pct);
+        .founder-area .founder-certs li > a {
+            flex-shrink: 0;
+            font-size: 13px;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(90deg, #1f55c9, #437eeb);
+            border-radius: 30px;
+            padding: 6px 16px;
+            white-space: nowrap;
+        }
+
+        .founder-area .founder-certs li > a i {
+            margin-right: 4px;
+        }
+
+        .founder-area .founder-press {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 25px;
+            padding: 16px;
+            background: #f5f7fb;
+            border-left: 3px solid #437eeb;
+            border-radius: 6px;
+        }
+
+        .founder-area .founder-press img {
+            width: 140px;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .founder-area .founder-press-tag {
+            display: block;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #437eeb;
+            margin-bottom: 6px;
+        }
+
+        .founder-area .founder-press a {
+            display: block;
+            font-size: 14.5px;
+            line-height: 22px;
+            font-weight: 600;
+            color: #232323;
+            margin-top: 6px;
+        }
+
+        .founder-area .founder-press a:hover {
+            color: #437eeb;
+        }
+
+        .founder-area .founder-press small {
+            color: #888888;
+            font-weight: 400;
+        }
+
+        @media (max-width: 575px) {
+            .founder-area .founder-press {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .founder-area .founder-press img {
+                width: 100%;
+            }
         }
 
         @media (max-width: 991px) {
@@ -1788,35 +1872,72 @@
                         </div>
                         <div class="col-lg-7 founder-info">
                             <h2>Júlio César Tenório</h2>
-                            <span class="founder-role">Fundador do IBRASO · MicroSertão Software</span>
+                            <span class="founder-role">Fundador da IBRASO conexões</span>
                             <p>
                                 Desenvolvedor de Coruripe/AL, idealizou o IBRASO para que o comércio local e a
-                                prefeitura tenham tecnologia própria, com os dados do município guardados no
+                                prefeitura tenham tecnologia própria, com os dados do município administrados no
                                 próprio território e um custo que o pequeno empreendedor consegue pagar.
                             </p>
 
-                            <h3>Competências</h3>
-                            <div class="founder-skills">
-                                <div class="founder-skill">
-                                    <div class="founder-skill-head"><span>Desenvolvimento Web e Mobile</span><span>90%</span></div>
-                                    <div class="founder-skill-bar"><span style="--pct: 90%"></span></div>
-                                </div>
-                                <div class="founder-skill">
-                                    <div class="founder-skill-head"><span>Gestão Pública Digital</span><span>85%</span></div>
-                                    <div class="founder-skill-bar"><span style="--pct: 85%"></span></div>
-                                </div>
-                                <div class="founder-skill">
-                                    <div class="founder-skill-head"><span>Inteligência Artificial</span><span>75%</span></div>
-                                    <div class="founder-skill-bar"><span style="--pct: 75%"></span></div>
+                            <h3>Capacitação</h3>
+                            <ul class="founder-certs">
+                                <li>
+                                    <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                                    <div>
+                                        <strong>Profissão: Analista de Dados</strong>
+                                        <span>EBAC – Escola Britânica de Artes Criativas &amp; Tecnologia · 47h · 2022</span>
+                                    </div>
+                                    <a href="certificados/ebac-analista-de-dados.pdf" download
+                                        aria-label="Baixar certificado Analista de Dados"><i
+                                            class="fas fa-download"></i> Baixar</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                                    <div>
+                                        <strong>Python para Machine Learning</strong>
+                                        <span>Universidade Estadual do Ceará (IDESCO) · Lead Dell Technologies · 42h · 2022</span>
+                                    </div>
+                                    <a href="certificados/uece-dell-python-machine-learning.pdf" download
+                                        aria-label="Baixar certificado Python para Machine Learning"><i
+                                            class="fas fa-download"></i> Baixar</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                                    <div>
+                                        <strong>Visualização de Dados</strong>
+                                        <span>Universidade Estadual do Ceará (IDESCO) · Lead Dell Technologies · 40h · 2022</span>
+                                    </div>
+                                    <a href="certificados/uece-dell-visualizacao-de-dados.pdf" download
+                                        aria-label="Baixar certificado Visualização de Dados"><i
+                                            class="fas fa-download"></i> Baixar</a>
+                                </li>
+                            </ul>
+
+                            <h3>Experiência e Competência</h3>
+                            <p>
+                                Profissional de Tecnologia da Informação com 4 anos de experiência na gestão da
+                                unidade SuperGeeks Maceió, fui sócio de uma das principais escolas de Maceió
+                                especializada em programação, robótica e educação tecnológica. Durante minha
+                                liderança, a unidade conquistou medalhas em competições nacionais como a
+                                Olimpíada Brasileira de Informática (OBI) e a Olimpíada Brasileira de Robótica
+                                (OBR). Nesse período, fui responsável pela operação da unidade, atendimento a
+                                clientes, coordenação de equipes e atividades pedagógicas, além do
+                                desenvolvimento de parcerias e crescimento do negócio.
+                            </p>
+
+                            <div class="founder-press">
+                                <img decoding="async" loading="lazy" src="images/imprensa-obi-2024.jpg"
+                                    alt="Fachada da SuperGeeks Maceió">
+                                <div>
+                                    <span class="founder-press-tag">Na imprensa · Jornal Extra Alagoas</span>
+                                    <a href="https://ojornalextra.com.br/noticias/conteudo-de-marca/2024/11/109284-maceio-se-destaca-em-olimpiadas-de-tecnologia-com-apoio-da-supergeeks"
+                                        target="_blank" rel="noopener"><i class="fas fa-angle-right"></i> Maceió se
+                                        destaca em Olimpíadas de Tecnologia com apoio da SuperGeeks <small>(nov/2024)</small></a>
+                                    <a href="https://ojornalextra.com.br/noticias/alagoas/2023/11/97705-alagoanos-sao-protagonistas-em-olimpiada-de-informatica"
+                                        target="_blank" rel="noopener"><i class="fas fa-angle-right"></i> Alagoanos são
+                                        protagonistas em olimpíada de informática <small>(nov/2023)</small></a>
                                 </div>
                             </div>
-
-                            <h3>Experiência &amp; Atividades</h3>
-                            <p>
-                                Passou pela SuperGeeks Maceió, escola de programação e robótica, e hoje
-                                desenvolve os aplicativos da MicroSertão para academias, lava-jatos, barbearias e
-                                escritórios de Coruripe, acompanhando de perto cada parceiro na implantação.
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -1984,7 +2105,7 @@
                         <div class="f-item about">
                             <img src="images/Logo-escura.png" alt="IBRASO Sistemas">
                             <p>
-                                O IBRASO é a plataforma de emancipação digital que mantém os dados do município no
+                                O IBRASO é a plataforma de emancipação digital em que os dados do município são administrados no
                                 próprio território, conectando a gestão pública, o comércio local e a população.
                             </p>
                         </div>
@@ -2196,27 +2317,6 @@
                 }, { passive: true });
             });
         })(jQuery);
-    </script>
-
-    <!-- Secao Fundador: enche as barras de competencias quando aparecem na tela. -->
-    <script>
-        (function () {
-            var skills = document.querySelector('.founder-skills');
-            if (!skills) {
-                return;
-            }
-            if (!('IntersectionObserver' in window)) {
-                skills.classList.add('is-visible');
-                return;
-            }
-            var observer = new IntersectionObserver(function (entries) {
-                if (entries[0].isIntersecting) {
-                    skills.classList.add('is-visible');
-                    observer.disconnect();
-                }
-            }, { threshold: 0.3 });
-            observer.observe(skills);
-        })();
     </script>
 
 </body>
