@@ -1,8 +1,8 @@
-# IBRASO Sistemas — site institucional
+# IBRASO conexões — site institucional
 
-Site institucional da **IBRASO Sistemas** (MicroSertão): emancipação digital para
+Site institucional da **IBRASO conexões**: emancipação digital para
 municípios — comunicação pública, gestão do comércio local e inteligência
-artificial com os dados mantidos no território, em conformidade com a LGPD.
+artificial com os dados administrados no território, em conformidade com a LGPD.
 
 Publicado em <https://www.microsertao.com.br>.
 
