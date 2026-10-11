@@ -3219,6 +3219,16 @@ body,
   width: auto;
 }
 
+.skill-area .thumb .image-box img:nth-child(3) {
+  position: absolute;
+  right: -18%;
+  top: -40px;
+  margin: 0;
+  width: 48%;
+  max-width: 48%;
+  z-index: 2;
+}
+
 .skill-items .progress-box {
   margin-bottom: 30px;
 }
