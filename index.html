@@ -739,6 +739,146 @@
                 justify-content: flex-end;
             }
         }
+
+        /* Secao Fundador: foto com cartao de contato sobreposto + texto e barras de competencias. */
+        .founder-area .founder-media {
+            position: relative;
+            padding-bottom: 130px;
+        }
+
+        .founder-area .founder-photo {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            background: #eeeeee;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .founder-area .founder-photo > i {
+            font-size: 140px;
+            color: #d2d2d2;
+        }
+
+        .founder-area .founder-photo img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .founder-area .founder-contact {
+            position: absolute;
+            left: 50px;
+            right: 50px;
+            bottom: 0;
+            background: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .founder-area .founder-contact h4 {
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .founder-area .founder-contact > a {
+            display: block;
+            color: #666666;
+            line-height: 30px;
+        }
+
+        .founder-area .founder-contact ul {
+            list-style: none;
+            margin: 18px 0 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+        }
+
+        .founder-area .founder-contact li a {
+            font-size: 18px;
+        }
+
+        .founder-area .founder-contact li.whatsapp a { color: #25d366; }
+        .founder-area .founder-contact li.instagram a { color: #e1306c; }
+        .founder-area .founder-contact li.email a { color: #437eeb; }
+
+        .founder-area .founder-info {
+            padding-left: 50px;
+        }
+
+        .founder-area .founder-info h2 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .founder-area .founder-role {
+            display: block;
+            color: #437eeb;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .founder-area .founder-info h3 {
+            font-weight: 700;
+            margin: 35px 0 20px;
+        }
+
+        .founder-area .founder-skill {
+            margin-bottom: 22px;
+        }
+
+        .founder-area .founder-skill-head {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #555555;
+            margin-bottom: 12px;
+        }
+
+        .founder-area .founder-skill-bar {
+            height: 3px;
+            background: #dddddd;
+        }
+
+        .founder-area .founder-skill-bar span {
+            display: block;
+            height: 5px;
+            margin-top: -1px;
+            width: 0;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #1f55c9, #437eeb);
+            transition: width 1.4s ease-out;
+        }
+
+        .founder-area .founder-skills.is-visible .founder-skill-bar span {
+            width: var(--pct);
+        }
+
+        @media (max-width: 991px) {
+            .founder-area .founder-media {
+                max-width: 480px;
+                margin: 0 auto 40px;
+            }
+
+            .founder-area .founder-contact {
+                left: 25px;
+                right: 25px;
+            }
+
+            .founder-area .founder-info {
+                padding-left: 15px;
+            }
+        }
     </style>
     <noscript>
         <style>
@@ -1007,7 +1147,7 @@
                                 title="Depoimentos" href="#testimonial">Depoimentos</a></li>
                         <li id="menu-item-564"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-564"><a
-                                title="Notícias" href="#blog">Notícias</a></li>
+                                title="Fundador" href="#fundador">Fundador</a></li>
                     </ul>
                 </div>
             </div>
@@ -1051,7 +1191,7 @@
                             <li class="menu-item"><a href="#about">Sobre o Projeto</a></li>
                             <li class="menu-item"><a href="#service">Soluções</a></li>
                             <li class="menu-item"><a href="#work">Como Funciona</a></li>
-                            <li class="menu-item"><a href="#blog">Notícias</a></li>
+                            <li class="menu-item"><a href="#fundador">Fundador</a></li>
                         </ul>
                     </div>
                 </div>
@@ -1618,7 +1758,76 @@
                 </div>
             </div>
         </div>
-        <div id="blog" class="vc_row wpb_row vc_row-fluid">
+        <!-- Start Fundador Area
+        ============================================= -->
+        <!-- ATENCAO: textos e percentuais redigidos como rascunho. Confirmar antes de divulgar.
+             Foto: salve a imagem como images/fundador.jpg (retrato, ~600x600) que ela aparece sozinha. -->
+        <div id="fundador" class="vc_row wpb_row vc_row-fluid">
+            <div class="founder-area default-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5 founder-media">
+                            <div class="founder-photo">
+                                <i class="fas fa-user" aria-hidden="true"></i>
+                                <img decoding="async" loading="lazy" src="images/fundador.jpg"
+                                    alt="Júlio César Tenório dos Santos" onerror="this.remove()">
+                            </div>
+                            <div class="founder-contact wow fadeInUp">
+                                <h4>Contato Rápido</h4>
+                                <a href="https://wa.me/5582996902951" target="_blank" rel="noopener">(82) 99690-2951</a>
+                                <a href="mailto:microsertao@gmail.com">microsertao@gmail.com</a>
+                                <ul>
+                                    <li class="whatsapp"><a href="https://wa.me/5582996902951" target="_blank"
+                                            rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
+                                    <li class="instagram"><a href="#" aria-label="Instagram"><i
+                                                class="fab fa-instagram"></i></a></li>
+                                    <li class="email"><a href="mailto:microsertao@gmail.com" aria-label="E-mail"><i
+                                                class="fas fa-envelope"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 founder-info">
+                            <h2>Júlio César Tenório</h2>
+                            <span class="founder-role">Fundador do IBRASO · MicroSertão Software</span>
+                            <p>
+                                Desenvolvedor de Coruripe/AL, idealizou o IBRASO para que o comércio local e a
+                                prefeitura tenham tecnologia própria, com os dados do município guardados no
+                                próprio território e um custo que o pequeno empreendedor consegue pagar.
+                            </p>
+
+                            <h3>Competências</h3>
+                            <div class="founder-skills">
+                                <div class="founder-skill">
+                                    <div class="founder-skill-head"><span>Desenvolvimento Web e Mobile</span><span>90%</span></div>
+                                    <div class="founder-skill-bar"><span style="--pct: 90%"></span></div>
+                                </div>
+                                <div class="founder-skill">
+                                    <div class="founder-skill-head"><span>Gestão Pública Digital</span><span>85%</span></div>
+                                    <div class="founder-skill-bar"><span style="--pct: 85%"></span></div>
+                                </div>
+                                <div class="founder-skill">
+                                    <div class="founder-skill-head"><span>Inteligência Artificial</span><span>75%</span></div>
+                                    <div class="founder-skill-bar"><span style="--pct: 75%"></span></div>
+                                </div>
+                            </div>
+
+                            <h3>Experiência &amp; Atividades</h3>
+                            <p>
+                                Passou pela SuperGeeks Maceió, escola de programação e robótica, e hoje
+                                desenvolve os aplicativos da MicroSertão para academias, lava-jatos, barbearias e
+                                escritórios de Coruripe, acompanhando de perto cada parceiro na implantação.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Fundador Area -->
+
+        <!-- NOTICIAS DESATIVADAS TEMPORARIAMENTE.
+             O conteudo continua aqui: para reativar, remova o style="display: none;"
+             da div abaixo e volte os links "Fundador" do menu e do rodape para #blog / Notícias. -->
+        <div id="blog" class="vc_row wpb_row vc_row-fluid" style="display: none;">
             <!-- Start Blog Area
 ============================================= -->
             <div class="blog-area bg-gray left-border default-padding bottom-less blog-fix">
@@ -1792,7 +2001,7 @@
                                     <!-- Link oculto enquanto os depoimentos estao desativados. -->
                                     <li class="menu-item" style="display: none;"><a href="#testimonial">Depoimentos</a>
                                     </li>
-                                    <li class="menu-item"><a href="#blog">Notícias</a></li>
+                                    <li class="menu-item"><a href="#fundador">Fundador</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1853,7 +2062,7 @@
                                 <li class="menu-item"><a href="#about">Sobre</a></li>
                                 <li class="menu-item"><a href="#service">Soluções</a></li>
                                 <li class="menu-item"><a href="#work">Como Funciona</a></li>
-                                <li class="menu-item"><a href="#blog">Notícias</a></li>
+                                <li class="menu-item"><a href="#fundador">Fundador</a></li>
                             </ul>
                         </div>
                     </div>
@@ -1987,6 +2196,27 @@
                 }, { passive: true });
             });
         })(jQuery);
+    </script>
+
+    <!-- Secao Fundador: enche as barras de competencias quando aparecem na tela. -->
+    <script>
+        (function () {
+            var skills = document.querySelector('.founder-skills');
+            if (!skills) {
+                return;
+            }
+            if (!('IntersectionObserver' in window)) {
+                skills.classList.add('is-visible');
+                return;
+            }
+            var observer = new IntersectionObserver(function (entries) {
+                if (entries[0].isIntersecting) {
+                    skills.classList.add('is-visible');
+                    observer.disconnect();
+                }
+            }, { threshold: 0.3 });
+            observer.observe(skills);
+        })();
     </script>
 
 </body>
