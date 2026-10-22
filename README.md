@@ -85,7 +85,6 @@ banco, sem senhas). Os riscos que restam:
 | E-mail e WhatsApp expostos | `microsertao@gmail.com` e números `wa.me` ficam públicos e são alvo de spam e phishing | Usar e-mail dedicado com filtro anti-spam e WhatsApp Business |
 | `certificados/*.pdf` | PDFs públicos, com possíveis dados pessoais nos metadados | Remover metadados antes de publicar ou tirar do repositório |
 | Fontes do Google | `fonts.googleapis.com` envia o IP do visitante ao Google (ponto de atenção da LGPD) | Hospedar a fonte localmente |
-| Links externos | Links para outros sites (ex.: `ojornalextra.com.br`) sem `rel="noopener"` | Adicionar `rel="noopener noreferrer"` |
 | Deploy via Actions | Um commit na `main` vai ao ar sem revisão; a conta GitHub é o elo mais fraco | Ativar 2FA, proteger a branch `main` e usar chave de acesso (passkey) |
 
 Nenhuma senha, chave de API ou token foi encontrado no código publicado.
