@@ -49,43 +49,46 @@ do repositório para o GitHub Pages.
 ## Bastidores de engenharia
 
 - **Origem do tema:** o HTML/CSS/JS veio de um tema WordPress exportado como
-  estático. Por isso há scripts herdados que não têm função no site atual
-  (WooCommerce, Contact Form 7, `wp-hooks`, `wp-i18n`) e variáveis como
-  `wc_add_to_cart_params` e `wpcf7` apontando para `/wp-admin/admin-ajax.php` e
-  `/wp-json/`. Esses endpoints **não existem** (o GitHub Pages só serve
-  arquivos), então as chamadas retornam 404 sem efeito.
+  estático. Os scripts herdados sem função (WooCommerce, Contact Form 7,
+  `wp-hooks`, `wp-i18n`, emoji do WordPress e rastreio de origem
+  `sourcebuster`) foram removidos do `index.html`. Sobraram folhas de estilo
+  desses plugins em `css/`, sem efeito.
 - **Nomes de arquivo ofuscados:** `css/` e `js/` usam nomes aleatórios
   (`Bu9UXg47y0Ci.js` = jQuery 3.7.1). O atributo `id` de cada `<script>` em
   `index.html` indica qual biblioteca é.
-- **Dependências embutidas:** jQuery 3.7.1 + Migrate 3.4.1, Bootstrap 4.4.1,
-  Popper, Owl Carousel, Isotope, Magnific Popup, WOW, Font Awesome e Nunito
-  (local). Nenhuma passa por gerenciador de pacotes: atualizar é trocar o
-  arquivo à mão.
+- **Dependências embutidas:** jQuery 3.7.1 + Migrate 3.4.1, Bootstrap JS 4.6.2
+  (`js/q4sBjg1eBBOB.js`), Popper 1.x, Owl Carousel, Isotope, Magnific Popup,
+  WOW e Font Awesome. A fonte Nunito é local (`css/nunito.css` + `fonts/nunito-*.woff2`).
+  Nenhuma passa por gerenciador de pacotes: atualizar é trocar o arquivo à mão.
 - **Sem back-end e sem banco:** não há login, formulário que grave dados nem
   cookie próprio. O contato é por `mailto:` e links `wa.me` (WhatsApp).
 - **Deploy:** GitHub Actions → GitHub Pages (`deploy.yml`), publicando a raiz
   inteira do repositório. Só um deploy roda por vez; os demais ficam na fila.
-- **Domínio:** `CNAME` aponta para `www.microsertao.com.br` (o domínio sem
-  `www` redireciona com 301).
+- **Domínio:** `CNAME` aponta para `www.microsertao.com.br`; o HTTPS é
+  obrigatório e o domínio sem `www` redireciona com 301.
 - **Legado:** `dist/`, `.astro/` e `node_modules/` são restos da versão antiga
   em Astro. Estão no `.gitignore` e não vão ao ar.
 
-## Possíveis vulnerabilidades e pontos de atenção
+## Segurança
 
 Por ser um site estático, a superfície de ataque é pequena (sem servidor, sem
-banco, sem senhas). Os riscos que restam:
+banco, sem senhas). Situação de cada ponto:
 
-| Ponto | Risco | Recomendação |
-| --- | --- | --- |
-| Bootstrap 4.4.1 (2019) | Versão com vulnerabilidades XSS conhecidas em tooltip/popover/data-attributes; só explorável se houver conteúdo de usuário, que o site não tem | Atualizar para Bootstrap 4.6.2 ou 5.x |
-| jQuery Migrate e scripts WooCommerce/CF7 | Código morto que aumenta a superfície e o tamanho da página | Remover os `<script>` não usados |
-| Sem cabeçalhos de segurança | O GitHub Pages não deixa configurar CSP, `X-Frame-Options` etc.; o site pode ser embutido em iframe (clickjacking) | Adicionar `<meta http-equiv="Content-Security-Policy">` e, se precisar de cabeçalhos reais, colocar o Cloudflare na frente |
-| HTTPS não obrigatório | `https_enforced` está `false` no Pages: o site ainda abre em `http://` | Ativar "Enforce HTTPS" em Settings → Pages |
-| Repositório público | Todo o código e o histórico são visíveis; um segredo commitado antes continua no histórico mesmo depois de apagado | Nunca commitar chaves ou `.env` (já no `.gitignore`); se vazar, revogar a chave e não só apagar o arquivo |
-| E-mail e WhatsApp expostos | `microsertao@gmail.com` e números `wa.me` ficam públicos e são alvo de spam e phishing | Usar e-mail dedicado com filtro anti-spam e WhatsApp Business |
-| `certificados/*.pdf` | PDFs públicos, com possíveis dados pessoais nos metadados | Remover metadados antes de publicar ou tirar do repositório |
-| Fontes do Google | `fonts.googleapis.com` envia o IP do visitante ao Google (ponto de atenção da LGPD) | Hospedar a fonte localmente |
-| Deploy via Actions | Um commit na `main` vai ao ar sem revisão; a conta GitHub é o elo mais fraco | Ativar 2FA, proteger a branch `main` e usar chave de acesso (passkey) |
+| Ponto | Situação |
+| --- | --- |
+| Bootstrap JS desatualizado (4.4.1) | **Corrigido:** atualizado para 4.6.2 |
+| Scripts mortos (WooCommerce, CF7, emoji WP, rastreio) | **Corrigido:** removidos |
+| Sem cabeçalhos de segurança | **Mitigado:** `<meta>` com Content-Security-Policy (só recursos do próprio site), `referrer` e proteção contra iframe via script. O Pages não permite cabeçalhos HTTP reais; para isso seria preciso um proxy como o Cloudflare |
+| HTTPS não obrigatório | **Corrigido:** "Enforce HTTPS" ativado no Pages |
+| Fonte do Google (IP do visitante, LGPD) | **Corrigido:** Nunito hospedada localmente |
+| Repositório público | **Aceito:** nunca commitar chaves ou `.env` (já no `.gitignore`); se algo vazar, revogar a chave, não só apagar o arquivo |
+| E-mail e WhatsApp expostos | **Aceito:** são o canal de contato. Considerar e-mail dedicado e WhatsApp Business |
+| `certificados/*.pdf` públicos | **Em aberto:** conferir os metadados dos PDFs antes de mantê-los |
+| Deploy sem revisão | **Em aberto:** ativar 2FA/passkey na conta GitHub e proteger a branch `main` |
+
+A CSP usa `'unsafe-inline'` em scripts e estilos porque o `index.html` tem
+trechos inline. Ela bloqueia qualquer recurso externo, mas não impede um script
+inline injetado; como o site não recebe conteúdo de usuários, o risco é baixo.
 
 Nenhuma senha, chave de API ou token foi encontrado no código publicado.
 

@@ -4,6 +4,10 @@
 <head>
     <!-- ========== Meta Tags ========== -->
     <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <script>if (window.top !== window.self) { try { window.top.location = window.self.location; } catch (e) { document.documentElement.style.display = 'none'; } }</script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -34,14 +38,6 @@
         content="Comunicação digital para a população e agilidade para os microempreendedores, com os dados administrados no território do município.">
     <meta name="twitter:image" content="https://www.microsertao.com.br/images/header.jpeg?v=2">
     <link rel="canonical" href="https://www.microsertao.com.br/">
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        window._wpemojiSettings = { "baseUrl": "https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/", "ext": ".png", "svgUrl": "https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/", "svgExt": ".svg", "source": {} };
-        /*! This file is auto-generated */
-        !function (i, n) { var o, s, e; function c(e) { try { var t = { supportTests: e, timestamp: (new Date).valueOf() }; sessionStorage.setItem(o, JSON.stringify(t)) } catch (e) { } } function p(e, t, n) { e.clearRect(0, 0, e.canvas.width, e.canvas.height), e.fillText(t, 0, 0); var t = new Uint32Array(e.getImageData(0, 0, e.canvas.width, e.canvas.height).data), r = (e.clearRect(0, 0, e.canvas.width, e.canvas.height), e.fillText(n, 0, 0), new Uint32Array(e.getImageData(0, 0, e.canvas.width, e.canvas.height).data)); return t.every(function (e, t) { return e === r[t] }) } function u(e, t, n) { switch (t) { case "flag": return n(e, "\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f", "\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f") ? !1 : !n(e, "\ud83c\uddfa\ud83c\uddf3", "\ud83c\uddfa\u200b\ud83c\uddf3") && !n(e, "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f", "\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f"); case "emoji": return !n(e, "\ud83d\udc26\u200d\u2b1b", "\ud83d\udc26\u200b\u2b1b") }return !1 } function f(e, t, n) { var r = "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? new OffscreenCanvas(300, 150) : i.createElement("canvas"), a = r.getContext("2d", { willReadFrequently: !0 }), o = (a.textBaseline = "top", a.font = "600 32px Arial", {}); return e.forEach(function (e) { o[e] = t(a, e, n) }), o } function t(e) { var t = i.createElement("script"); t.src = e, t.defer = !0, i.head.appendChild(t) } "undefined" != typeof Promise && (o = "wpEmojiSettingsSupports", s = ["flag", "emoji"], n.supports = { everything: !0, everythingExceptFlag: !0 }, e = new Promise(function (e) { i.addEventListener("DOMContentLoaded", e, { once: !0 }) }), new Promise(function (t) { var n = function () { try { var e = JSON.parse(sessionStorage.getItem(o)); if ("object" == typeof e && "number" == typeof e.timestamp && (new Date).valueOf() < e.timestamp + 604800 && "object" == typeof e.supportTests) return e.supportTests } catch (e) { } return null }(); if (!n) { if ("undefined" != typeof Worker && "undefined" != typeof OffscreenCanvas && "undefined" != typeof URL && URL.createObjectURL && "undefined" != typeof Blob) try { var e = "postMessage(" + f.toString() + "(" + [JSON.stringify(s), u.toString(), p.toString()].join(",") + "));", r = new Blob([e], { type: "text/javascript" }), a = new Worker(URL.createObjectURL(r), { name: "wpTestEmojiSupports" }); return void (a.onmessage = function (e) { c(n = e.data), a.terminate(), t(n) }) } catch (e) { } c(n = f(s, u, p)) } t(n) }).then(function (e) { for (var t in e) n.supports[t] = e[t], n.supports.everything = n.supports.everything && n.supports[t], "flag" !== t && (n.supports.everythingExceptFlag = n.supports.everythingExceptFlag && n.supports[t]); n.supports.everythingExceptFlag = n.supports.everythingExceptFlag && !n.supports.flag, n.DOMReady = !1, n.readyCallback = function () { n.DOMReady = !0 } }).then(function () { return e }).then(function () { var e; n.supports.everything || (n.readyCallback(), (e = n.source || {}).concatemoji ? t(e.concatemoji) : e.wpemoji && e.twemoji && (t(e.twemoji), t(e.wpemoji))) })) }((window, document), window._wpemojiSettings);
-        /* ]]> */
-    </script>
 
     <style id="wp-emoji-styles-inline-css" type="text/css">
         img.wp-smiley,
@@ -425,29 +421,12 @@
     <link rel="stylesheet" id="ibraso-style-css" href="css/1DZ4HcYu1JLe.css" type="text/css" media="all">
     <link rel="stylesheet" id="ibraso-responsive-css" href="css/CfJagNntL8lx.css" type="text/css" media="all">
     <link rel="stylesheet" id="ibraso-woo-commerce-css" href="css/BlwuikfGmq2p.css" type="text/css" media="all">
-    <link rel="stylesheet" id="ibraso-nuntino-css"
-        href="https://fonts.googleapis.com/css2?family=Nunito%3Awght%40200%3B300%3B400%3B600%3B700%3B800&amp;display=swap&amp;ver=6.6.7"
-        type="text/css" media="all">
+    <link rel="stylesheet" id="ibraso-nuntino-css" href="css/nunito.css" type="text/css" media="all">
     <link rel="stylesheet" id="js_composer_front-css" href="css/vRkgHsjd9x7p.css" type="text/css" media="all">
     <script type="text/javascript" src="js/Bu9UXg47y0Ci.js" id="jquery-core-js"></script>
     <script type="text/javascript" src="js/eNRijLE3jJy7.js" id="jquery-migrate-js"></script>
-    <script type="text/javascript" src="js/pb3Ni1ISym9l.js" id="jquery-blockui-js" data-wp-strategy="defer"></script>
-    <script type="text/javascript" id="wc-add-to-cart-js-extra">
-        /* <![CDATA[ */
-        var wc_add_to_cart_params = { "ajax_url": "\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/?wc-ajax=%%endpoint%%", "i18n_view_cart": "Ver carrinho", "cart_url": "#", "is_cart": "", "cart_redirect_after_add": "no" };
-        /* ]]> */
-    </script>
-    <script type="text/javascript" src="js/bY8CQL1TYyKJ.js" id="wc-add-to-cart-js" data-wp-strategy="defer"></script>
     <script type="text/javascript" src="js/PuPnksldvyuW.js" id="js-cookie-js" defer="defer"
         data-wp-strategy="defer"></script>
-    <script type="text/javascript" id="woocommerce-js-extra">
-        /* <![CDATA[ */
-        var woocommerce_params = { "ajax_url": "\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/?wc-ajax=%%endpoint%%" };
-        /* ]]> */
-    </script>
-    <script type="text/javascript" src="js/86rd3TiC14wu.js" id="woocommerce-js" defer="defer"
-        data-wp-strategy="defer"></script>
-    <script type="text/javascript" src="js/D3Yma5WLalnN.js" id="vc_woocommerce-add-to-cart-js-js"></script>
     <noscript>
         <style>
             .woocommerce-product-gallery {
@@ -1007,7 +986,6 @@
             }
         </style>
     </noscript>
-    <script src="js/L3F009mNeCO1.js" defer=""></script>
 
     <!-- Tela de carregamento: cobre a pagina ate todas as imagens, fontes e estilos carregarem. -->
     <style id="site-loader-css">
@@ -2107,20 +2085,6 @@
         })();
     </script>
     <link rel="stylesheet" id="wc-blocks-style-css" href="css/hKA3AAN6cL4k.css" type="text/css" media="all">
-    <script type="text/javascript" src="js/Fu3nD5i9TsFI.js" id="wp-hooks-js"></script>
-    <script type="text/javascript" src="js/N84GBpHBUeSC.js" id="wp-i18n-js"></script>
-    <script type="text/javascript" id="wp-i18n-js-after">
-        /* <![CDATA[ */
-        wp.i18n.setLocaleData({ 'text direction\u0004ltr': ['ltr'] });
-        /* ]]> */
-    </script>
-    <script type="text/javascript" src="js/sqMp0PqvakY2.js" id="swv-js"></script>
-    <script type="text/javascript" id="contact-form-7-js-extra">
-        /* <![CDATA[ */
-        var wpcf7 = { "api": { "root": "\/wp-json\/", "namespace": "contact-form-7\/v1" }, "cached": "1" };
-        /* ]]> */
-    </script>
-    <script type="text/javascript" src="js/i62Whjnryzxz.js" id="contact-form-7-js"></script>
     <script type="text/javascript" src="js/4fVsz3P5oTCb.js" id="popper-js"></script>
     <script type="text/javascript" src="js/q4sBjg1eBBOB.js" id="bootstrap-js"></script>
     <script type="text/javascript" src="js/9L8BCsnrQS2t.js" id="equal-height-js"></script>
@@ -2138,13 +2102,6 @@
     <script type="text/javascript" src="js/f4uv5zesJlTd.js" id="circle-progress-js"></script>
     <script type="text/javascript" src="js/ypgR5hkHL85I.js" id="bootsnav-js"></script>
     <script type="text/javascript" src="js/2l69QDXnMrvb.js" id="ibraso-main-js"></script>
-    <script type="text/javascript" src="js/12lNh2D7Kf4g.js" id="sourcebuster-js-js"></script>
-    <script type="text/javascript" id="wc-order-attribution-js-extra">
-        /* <![CDATA[ */
-        var wc_order_attribution = { "params": { "lifetime": 1.0e-5, "session": 30, "base64": false, "ajaxurl": "\/wp-admin\/admin-ajax.php", "prefix": "wc_order_attribution_", "allowTracking": true }, "fields": { "source_type": "current.typ", "referrer": "current_add.rf", "utm_campaign": "current.cmp", "utm_source": "current.src", "utm_medium": "current.mdm", "utm_content": "current.cnt", "utm_id": "current.id", "utm_term": "current.trm", "utm_source_platform": "current.plt", "utm_creative_format": "current.fmt", "utm_marketing_tactic": "current.tct", "session_entry": "current_add.ep", "session_start_time": "current_add.fd", "session_pages": "session.pgs", "session_count": "udata.vst", "user_agent": "udata.uag" } };
-        /* ]]> */
-    </script>
-    <script type="text/javascript" src="js/FuNWzzNSyFZ7.js" id="wc-order-attribution-js"></script>
     <script type="text/javascript" src="js/xT9VCFKy1Mgz.js" id="wpb_composer_front_js-js"></script>
 
     <!-- Troca a ilustracao da esquerda conforme o card ativo do carrossel.
