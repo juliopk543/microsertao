@@ -1043,34 +1043,40 @@
             pointer-events: none;
         }
 
-        #site-loader .loader-mark {
+        #site-loader .loader-stage {
             position: relative;
-            width: 112px;
-            height: 112px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: #fff;
-            box-shadow: 0 10px 30px rgba(67, 126, 235, .15);
+            width: 340px;
+            height: 300px;
+            max-width: 90vw;
         }
 
-        #site-loader .loader-mark::before {
-            content: "";
+        #site-loader .loader-phone {
             position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            border: 3px solid rgba(67, 126, 235, .15);
-            border-top-color: #437eeb;
-            animation: site-loader-spin 1s linear infinite;
+            left: 50%;
+            top: 50%;
+            height: 280px;
+            width: auto;
+            transform: translate(-50%, -50%);
+            filter: drop-shadow(0 18px 24px rgba(37, 99, 235, .22));
+            animation: site-loader-float 3s ease-in-out infinite;
         }
 
-        #site-loader .loader-mark img {
-            width: 64px;
-            height: 64px;
-            object-fit: contain;
-            animation: site-loader-pulse 1.6s ease-in-out infinite;
+        /* Opinioes surgindo ao redor do celular, uma de cada vez, em ciclo. */
+        #site-loader .loader-bubble {
+            position: absolute;
+            width: 124px;
+            height: auto;
+            opacity: 0;
+            transform: scale(0) rotate(var(--rot, 0deg));
+            animation: site-loader-pop 4.8s ease-in-out infinite;
+            animation-delay: var(--d, 0s);
+            filter: drop-shadow(0 10px 14px rgba(37, 99, 235, .25));
         }
+
+        #site-loader .loader-bubble.b1 { top: 0;    left: 0;  --d: 0s;   --rot: -6deg; transform-origin: 80% 100%; }
+        #site-loader .loader-bubble.b2 { top: 28px; right: 0; --d: 1.2s; --rot: 6deg;  transform-origin: 20% 100%; scale: -1 1; }
+        #site-loader .loader-bubble.b3 { bottom: 30px; left: 0;  --d: 2.4s; --rot: 5deg;  transform-origin: 80% 100%; }
+        #site-loader .loader-bubble.b4 { bottom: 0;    right: 0; --d: 3.6s; --rot: -5deg; transform-origin: 20% 100%; scale: -1 1; }
 
         #site-loader .loader-bar {
             width: 180px;
@@ -1099,23 +1105,45 @@
             color: #6b7280;
         }
 
-        @keyframes site-loader-spin {
-            to {
-                transform: rotate(360deg);
+        @keyframes site-loader-float {
+            50% {
+                transform: translate(-50%, calc(-50% - 8px));
             }
         }
 
-        @keyframes site-loader-pulse {
-            50% {
-                transform: scale(.9);
-                opacity: .75;
+        @keyframes site-loader-pop {
+            0% {
+                opacity: 0;
+                transform: translateY(14px) scale(0) rotate(var(--rot, 0deg));
             }
+            8% {
+                opacity: 1;
+                transform: translateY(0) scale(1.12) rotate(var(--rot, 0deg));
+            }
+            14%, 22% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotate(var(--rot, 0deg));
+            }
+            32% {
+                opacity: 1;
+                transform: translateY(-6px) scale(1) rotate(var(--rot, 0deg));
+            }
+            50%, 100% {
+                opacity: 0;
+                transform: translateY(-14px) scale(.85) rotate(var(--rot, 0deg));
+            }
+        }
+
+        @media (max-width: 480px) {
+            #site-loader .loader-phone { height: 230px; }
+            #site-loader .loader-bubble { width: 96px; }
+            #site-loader .loader-stage { height: 250px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            #site-loader .loader-mark::before,
-            #site-loader .loader-mark img {
-                animation-duration: 3s;
+            #site-loader .loader-phone,
+            #site-loader .loader-bubble {
+                animation-duration: 9s;
             }
         }
     </style>
@@ -1134,8 +1162,12 @@
 
     <!-- Tela de carregamento -->
     <div id="site-loader" role="status" aria-live="polite">
-        <div class="loader-mark">
-            <img src="images/favicon.png" alt="">
+        <div class="loader-stage">
+            <img class="loader-phone" src="images/loader-celular.webp" width="307" height="560" alt="">
+            <img class="loader-bubble b1" src="images/loader-opiniao.webp" width="480" height="326" alt="">
+            <img class="loader-bubble b2" src="images/loader-opiniao.webp" width="480" height="326" alt="">
+            <img class="loader-bubble b3" src="images/loader-opiniao.webp" width="480" height="326" alt="">
+            <img class="loader-bubble b4" src="images/loader-opiniao.webp" width="480" height="326" alt="">
         </div>
         <div class="loader-bar"><span></span></div>
         <p class="loader-text">Carregando <span class="loader-pct">0%</span></p>
