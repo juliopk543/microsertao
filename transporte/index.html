@@ -1179,6 +1179,7 @@
 
         /* mobile: fundo roxo encosta nas bordas e navbar da mesma cor */
         @media only screen and (max-width: 991px) {
+            nav.navbar .navbar-brand img.logo.logo-responsive { height: 38px !important; }
             .banner-area { margin-left: -15px; margin-right: -15px; width: calc(100% + 30px); max-width: none; }
             nav.navbar.navbar-default.bootsnav { background: #490a7c; border-color: #490a7c; }
             nav.navbar.navbar-default.bootsnav .navbar-toggle,
@@ -1273,8 +1274,8 @@
                         <i class="fa fa-bars"></i>
                     </button>
                     <a class="navbar-brand" href="#home">
-                        <img src="images/coruripedbs.png" class="logo default" alt="IBRASO conexões">
-                        <img src="images/coruripedbs.png" class="logo logo-responsive" alt="IBRASO conexões">
+                        <img src="images/studio-microsertao.png?v=1" class="logo default" alt="StudioMicrosertão">
+                        <img src="images/studio-microsertao.png?v=1" class="logo logo-responsive" alt="StudioMicrosertão">
                     </a>
                 </div>
                 <!-- End Header Navigation -->
@@ -1404,13 +1405,11 @@
                                                             (function () {
                                                                 var s = document.querySelector('.banner-slider');
                                                                 if (!s) return;
-                                                                // desktop: o onibus vai ate a borda direita da tela
+                                                                // o onibus vai ate a borda direita da tela (desktop e mobile)
                                                                 function bleed() {
                                                                     s.style.marginRight = '0px';
-                                                                    if (window.innerWidth >= 992) {
-                                                                        var gap = document.documentElement.clientWidth - s.getBoundingClientRect().right;
-                                                                        s.style.marginRight = (-Math.max(gap, 0)) + 'px';
-                                                                    }
+                                                                    var gap = document.documentElement.clientWidth - s.getBoundingClientRect().right;
+                                                                    s.style.marginRight = (-Math.max(gap, 0)) + 'px';
                                                                 }
                                                                 bleed();
                                                                 window.addEventListener('resize', bleed);

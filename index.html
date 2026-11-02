@@ -1368,13 +1368,11 @@
                                                             (function () {
                                                                 var s = document.querySelector('.banner-slider');
                                                                 if (!s) return;
-                                                                // desktop: o onibus vai ate a borda direita da tela
+                                                                // o onibus vai ate a borda direita da tela (desktop e mobile)
                                                                 function bleed() {
                                                                     s.style.marginRight = '0px';
-                                                                    if (window.innerWidth >= 992) {
-                                                                        var gap = document.documentElement.clientWidth - s.getBoundingClientRect().right;
-                                                                        s.style.marginRight = (-Math.max(gap, 0)) + 'px';
-                                                                    }
+                                                                    var gap = document.documentElement.clientWidth - s.getBoundingClientRect().right;
+                                                                    s.style.marginRight = (-Math.max(gap, 0)) + 'px';
                                                                 }
                                                                 bleed();
                                                                 window.addEventListener('resize', bleed);

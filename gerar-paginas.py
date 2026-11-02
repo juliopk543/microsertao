@@ -42,6 +42,7 @@ CSS_TRANSPORTE = """    <style>
 
         /* mobile: fundo roxo encosta nas bordas e navbar da mesma cor */
         @media only screen and (max-width: 991px) {
+            nav.navbar .navbar-brand img.logo.logo-responsive { height: 38px !important; }
             .banner-area { margin-left: -15px; margin-right: -15px; width: calc(100% + 30px); max-width: none; }
             nav.navbar.navbar-default.bootsnav { background: #490a7c; border-color: #490a7c; }
             nav.navbar.navbar-default.bootsnav .navbar-toggle,
@@ -58,7 +59,7 @@ CSS_TRANSPORTE = """    <style>
 
 PAGINAS = {
     "microempreendedores": {"sub": SUB_MICRO, "img": IMG_MICRO},
-    "transporte": {"css": CSS_TRANSPORTE},  # texto novo + slide do onibus + fundo roxo
+    "transporte": {"css": CSS_TRANSPORTE, "logo": "images/studio-microsertao.png?v=1"},  # texto novo + slide do onibus + fundo roxo
 }
 
 
@@ -73,8 +74,12 @@ for pasta, trocas in PAGINAS.items():
     html = base
     for nome in ("banner-sub", "banner-img"):
         chave = nome.split("-")[1]
-        if chave in trocas and chave != "css":
+        if chave in trocas and chave in ("sub", "img"):
             html = trocar(html, nome, trocas[chave])
+    if "logo" in trocas:
+        html = html.replace('src="images/coruripedbs.png"', 'src="%s"' % trocas["logo"])
+        html = html.replace('class="logo default" alt="IBRASO conexões"', 'class="logo default" alt="StudioMicrosertão"')
+        html = html.replace('class="logo logo-responsive" alt="IBRASO conexões"', 'class="logo logo-responsive" alt="StudioMicrosertão"')
     if "css" in trocas:
         html = html.replace("</head>", trocas["css"] + "</head>", 1)
     url = SITE + pasta + "/"
