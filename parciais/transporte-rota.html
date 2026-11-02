@@ -291,8 +291,35 @@
                 desenhar();
                 setTimeout(desenhar, 1200);
                 if (window.jQuery) {
-                    // o carrossel continua passando um card de cada vez; so redesenha quando ele muda de tamanho
-                    jQuery('.feature-carousel').on('initialized.owl.carousel refreshed.owl.carousel resized.owl.carousel', agendar);
+                    var car = jQuery('.feature-carousel');
+                    car.on('initialized.owl.carousel refreshed.owl.carousel resized.owl.carousel', agendar);
+
+                    // o carrossel fica parado no primeiro card (Rota Universitaria) ate o usuario
+                    // chegar nele; dai em diante passa um card de cada vez.
+                    // (o plugin de autoplay le settings.autoplay, recalculado de options a cada breakpoint)
+                    var liberado = false;
+                    var autoplay = function (sim) {
+                        var owl = car.data('owl.carousel');
+                        if (!owl) return;
+                        owl.options.autoplay = sim; owl.settings.autoplay = sim;
+                        car.trigger(sim ? 'play.owl.autoplay' : 'stop.owl.autoplay');
+                    };
+                    var segura = function () { if (!liberado) autoplay(false); };
+                    segura();
+                    car.on('initialized.owl.carousel', function () { setTimeout(segura, 0); });
+                    var liberar = function () {
+                        if (liberado) return;
+                        liberado = true;
+                        autoplay(true);
+                    };
+                    if (window.IntersectionObserver && car[0]) {
+                        var io = new IntersectionObserver(function (ents) {
+                            if (ents[0].isIntersecting) { io.disconnect(); liberar(); }
+                        }, { threshold: 0.35 });
+                        io.observe(car[0]);
+                    } else {
+                        liberar();
+                    }
                 }
                 if (!calmo) requestAnimationFrame(quadro);
             });
