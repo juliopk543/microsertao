@@ -55,6 +55,7 @@
                e a pessoa junto do marcador em cima do card */
             .rota-start { display: none !important; }
             #rota-svg .r-band, #rota-svg .r-prog, #rota-svg .r-dots { display: none; }
+            #rota-svg #rota-bus, #rota-svg #rota-pin-g { display: none; }
             #rota-svg .r-label { transform-box: fill-box; transform-origin: center; }
             #rota-svg .r-label.hit { animation: rota-tag .6s ease-out; }
             #rota-svg .r-bus-in { transform-box: fill-box; transform-origin: center; }
@@ -246,8 +247,8 @@
             // ciclo: percorre (4.8s) -> chega e o marcador pula -> pausa -> some e recomeca
             var IDA = 4800, PAUSA = 1400, t0 = null, passou = 0, chegou = false;
             function suave(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
-            // mobile: a tag troca a cada TROCA ms com um pulso; no Destino a pessoa e o marcador pulam
-            var TAGS = ['Embarque', 'Check-in', 'Destino'], TROCA = 2000, ultima = -1;
+            // mobile: a tag troca a cada TROCA ms com um pulso
+            var TAGS = ['Check-in', 'Embarque', 'Comunicados', 'Destino', 'Avisos', 'Localização'], TROCA = 2000, ultima = -1;
             function trocarTag(ts) {
                 var n = Math.floor(ts / TROCA);
                 if (n === ultima) return;
@@ -255,7 +256,6 @@
                 var k = n % TAGS.length, tx = stops[1].querySelector('text');
                 tx.textContent = TAGS[k];
                 bater(tx); bater(stops[1]);
-                if (k === TAGS.length - 1) { bater(pin); bater(busIn); }
             }
             function quadro(ts) {
                 if (!L) { requestAnimationFrame(quadro); return; }
