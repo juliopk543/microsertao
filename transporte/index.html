@@ -1176,6 +1176,20 @@
         .banner-area::before { display: none; }
         /* faixa da logo na cor do fundo do banner */
         nav.navbar.navbar-default.bootsnav.navbar-fixed-light a.navbar-brand::before { background-color: #490a7c; background-image: none; }
+
+        /* mobile: fundo roxo encosta nas bordas e navbar da mesma cor */
+        @media only screen and (max-width: 991px) {
+            .banner-area { margin-left: -15px; margin-right: -15px; width: calc(100% + 30px); max-width: none; }
+            nav.navbar.navbar-default.bootsnav { background: #490a7c; border-color: #490a7c; }
+            nav.navbar.navbar-default.bootsnav .navbar-toggle,
+            nav.navbar.navbar-default.bootsnav .navbar-toggle i,
+            nav.navbar.navbar-default.bootsnav .attr-nav > ul > li > a,
+            nav.navbar.navbar-default.bootsnav .attr-nav > ul > li > a i { color: #fff; }
+            nav.navbar.navbar-default.bootsnav .attr-nav > ul > li.side-menu,
+            nav.navbar.navbar-default.bootsnav .attr-nav { border-color: rgba(255, 255, 255, 0.25); }
+            nav.navbar.navbar-default.bootsnav .navbar-collapse { background: #490a7c; }
+            nav.navbar.navbar-default.bootsnav .navbar-collapse .nav > li > a { color: #fff; }
+        }
     </style>
 </head>
 
