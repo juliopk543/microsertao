@@ -1371,11 +1371,15 @@
                                                                 // o onibus vai ate a borda direita da tela (desktop e mobile)
                                                                 function bleed() {
                                                                     s.style.marginRight = '0px';
-                                                                    var gap = document.documentElement.clientWidth - s.getBoundingClientRect().right;
+                                                                    // posicao sem transform (a animacao fadeInRight desloca o getBoundingClientRect)
+                                                                    var left = 0, n = s;
+                                                                    while (n) { left += n.offsetLeft; n = n.offsetParent; }
+                                                                    var gap = document.documentElement.clientWidth - (left + s.offsetWidth);
                                                                     s.style.marginRight = (-Math.max(gap, 0)) + 'px';
                                                                 }
                                                                 bleed();
                                                                 window.addEventListener('resize', bleed);
+                                                                window.addEventListener('load', bleed);
                                                                 setTimeout(function () { s.classList.add('slid'); }, 1000);
                                                             })();
                                                         </script>
