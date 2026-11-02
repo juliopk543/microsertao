@@ -59,7 +59,7 @@ CSS_TRANSPORTE = """    <style>
 
 PAGINAS = {
     "microempreendedores": {"sub": SUB_MICRO, "img": IMG_MICRO},
-    "transporte": {"css": CSS_TRANSPORTE, "logo": "images/studio-microsertao.png?v=1"},  # texto novo + slide do onibus + fundo roxo
+    "transporte": {"css": CSS_TRANSPORTE, "logo": "images/studio-microsertao.png?v=1", "transporte_primeiro": True},  # texto novo + slide do onibus + fundo roxo
 }
 
 
@@ -69,6 +69,21 @@ def trocar(html, nome, novo):
     return padrao.sub(lambda m: novo, html)
 
 
+def transporte_primeiro(html):
+    """Coloca o card da Secretaria de Transporte como primeiro do carrossel."""
+    ini = html.index('<div class="feature-items feature-carousel owl-carousel owl-theme">')
+    sep = "<!-- End Single Item --><!-- Single Item -->"
+    corpo_ini = html.index("<!-- Single Item -->", ini) + len("<!-- Single Item -->")
+    fim = html.index("<!-- End Single Item -->", corpo_ini)
+    while html.startswith(sep, fim):  # avanca ate o ultimo card
+        fim = html.index("<!-- End Single Item -->", fim + len(sep))
+    cards = html[corpo_ini:fim].split(sep)
+    assert len(cards) == 3, "esperava 3 cards no carrossel"
+    cards.sort(key=lambda c: 0 if "<h3>Secretaria de Transporte</h3>" in c else 1)  # ordenacao estavel
+    assert "<h3>Secretaria de Transporte</h3>" in cards[0]
+    return html[:corpo_ini] + sep.join(cards) + html[fim:]
+
+
 base = (RAIZ / "index.html").read_text(encoding="utf-8")
 for pasta, trocas in PAGINAS.items():
     html = base
@@ -76,6 +91,8 @@ for pasta, trocas in PAGINAS.items():
         chave = nome.split("-")[1]
         if chave in trocas and chave in ("sub", "img"):
             html = trocar(html, nome, trocas[chave])
+    if trocas.get("transporte_primeiro"):
+        html = transporte_primeiro(html)
     if "logo" in trocas:
         html = html.replace('src="images/coruripedbs.png"', 'src="%s"' % trocas["logo"])
         html = html.replace('class="logo default" alt="IBRASO conexões"', 'class="logo default" alt="StudioMicrosertão"')
