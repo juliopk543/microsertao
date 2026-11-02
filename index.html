@@ -1341,16 +1341,27 @@
                                                         </div>
                                                         <style>
                                                             .banner-slider { position: relative; overflow: hidden; }
-                                                            .banner-slider .banner-slide { display: block; width: 100%; height: auto; transition: transform .9s ease, opacity .9s ease; }
+                                                            .banner-slider .banner-slide { display: block; width: 100%; max-width: 100%; height: auto; transition: transform .9s ease, opacity .9s ease; }
                                                             .banner-slider .is-next { position: absolute; top: 0; left: 0; transform: translateX(100%); opacity: 0; }
                                                             .banner-slider.slid .is-active { transform: translateX(-100%); opacity: 0; }
                                                             .banner-slider.slid .is-next { transform: translateX(0); opacity: 1; }
                                                         </style>
                                                         <script>
-                                                            setTimeout(function () {
+                                                            (function () {
                                                                 var s = document.querySelector('.banner-slider');
-                                                                if (s) s.classList.add('slid');
-                                                            }, 1000);
+                                                                if (!s) return;
+                                                                // desktop: o onibus vai ate a borda direita da tela
+                                                                function bleed() {
+                                                                    s.style.marginRight = '0px';
+                                                                    if (window.innerWidth >= 992) {
+                                                                        var gap = document.documentElement.clientWidth - s.getBoundingClientRect().right;
+                                                                        s.style.marginRight = (-Math.max(gap, 0)) + 'px';
+                                                                    }
+                                                                }
+                                                                bleed();
+                                                                window.addEventListener('resize', bleed);
+                                                                setTimeout(function () { s.classList.add('slid'); }, 1000);
+                                                            })();
                                                         </script>
                                                         <a class="btn circle btn-md btn-gradient banner-btn-mobile"
                                                             aria-hidden="true">Vantagens <i class="fas fa-plus"></i></a>
