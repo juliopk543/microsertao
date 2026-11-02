@@ -51,8 +51,16 @@
             .banner-area .thumb { z-index: 6; margin-top: 64px; }
             .banner-area .double-items { padding-bottom: 0 !important; }
             .banner-area .banner-slider { margin-bottom: -2.7%; }
-            .rota-start .rs-txt { display: none; }
+            /* sem tracado: uma tag so (Embarque -> Check-in -> Destino, trocando com pulso)
+               e a pessoa junto do marcador em cima do card */
+            .rota-start { display: none !important; }
+            #rota-svg .r-band, #rota-svg .r-prog, #rota-svg .r-dots { display: none; }
+            #rota-svg .r-label { transform-box: fill-box; transform-origin: center; }
+            #rota-svg .r-label.hit { animation: rota-tag .6s ease-out; }
+            #rota-svg .r-bus-in { transform-box: fill-box; transform-origin: center; }
+            #rota-svg .r-bus-in.hit { animation: rota-pin .7s cubic-bezier(.3, 1.6, .5, 1); }
         }
+        @keyframes rota-tag { 0% { opacity: 0; transform: scale(.6); } 60% { opacity: 1; transform: scale(1.12); } 100% { opacity: 1; transform: scale(1); } }
 
         @media (prefers-reduced-motion: reduce) {
             #rota-svg .r-dots, .rota-start .rs-dot::after { animation: none; }
@@ -86,11 +94,14 @@
                 '<g id="rota-pin-g"><g class="r-pin" id="rota-pin">' +
                 '<path d="M0,0 C-2,-6 -11,-12 -11,-20 A11,11 0 1 1 11,-20 C11,-12 2,-6 0,0Z" fill="' + ROXO + '"/>' +
                 '<circle cx="0" cy="-20" r="4.5" fill="' + BRANCO + '"/></g></g>' +
-                '<g class="r-bus" id="rota-bus"><circle id="rota-bus-bg" r="16"/>' +
+                '<g class="r-bus" id="rota-bus"><g class="r-bus-in" id="rota-bus-in"><circle id="rota-bus-bg" r="16"/>' +
                 '<g id="rota-bus-ic"><rect x="-7.5" y="-9" width="15" height="15" rx="3.5"/>' +
                 '<rect class="v" x="-5.5" y="-6.8" width="11" height="5.6" rx="1.2"/>' +
                 '<circle class="v" cx="-4" cy="2.4" r="1.2"/><circle class="v" cx="4" cy="2.4" r="1.2"/>' +
-                '<rect x="-6.5" y="5.5" width="3.2" height="3" rx=".9"/><rect x="3.3" y="5.5" width="3.2" height="3" rx=".9"/></g></g>' +
+                '<rect x="-6.5" y="5.5" width="3.2" height="3" rx=".9"/><rect x="3.3" y="5.5" width="3.2" height="3" rx=".9"/></g>' +
+                // pessoa (usada no mobile no lugar do onibus)
+                '<g id="rota-pessoa"><circle cx="0" cy="-4.6" r="3.9"/>' +
+                '<path d="M-7,8.5 C-7,2.2 -3.8,-.2 0,-.2 C3.8,-.2 7,2.2 7,8.5 Z"/></g></g></g>' +
                 '</svg>';
             document.body.appendChild(wrap);
 
@@ -107,6 +118,8 @@
             var stops = svg.querySelectorAll('.r-stop');
             var pinG = svg.querySelector('#rota-pin-g'), pin = svg.querySelector('#rota-pin');
             var bus = svg.querySelector('#rota-bus'), busBg = svg.querySelector('#rota-bus-bg'), busIc = svg.querySelector('#rota-bus-ic');
+            var busIn = svg.querySelector('#rota-bus-in'), pessoa = svg.querySelector('#rota-pessoa');
+            var modoMobile = false;
 
             var L = 0, B = 0, alvo = null;
             var paradas = []; // { el, at } das paradas visiveis, na ordem do trajeto
@@ -163,8 +176,13 @@
                     d = 'M' + S.x + ',' + Y + ' L' + (X - r) + ',' + Y +
                         ' Q' + X + ',' + Y + ' ' + X + ',' + (Y + r) + ' L' + E.x + ',' + E.y;
                     var dest = X - r - 22;
-                    pos = [0, (S.x + dest) / 2 - S.x, dest - S.x];
+                    // so a tag do meio aparece; o texto dela alterna (ver quadro)
+                    pos = [null, (S.x + dest) / 2 - S.x, null];
                 }
+                modoMobile = mobile;
+                busIc.style.display = mobile ? 'none' : '';
+                pessoa.style.display = mobile ? '' : 'none';
+                if (!mobile) stops[1].querySelector('text').textContent = 'Check-in';
                 path.setAttribute('d', d);
                 L = path.getTotalLength();
 
@@ -207,7 +225,7 @@
                 start.style.top = S.y + 'px';
                 alvo = { y: c.y };
 
-                if (calmo) posicionar(L, 1);
+                if (calmo || mobile) posicionar(L, 1);
             }
 
             function posicionar(s, alpha) {
@@ -217,6 +235,7 @@
                 var top = cor(p.y) === 'top';
                 busBg.setAttribute('fill', top ? BRANCO : ROXO);
                 busIc.setAttribute('fill', top ? ROXO : BRANCO);
+                pessoa.setAttribute('fill', top ? ROXO : BRANCO);
                 var vs = busIc.querySelectorAll('.v');
                 for (var i = 0; i < vs.length; i++) vs[i].setAttribute('fill', top ? BRANCO : ROXO);
                 for (var j = 0; j < progs.length; j++) progs[j].style.strokeDashoffset = L - s;
@@ -227,8 +246,20 @@
             // ciclo: percorre (4.8s) -> chega e o marcador pula -> pausa -> some e recomeca
             var IDA = 4800, PAUSA = 1400, t0 = null, passou = 0, chegou = false;
             function suave(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+            // mobile: a tag troca a cada TROCA ms com um pulso; no Destino a pessoa e o marcador pulam
+            var TAGS = ['Embarque', 'Check-in', 'Destino'], TROCA = 2000, ultima = -1;
+            function trocarTag(ts) {
+                var n = Math.floor(ts / TROCA);
+                if (n === ultima) return;
+                ultima = n;
+                var k = n % TAGS.length, tx = stops[1].querySelector('text');
+                tx.textContent = TAGS[k];
+                bater(tx); bater(stops[1]);
+                if (k === TAGS.length - 1) { bater(pin); bater(busIn); }
+            }
             function quadro(ts) {
                 if (!L) { requestAnimationFrame(quadro); return; }
+                if (modoMobile) { trocarTag(ts); t0 = null; requestAnimationFrame(quadro); return; }
                 if (t0 === null) t0 = ts;
                 var t = ts - t0;
                 if (t <= IDA) {
