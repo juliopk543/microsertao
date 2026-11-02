@@ -37,6 +37,8 @@ CSS_TRANSPORTE = """    <style>
         .banner-area.text-combo h2 span.banner-eyebrow::before { background: #d6c3ff; }
         .banner-area.text-combo h2 span.banner-sub { color: rgba(255, 255, 255, 0.9); }
         .banner-area::before { display: none; }
+        /* faixa da logo na cor do fundo do banner */
+        nav.navbar.navbar-default.bootsnav.navbar-fixed-light a.navbar-brand::before { background-color: #490a7c; background-image: none; }
     </style>
 """
 
