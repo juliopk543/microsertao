@@ -1326,16 +1326,32 @@
                                                             <span class="banner-eyebrow">Emancipação
                                                                 Digital</span>IBRASO<span
                                                                 class="brand-light">conexões</span>
-                                                            <span class="banner-sub">Canal digital de comunicação pública, integrado ao transporte universitário
-                                                                e aos microempreendedores.</span>
+                                                            <span class="banner-sub">Canal digital de comunicação pública, integração com microempreendedores e transporte universitário.</span>
                                                         </h2>
                                                         <a class="btn circle btn-md btn-gradient wow fadeInUp banner-btn-desktop"
                                                             data-wow-duration="1.8s" aria-hidden="true">Vantagens
                                                             <i class="fas fa-plus"></i></a>
                                                     </div>
                                                     <div class="col-lg-6 thumb wow fadeInRight" data-wow-duration="1s">
-                                                        <img decoding="async" src="images/Header.png"
-                                                            alt="Aplicativo IBRASO em uso no celular">
+                                                        <div class="banner-slider">
+                                                            <img class="banner-slide is-active" decoding="async" src="images/Header.png"
+                                                                alt="Aplicativo IBRASO em uso no celular">
+                                                            <img class="banner-slide is-next" decoding="async" src="images/Onibus.png"
+                                                                alt="Ônibus do transporte universitário integrado ao IBRASO">
+                                                        </div>
+                                                        <style>
+                                                            .banner-slider { position: relative; overflow: hidden; }
+                                                            .banner-slider .banner-slide { display: block; width: 100%; height: auto; transition: transform .9s ease, opacity .9s ease; }
+                                                            .banner-slider .is-next { position: absolute; top: 0; left: 0; transform: translateX(100%); opacity: 0; }
+                                                            .banner-slider.slid .is-active { transform: translateX(-100%); opacity: 0; }
+                                                            .banner-slider.slid .is-next { transform: translateX(0); opacity: 1; }
+                                                        </style>
+                                                        <script>
+                                                            setTimeout(function () {
+                                                                var s = document.querySelector('.banner-slider');
+                                                                if (s) s.classList.add('slid');
+                                                            }, 1000);
+                                                        </script>
                                                         <a class="btn circle btn-md btn-gradient banner-btn-mobile"
                                                             aria-hidden="true">Vantagens <i class="fas fa-plus"></i></a>
                                                     </div>
