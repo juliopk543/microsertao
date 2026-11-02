@@ -549,7 +549,7 @@
 
         /* Suaviza a borda inferior do banner: o fundo claro some em degrade ate o branco da secao seguinte. */
         .banner-area { position: relative; }
-        .banner-area::after {
+        .banner-area::before {
             content: "";
             position: absolute;
             left: 0;
@@ -558,9 +558,9 @@
             height: 140px;
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #fff 100%);
             pointer-events: none;
-            z-index: 0;
+            z-index: -1;
         }
-        body.dark-layout .banner-area::after { display: none; }
+        body.dark-layout .banner-area::before { display: none; }
 
         /* Painel lateral fechado fica fora da tela a direita e gerava rolagem lateral no iOS. */
         .side:not(.on) {

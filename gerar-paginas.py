@@ -26,9 +26,23 @@ HEAD_EXTRA = """    <base href="/">
     });</script>
 """
 
+# Fundo roxo do banner em /transporte
+CSS_TRANSPORTE = """    <style>
+        /* /transporte: banner com fundo roxo */
+        .banner-area.bg-light-gradient { background: #490a7c; }
+        .banner-area.rectangular-shape::after { display: none; }
+        .banner-area.text-combo h2 { color: #fff; }
+        .banner-area.text-combo h2 span.brand-light { color: #8fb2ff; }
+        .banner-area.text-combo h2 span.banner-eyebrow { color: #d6c3ff; }
+        .banner-area.text-combo h2 span.banner-eyebrow::before { background: #d6c3ff; }
+        .banner-area.text-combo h2 span.banner-sub { color: rgba(255, 255, 255, 0.9); }
+        .banner-area::before { background: linear-gradient(to bottom, rgba(73, 10, 124, 0) 0%, #fff 100%); }
+    </style>
+"""
+
 PAGINAS = {
     "microempreendedores": {"sub": SUB_MICRO, "img": IMG_MICRO},
-    "transporte": {},  # igual ao index atual (texto novo + slide do onibus)
+    "transporte": {"css": CSS_TRANSPORTE},  # texto novo + slide do onibus + fundo roxo
 }
 
 
@@ -43,8 +57,10 @@ for pasta, trocas in PAGINAS.items():
     html = base
     for nome in ("banner-sub", "banner-img"):
         chave = nome.split("-")[1]
-        if chave in trocas:
+        if chave in trocas and chave != "css":
             html = trocar(html, nome, trocas[chave])
+    if "css" in trocas:
+        html = html.replace("</head>", trocas["css"] + "</head>", 1)
     url = SITE + pasta + "/"
     html = html.replace('content="%s"' % SITE, 'content="%s"' % url, 1)
     html = html.replace('rel="canonical" href="%s"' % SITE, 'rel="canonical" href="%s"' % url, 1)
