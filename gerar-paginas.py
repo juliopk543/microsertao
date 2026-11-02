@@ -59,7 +59,8 @@ CSS_TRANSPORTE = """    <style>
 
 PAGINAS = {
     "microempreendedores": {"sub": SUB_MICRO, "img": IMG_MICRO},
-    "transporte": {"css": CSS_TRANSPORTE, "logo": "images/studio-microsertao.png?v=1", "transporte_primeiro": True},  # texto novo + slide do onibus + fundo roxo
+    "transporte": {"css": CSS_TRANSPORTE, "logo": "images/studio-microsertao.png?v=1", "transporte_primeiro": True,
+                   "rota": "parciais/transporte-rota.html"},  # texto novo + slide do onibus + fundo roxo + rota ate o card
 }
 
 
@@ -99,6 +100,10 @@ for pasta, trocas in PAGINAS.items():
         html = html.replace('class="logo logo-responsive" alt="IBRASO conexões"', 'class="logo logo-responsive" alt="StudioMicrosertão"')
     if "css" in trocas:
         html = html.replace("</head>", trocas["css"] + "</head>", 1)
+    if "rota" in trocas:
+        bloco = (RAIZ / trocas["rota"]).read_text(encoding="utf-8")
+        assert html.count("</body>") == 1, "esperava um unico </body>"
+        html = html.replace("</body>", bloco + "</body>", 1)
     url = SITE + pasta + "/"
     html = html.replace('content="%s"' % SITE, 'content="%s"' % url, 1)
     html = html.replace('rel="canonical" href="%s"' % SITE, 'rel="canonical" href="%s"' % url, 1)
