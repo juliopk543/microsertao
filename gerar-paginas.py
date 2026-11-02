@@ -36,7 +36,7 @@ CSS_TRANSPORTE = """    <style>
         .banner-area.text-combo h2 span.banner-eyebrow { color: #d6c3ff; }
         .banner-area.text-combo h2 span.banner-eyebrow::before { background: #d6c3ff; }
         .banner-area.text-combo h2 span.banner-sub { color: rgba(255, 255, 255, 0.9); }
-        .banner-area::before { background: linear-gradient(to bottom, rgba(73, 10, 124, 0) 0%, #fff 100%); }
+        .banner-area::before { display: none; }
     </style>
 """
 
