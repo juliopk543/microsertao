@@ -2244,331 +2244,148 @@
     </script>
 
     <!-- ===================================================================
-         /transporte: rota do banner ate o card Rota Universitaria.
-         Substitui o botao Vantagens. Linha pontilhada branca sobre o roxo,
-         roxa sobre o branco; um onibus percorre o trajeto, passa pelo
-         check-in e chega ao marcador em cima do card.
+         /transporte: tag animada acima da frente do onibus (desktop e mobile).
+         Substitui o botao Vantagens. Uma tag unica alterna Check-in, Embarque,
+         Comunicados, Destino, Avisos e Localizacao com um pulso; o onibus desce
+         ate encostar na base do roxo. O carrossel de cards fica parado no
+         primeiro card (Rota Universitaria) ate o usuario chegar nele.
          Injetado pelo gerar-paginas.py (nao existe no index.html).
     =================================================================== -->
     <style>
-        .banner-btn-desktop { opacity: 0 !important; pointer-events: none !important; }
+        .banner-btn-desktop { display: none !important; }
 
-        /* overflow hidden: o svg nunca alarga a pagina (no mobile isso afastava o zoom e o
-           carrossel continuava achando que estava no desktop, com 3 cards fixos) */
-        #rota-wrap { position: absolute; left: 0; top: 0; width: 100%; height: 0; z-index: 5; pointer-events: none; overflow: hidden; }
-        #rota-svg { position: absolute; left: 0; top: 0; overflow: visible; }
-
-        #rota-svg .r-band { fill: none; stroke-width: 18; stroke-linecap: round; opacity: .12; }
-        #rota-svg .r-dots { fill: none; stroke-width: 4.5; stroke-linecap: round; stroke-dasharray: 0 15; animation: rota-flow 1.1s linear infinite; }
-        #rota-svg .r-prog { fill: none; stroke-width: 2.5; stroke-linecap: round; opacity: .55; }
-        #rota-svg .z-top { stroke: #fff; }
-        #rota-svg .z-bot { stroke: #490a7c; }
-
-        #rota-svg .r-stop circle.ring { fill: none; stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; }
-        #rota-svg .r-stop.hit circle.ring { animation: rota-ping .9s ease-out; }
-        #rota-svg .r-label { font-family: "Nunito", sans-serif; font-weight: 800; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; }
-
-        #rota-svg .r-pin { transform-box: fill-box; transform-origin: 50% 100%; }
-        #rota-svg .r-pin.hit { animation: rota-pin .7s cubic-bezier(.3, 1.6, .5, 1); }
-        #rota-svg .r-bus { filter: drop-shadow(0 3px 6px rgba(20, 0, 40, .35)); transition: opacity .35s; }
-
-        .rota-start {
-            position: absolute; display: inline-flex; align-items: center; gap: 14px;
-            transform: translate(-13px, -50%); pointer-events: auto; text-decoration: none !important;
-            color: #fff !important; font-family: "Nunito", sans-serif; font-weight: 800; font-size: 13px;
-            letter-spacing: 3px; text-transform: uppercase; white-space: nowrap;
+        .rota-tag {
+            position: absolute; z-index: 6; left: 0; top: 0; pointer-events: none;
+            height: auto !important; width: auto !important; /* o tema da altura cheia aos filhos do banner */
+            display: flex; flex-direction: column; align-items: center; gap: 9px;
+            /* o ponto (16px) fica centrado em left/top */
+            transform: translate(-50%, calc(-100% + 8px));
+            opacity: 0; transition: opacity .4s;
         }
-        .rota-start .rs-dot { position: relative; width: 26px; height: 26px; border-radius: 50%; background: #fff; flex: 0 0 auto; }
-        .rota-start .rs-dot::before { content: ""; position: absolute; inset: 8px; border-radius: 50%; background: #490a7c; }
-        .rota-start .rs-dot::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid #fff; animation: rota-pulse 2s ease-out infinite; }
-        .rota-start .rs-txt { border-bottom: 1px dashed rgba(255, 255, 255, .5); padding-bottom: 2px; transition: border-color .2s; }
-        .rota-start:hover .rs-txt, .rota-start:focus-visible .rs-txt { border-bottom-color: #fff; }
+        .rota-tag.pronta { opacity: 1; }
+        .rota-tag .rt-txt {
+            color: #fff; font-family: "Nunito", sans-serif; font-weight: 800; font-size: 11px;
+            letter-spacing: 3px; text-transform: uppercase; white-space: nowrap; line-height: 1;
+            padding-left: 3px; /* compensa o espacamento depois da ultima letra */
+        }
+        .rota-tag .rt-dot { position: relative; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #fff; background: #490a7c; box-sizing: border-box; }
+        .rota-tag .rt-dot::after { content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid #fff; opacity: 0; }
+        .rota-tag.hit .rt-txt { animation: rota-tag .6s ease-out; }
+        .rota-tag.hit .rt-dot::after { animation: rota-ping .9s ease-out; }
 
-        @keyframes rota-flow { to { stroke-dashoffset: -30; } }
-        @keyframes rota-pulse { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(2.1); opacity: 0; } }
+        @media only screen and (min-width: 992px) {
+            .rota-tag .rt-txt { font-size: 13px; }
+        }
+
+        @keyframes rota-tag { 0% { opacity: 0; transform: scale(.6); } 60% { opacity: 1; transform: scale(1.12); } 100% { opacity: 1; transform: scale(1); } }
         @keyframes rota-ping { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(3); opacity: 0; } }
-        @keyframes rota-pin { 0% { transform: translateY(0) scale(1); } 40% { transform: translateY(-7px) scale(1.12); } 100% { transform: translateY(0) scale(1); } }
 
-        /* mobile: as tags Embarque / Check-in / Destino ficam acima do onibus, a linha desce
-           por tras da imagem (thumb acima do svg) e o onibus encosta na base do roxo */
+        /* mobile: espaco para a tag acima do onibus e onibus encostado na base do roxo
+           (no desktop o deslocamento e calculado no script) */
         @media only screen and (max-width: 991px) {
-            .banner-area, .banner-area .double-items { z-index: auto !important; }
-            .banner-area .thumb { z-index: 6; margin-top: 64px; }
+            .banner-area .thumb { margin-top: 64px; }
             .banner-area .double-items { padding-bottom: 0 !important; }
             .banner-area .banner-slider { margin-bottom: -2.7%; }
-            /* sem tracado: uma tag so (Embarque -> Check-in -> Destino, trocando com pulso)
-               e a pessoa junto do marcador em cima do card */
-            .rota-start { display: none !important; }
-            #rota-svg .r-band, #rota-svg .r-prog, #rota-svg .r-dots { display: none; }
-            #rota-svg #rota-bus, #rota-svg #rota-pin-g { display: none; }
-            #rota-svg .r-label { transform-box: fill-box; transform-origin: center; }
-            #rota-svg .r-label.hit { animation: rota-tag .6s ease-out; }
-            #rota-svg .r-bus-in { transform-box: fill-box; transform-origin: center; }
-            #rota-svg .r-bus-in.hit { animation: rota-pin .7s cubic-bezier(.3, 1.6, .5, 1); }
         }
-        @keyframes rota-tag { 0% { opacity: 0; transform: scale(.6); } 60% { opacity: 1; transform: scale(1.12); } 100% { opacity: 1; transform: scale(1); } }
 
         @media (prefers-reduced-motion: reduce) {
-            #rota-svg .r-dots, .rota-start .rs-dot::after { animation: none; }
+            .rota-tag.hit .rt-txt, .rota-tag.hit .rt-dot::after { animation: none; }
         }
     </style>
     <script>
         (function () {
-            var NS = 'http://www.w3.org/2000/svg';
-            var ROXO = '#490a7c', BRANCO = '#fff';
+            var TAGS = ['Check-in', 'Embarque', 'Comunicados', 'Destino', 'Avisos', 'Localização'];
+            var TROCA = 2000;
+            var VAZIO_BASE = 0.041;  // faixa transparente embaixo dos pneus no Onibus.png (fracao da altura)
+            var TETO_FRENTE = 0.2;   // altura do teto sobre a frente do onibus (fracao da altura)
             var calmo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            var wrap = document.createElement('div');
-            wrap.id = 'rota-wrap';
-            wrap.innerHTML =
-                '<svg id="rota-svg" aria-hidden="true">' +
-                '<defs>' +
-                '<path id="rota-path"/>' +
-                '<clipPath id="rota-top"><rect id="rota-top-r" x="0" y="0"/></clipPath>' +
-                '<clipPath id="rota-bot"><rect id="rota-bot-r" x="0"/></clipPath>' +
-                '</defs>' +
-                '<g clip-path="url(#rota-top)">' +
-                '<use href="#rota-path" class="r-band z-top"/><use href="#rota-path" class="r-prog z-top"/><use href="#rota-path" class="r-dots z-top"/>' +
-                '</g>' +
-                '<g clip-path="url(#rota-bot)">' +
-                '<use href="#rota-path" class="r-band z-bot"/><use href="#rota-path" class="r-prog z-bot"/><use href="#rota-path" class="r-dots z-bot"/>' +
-                '</g>' +
-                ['Embarque', 'Check-in', 'Destino'].map(function (t) {
-                    return '<g class="r-stop"><circle class="ring" r="8"/><circle class="core" r="7" stroke-width="3"/>' +
-                        '<text class="r-label">' + t + '</text></g>';
-                }).join('') +
-                '<g id="rota-pin-g"><g class="r-pin" id="rota-pin">' +
-                '<path d="M0,0 C-2,-6 -11,-12 -11,-20 A11,11 0 1 1 11,-20 C11,-12 2,-6 0,0Z" fill="' + ROXO + '"/>' +
-                '<circle cx="0" cy="-20" r="4.5" fill="' + BRANCO + '"/></g></g>' +
-                '<g class="r-bus" id="rota-bus"><g class="r-bus-in" id="rota-bus-in"><circle id="rota-bus-bg" r="16"/>' +
-                '<g id="rota-bus-ic"><rect x="-7.5" y="-9" width="15" height="15" rx="3.5"/>' +
-                '<rect class="v" x="-5.5" y="-6.8" width="11" height="5.6" rx="1.2"/>' +
-                '<circle class="v" cx="-4" cy="2.4" r="1.2"/><circle class="v" cx="4" cy="2.4" r="1.2"/>' +
-                '<rect x="-6.5" y="5.5" width="3.2" height="3" rx=".9"/><rect x="3.3" y="5.5" width="3.2" height="3" rx=".9"/></g>' +
-                // pessoa (usada no mobile no lugar do onibus)
-                '<g id="rota-pessoa"><circle cx="0" cy="-4.6" r="3.9"/>' +
-                '<path d="M-7,8.5 C-7,2.2 -3.8,-.2 0,-.2 C3.8,-.2 7,2.2 7,8.5 Z"/></g></g></g>' +
-                '</svg>';
-            document.body.appendChild(wrap);
+            var banner = document.querySelector('.banner-area');
+            var slider = document.querySelector('.banner-area .banner-slider');
+            if (!banner || !slider) return;
 
-            var start = document.createElement('a');
-            start.className = 'rota-start';
-            start.href = '#service';
-            start.setAttribute('aria-label', 'Siga a rota até o card Rota Universitária');
-            start.innerHTML = '<span class="rs-dot"></span><span class="rs-txt">Embarque aqui</span>';
-            wrap.appendChild(start);
+            var tag = document.createElement('div');
+            tag.className = 'rota-tag';
+            tag.setAttribute('aria-hidden', 'true');
+            tag.innerHTML = '<span class="rt-txt">' + TAGS[0] + '</span><span class="rt-dot"></span>';
+            banner.appendChild(tag);
+            var txt = tag.querySelector('.rt-txt');
 
-            var svg = wrap.querySelector('svg');
-            var path = svg.querySelector('#rota-path');
-            var progs = svg.querySelectorAll('.r-prog');
-            var stops = svg.querySelectorAll('.r-stop');
-            var pinG = svg.querySelector('#rota-pin-g'), pin = svg.querySelector('#rota-pin');
-            var bus = svg.querySelector('#rota-bus'), busBg = svg.querySelector('#rota-bus-bg'), busIc = svg.querySelector('#rota-bus-ic');
-            var busIn = svg.querySelector('#rota-bus-in'), pessoa = svg.querySelector('#rota-pessoa');
-            var modoMobile = false;
-
-            var L = 0, B = 0, alvo = null;
-            var paradas = []; // { el, at } das paradas visiveis, na ordem do trajeto
-
-            function doc(r) { return { x: r.left + window.pageXOffset, y: r.top + window.pageYOffset, w: r.width, h: r.height }; }
-            function cor(y) { return y < B ? 'top' : 'bot'; }
-
-            function cardAlvo() {
-                var itens = document.querySelectorAll('.feature-carousel .owl-item:not(.cloned) .item');
-                for (var i = 0; i < itens.length; i++) {
-                    if (/Secretaria de Transporte/.test(itens[i].textContent)) return itens[i];
-                }
-                return document.querySelector('.feature-carousel');
+            // posicao no documento sem transform (a animacao fadeInRight desloca o getBoundingClientRect)
+            function pos(el) {
+                var x = 0, y = 0;
+                while (el) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; }
+                return { x: x, y: y };
             }
 
-            function desenhar() {
-                var banner = document.querySelector('.banner-area');
-                var card = cardAlvo();
-                if (!banner || !card) return;
-                var W = document.documentElement.clientWidth;
+            function posicionar() {
                 var mobile = window.matchMedia('(max-width: 991px)').matches;
-                B = doc(banner.getBoundingClientRect()).y + banner.offsetHeight;
-                var c = doc(card.getBoundingClientRect());
-                var S, E, Y, d, topo, X, pos;
-
+                var b = pos(banner);
+                var h = slider.offsetHeight, w = slider.offsetWidth;
+                var x, y;
                 if (!mobile) {
-                    // sai do lugar do antigo botao, desce fazendo a curva para a direita,
-                    // cruza a divisa e volta pela faixa branca ate o topo do card
-                    var btn = doc(document.querySelector('.banner-btn-desktop').getBoundingClientRect());
-                    S = { x: btn.x + 13, y: btn.y + btn.h / 2 };
-                    topo = c.y;
-                    Y = B + Math.max(18, (topo - B) * 0.48);
-                    E = { x: c.x + c.w / 2, y: Y };
-                    var Mx = Math.min(W - 120, Math.max(S.x, E.x) + 380);
-                    d = 'M' + S.x + ',' + S.y +
-                        ' C' + S.x + ',' + (S.y + 120) + ' ' + Mx + ',' + (Y - 150) + ' ' + Mx + ',' + (Y - 40) +
-                        ' C' + Mx + ',' + (Y - 10) + ' ' + (Mx - 20) + ',' + Y + ' ' + (Mx - 60) + ',' + Y +
-                        ' L' + E.x + ',' + Y;
-                    X = E.x;
-                    pos = null; // desktop: so o Check-in, na curva roxa (o Embarque e o link ao lado do ponto)
+                    // desce o onibus ate os pneus encostarem na base do roxo
+                    slider.style.top = '0px';
+                    var s = pos(slider);
+                    var dy = (b.y + banner.offsetHeight) - (s.y + h * (1 - VAZIO_BASE));
+                    slider.style.top = Math.round(dy) + 'px';
+                    // tag acima da frente do onibus
+                    x = s.x - b.x + w * 0.26;
+                    y = s.y + dy - b.y + h * TETO_FRENTE - 44;
                 } else {
-                    // mobile: corre acima do onibus passando por Embarque, Check-in e Destino,
-                    // vira para baixo, passa por tras da imagem, cruza a divisa e chega ao carrossel
-                    // (vale para qualquer card que estiver na tela; a cor indica a ligacao)
-                    var stage = document.querySelector('.feature-carousel .owl-stage-outer') || card;
-                    var sc = doc(stage.getBoundingClientRect());
-                    var th = doc(document.querySelector('.banner-area .thumb').getBoundingClientRect());
-                    var r = 22;
-                    topo = c.y; // todos os cards ficam na mesma altura
-                    Y = th.y - 14;
-                    S = { x: 32, y: Y };
-                    X = sc.x + sc.w - 40;
-                    E = { x: X, y: topo - 44 };
-                    d = 'M' + S.x + ',' + Y + ' L' + (X - r) + ',' + Y +
-                        ' Q' + X + ',' + Y + ' ' + X + ',' + (Y + r) + ' L' + E.x + ',' + E.y;
-                    var dest = X - r - 22;
-                    // so a tag do meio aparece; o texto dela alterna (ver quadro)
-                    pos = [null, (S.x + dest) / 2 - S.x, null];
+                    slider.style.top = '';
+                    var s2 = pos(slider), th = pos(document.querySelector('.banner-area .thumb'));
+                    x = s2.x - b.x + w * 0.39;
+                    y = th.y - b.y - 14;
                 }
-                modoMobile = mobile;
-                busIc.style.display = mobile ? 'none' : '';
-                pessoa.style.display = mobile ? '' : 'none';
-                if (!mobile) stops[1].querySelector('text').textContent = 'Check-in';
-                path.setAttribute('d', d);
-                L = path.getTotalLength();
-
-                var H = topo + 20;
-                svg.setAttribute('width', W);
-                svg.setAttribute('height', H);
-                wrap.style.height = H + 'px';
-                svg.querySelector('#rota-top-r').setAttribute('width', W);
-                svg.querySelector('#rota-top-r').setAttribute('height', B);
-                var bot = svg.querySelector('#rota-bot-r');
-                bot.setAttribute('y', B); bot.setAttribute('width', W); bot.setAttribute('height', Math.max(0, H - B));
-
-                for (var i = 0; i < progs.length; i++) progs[i].style.strokeDasharray = L + ' ' + L;
-
-                if (!pos) pos = [null, L * 0.38, null];
-                paradas = [];
-                for (var k = 0; k < stops.length; k++) {
-                    var st = stops[k];
-                    if (pos[k] === null) { st.style.display = 'none'; continue; }
-                    st.style.display = '';
-                    var p = path.getPointAtLength(pos[k]);
-                    st.setAttribute('transform', 'translate(' + p.x + ',' + p.y + ')');
-                    var z = cor(p.y), fg = z === 'top' ? BRANCO : ROXO, bg = z === 'top' ? ROXO : BRANCO;
-                    st.querySelector('.core').setAttribute('fill', bg);
-                    st.querySelector('.core').setAttribute('stroke', fg);
-                    st.querySelector('.ring').setAttribute('stroke', fg);
-                    // o Embarque ja tem o ponto do link; aqui so o texto
-                    st.querySelector('.core').style.display = k === 0 ? 'none' : '';
-                    var tx = st.querySelector('text');
-                    tx.setAttribute('fill', fg);
-                    tx.setAttribute('x', !mobile ? 12 : k === 0 ? -13 : 0);
-                    tx.setAttribute('y', mobile ? -22 : -14);
-                    tx.setAttribute('text-anchor', !mobile || k === 0 ? 'start' : 'middle');
-                    if (k > 0) paradas.push({ el: st, at: pos[k] });
-                }
-
-                // ponta do marcador encosta no topo do card
-                pinG.setAttribute('transform', 'translate(' + X + ',' + (topo - 2) + ')');
-                start.style.left = S.x + 'px';
-                start.style.top = S.y + 'px';
-                alvo = { y: c.y };
-
-                if (calmo || mobile) posicionar(L, 1);
+                tag.style.left = Math.round(x) + 'px';
+                tag.style.top = Math.round(y) + 'px';
+                tag.classList.add('pronta');
             }
 
-            function posicionar(s, alpha) {
-                var p = path.getPointAtLength(s);
-                bus.setAttribute('transform', 'translate(' + p.x + ',' + p.y + ')');
-                bus.style.opacity = alpha;
-                var top = cor(p.y) === 'top';
-                busBg.setAttribute('fill', top ? BRANCO : ROXO);
-                busIc.setAttribute('fill', top ? ROXO : BRANCO);
-                pessoa.setAttribute('fill', top ? ROXO : BRANCO);
-                var vs = busIc.querySelectorAll('.v');
-                for (var i = 0; i < vs.length; i++) vs[i].setAttribute('fill', top ? BRANCO : ROXO);
-                for (var j = 0; j < progs.length; j++) progs[j].style.strokeDashoffset = L - s;
+            var n = 0;
+            function trocar() {
+                n = (n + 1) % TAGS.length;
+                txt.textContent = TAGS[n];
+                tag.classList.remove('hit'); void tag.offsetWidth; tag.classList.add('hit');
             }
-
-            function bater(el) { el.classList.remove('hit'); void el.getBBox(); el.classList.add('hit'); }
-
-            // ciclo: percorre (4.8s) -> chega e o marcador pula -> pausa -> some e recomeca
-            var IDA = 4800, PAUSA = 1400, t0 = null, passou = 0, chegou = false;
-            function suave(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
-            // mobile: a tag troca a cada TROCA ms com um pulso
-            var TAGS = ['Check-in', 'Embarque', 'Comunicados', 'Destino', 'Avisos', 'Localização'], TROCA = 2000, ultima = -1;
-            function trocarTag(ts) {
-                var n = Math.floor(ts / TROCA);
-                if (n === ultima) return;
-                ultima = n;
-                var k = n % TAGS.length, tx = stops[1].querySelector('text');
-                tx.textContent = TAGS[k];
-                bater(tx); bater(stops[1]);
-            }
-            function quadro(ts) {
-                if (!L) { requestAnimationFrame(quadro); return; }
-                if (modoMobile) { trocarTag(ts); t0 = null; requestAnimationFrame(quadro); return; }
-                if (t0 === null) t0 = ts;
-                var t = ts - t0;
-                if (t <= IDA) {
-                    var s = L * suave(t / IDA);
-                    posicionar(s, Math.min(1, t / 250));
-                    while (passou < paradas.length && s >= paradas[passou].at) bater(paradas[passou++].el);
-                } else if (t <= IDA + PAUSA) {
-                    if (!chegou) { chegou = true; posicionar(L, 1); bater(pin); }
-                    if (t > IDA + PAUSA - 350) bus.style.opacity = 0;
-                } else {
-                    t0 = ts; passou = 0; chegou = false;
-                    posicionar(0, 0);
-                }
-                requestAnimationFrame(quadro);
-            }
-
-            start.addEventListener('click', function (e) {
-                e.preventDefault();
-                if (window.jQuery && window.innerWidth < 1000) jQuery('.feature-carousel').trigger('to.owl.carousel', [0, 300]);
-                if (alvo) window.scrollTo({ top: alvo.y - window.innerHeight * 0.22, behavior: calmo ? 'auto' : 'smooth' });
-            });
+            if (!calmo) setInterval(trocar, TROCA);
 
             var espera;
-            function agendar() { clearTimeout(espera); espera = setTimeout(desenhar, 120); }
+            function agendar() { clearTimeout(espera); espera = setTimeout(posicionar, 120); }
             window.addEventListener('resize', agendar);
-            // imagens e fontes que carregam depois mudam a altura da pagina: redesenha junto
-            if (window.ResizeObserver) new ResizeObserver(agendar).observe(document.body);
-            window.addEventListener('load', function () {
-                desenhar();
-                setTimeout(desenhar, 1200);
-                if (window.jQuery) {
-                    var car = jQuery('.feature-carousel');
-                    car.on('initialized.owl.carousel refreshed.owl.carousel resized.owl.carousel', agendar);
-
-                    // o carrossel fica parado no primeiro card (Rota Universitaria) ate o usuario
-                    // chegar nele; dai em diante passa um card de cada vez.
-                    // (o plugin de autoplay le settings.autoplay, recalculado de options a cada breakpoint)
-                    var liberado = false;
-                    var autoplay = function (sim) {
-                        var owl = car.data('owl.carousel');
-                        if (!owl) return;
-                        owl.options.autoplay = sim; owl.settings.autoplay = sim;
-                        car.trigger(sim ? 'play.owl.autoplay' : 'stop.owl.autoplay');
-                    };
-                    var segura = function () { if (!liberado) autoplay(false); };
-                    segura();
-                    car.on('initialized.owl.carousel', function () { setTimeout(segura, 0); });
-                    var liberar = function () {
-                        if (liberado) return;
-                        liberado = true;
-                        autoplay(true);
-                    };
-                    if (window.IntersectionObserver && car[0]) {
-                        var io = new IntersectionObserver(function (ents) {
-                            if (ents[0].isIntersecting) { io.disconnect(); liberar(); }
-                        }, { threshold: 0.35 });
-                        io.observe(car[0]);
-                    } else {
-                        liberar();
-                    }
-                }
-                if (!calmo) requestAnimationFrame(quadro);
-            });
+            if (window.ResizeObserver) new ResizeObserver(agendar).observe(banner);
             if (document.fonts && document.fonts.ready) document.fonts.ready.then(agendar);
+            posicionar();
+
+            window.addEventListener('load', function () {
+                posicionar();
+                setTimeout(posicionar, 1200);
+                if (!window.jQuery) return;
+
+                // o carrossel fica parado no primeiro card (Rota Universitaria) ate o usuario
+                // chegar nele; dai em diante passa um card de cada vez.
+                // (o plugin de autoplay le settings.autoplay, recalculado de options a cada breakpoint)
+                var car = jQuery('.feature-carousel'), liberado = false;
+                var autoplay = function (sim) {
+                    var owl = car.data('owl.carousel');
+                    if (!owl) return;
+                    owl.options.autoplay = sim; owl.settings.autoplay = sim;
+                    car.trigger(sim ? 'play.owl.autoplay' : 'stop.owl.autoplay');
+                };
+                var segura = function () { if (!liberado) autoplay(false); };
+                segura();
+                car.on('initialized.owl.carousel', function () { setTimeout(segura, 0); });
+                var liberar = function () { if (!liberado) { liberado = true; autoplay(true); } };
+                if (window.IntersectionObserver && car[0]) {
+                    var io = new IntersectionObserver(function (ents) {
+                        if (ents[0].isIntersecting) { io.disconnect(); liberar(); }
+                    }, { threshold: 0.35 });
+                    io.observe(car[0]);
+                } else {
+                    liberar();
+                }
+            });
         })();
     </script>
 </body>
