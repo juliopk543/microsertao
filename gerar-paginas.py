@@ -31,6 +31,10 @@ HEAD_EXTRA = """    <base href="/">
 CSS_TRANSPORTE = """    <style>
         /* /transporte: banner com fundo roxo */
         .banner-area.bg-light-gradient { background: #490a7c; }
+        /* desktop: fundo com ondas e piso iluminado (images/fundoHeader.png convertido para jpg) */
+        @media only screen and (min-width: 992px) {
+            .banner-area.bg-light-gradient { background: #490a7c url("images/fundoHeader.jpg?v=1") center bottom / cover no-repeat; }
+        }
         .banner-area.rectangular-shape::after { display: none; }
         .banner-area.text-combo h2 { color: #fff; }
         .banner-area.text-combo h2 span.brand-light { color: #8fb2ff; }
