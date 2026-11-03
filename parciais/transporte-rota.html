@@ -13,8 +13,9 @@
             position: absolute; z-index: 6; left: 0; top: 0; pointer-events: none;
             height: auto !important; width: auto !important; /* o tema da altura cheia aos filhos do banner */
             display: flex; flex-direction: column; align-items: center; gap: 9px;
-            /* o ponto (16px) fica centrado em left/top */
-            transform: translate(-50%, calc(-100% + 8px));
+            /* o ponto fica centrado em left/top (--meio = metade do ponto) */
+            --meio: 8px;
+            transform: translate(-50%, calc(-100% + var(--meio)));
             opacity: 0; transition: opacity .4s;
         }
         .rota-tag.pronta { opacity: 1; }
@@ -28,8 +29,12 @@
         .rota-tag.hit .rt-txt { animation: rota-tag .6s ease-out; }
         .rota-tag.hit .rt-dot::after { animation: rota-ping .9s ease-out; }
 
+        /* desktop: tag maior, no espaco livre acima do texto, entre a coluna e a frente do onibus */
         @media only screen and (min-width: 992px) {
-            .rota-tag .rt-txt { font-size: 13px; }
+            .rota-tag { --meio: 11px; gap: 14px; }
+            .rota-tag .rt-txt { font-size: 22px; letter-spacing: 6px; padding-left: 6px; }
+            .rota-tag .rt-dot { width: 22px; height: 22px; border-width: 4px; }
+            .rota-tag .rt-dot::after { inset: -4px; }
         }
 
         @keyframes rota-tag { 0% { opacity: 0; transform: scale(.6); } 60% { opacity: 1; transform: scale(1.12); } 100% { opacity: 1; transform: scale(1); } }
@@ -52,7 +57,6 @@
             var TAGS = ['Check-in', 'Embarque', 'Comunicados', 'Destino', 'Avisos', 'Localização'];
             var TROCA = 2000;
             var VAZIO_BASE = 0.041;  // faixa transparente embaixo dos pneus no Onibus.png (fracao da altura)
-            var TETO_FRENTE = 0.2;   // altura do teto sobre a frente do onibus (fracao da altura)
             var calmo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             var banner = document.querySelector('.banner-area');
@@ -84,9 +88,11 @@
                     var s = pos(slider);
                     var dy = (b.y + banner.offsetHeight) - (s.y + h * (1 - VAZIO_BASE));
                     slider.style.top = Math.round(dy) + 'px';
-                    // tag acima da frente do onibus
-                    x = s.x - b.x + w * 0.26;
-                    y = s.y + dy - b.y + h * TETO_FRENTE - 44;
+                    // tag no espaco livre acima do titulo, logo depois da coluna de texto
+                    var info = document.querySelector('.banner-area .info');
+                    var h2 = document.querySelector('.banner-area h2');
+                    x = pos(info).x - b.x + info.offsetWidth + 30;
+                    y = pos(h2).y - b.y - 44;
                 } else {
                     slider.style.top = '';
                     var s2 = pos(slider), th = pos(document.querySelector('.banner-area .thumb'));
