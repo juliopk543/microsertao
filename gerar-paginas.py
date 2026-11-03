@@ -71,7 +71,7 @@ def trocar(html, nome, novo):
 
 
 def transporte_primeiro(html):
-    """Coloca o card da Secretaria de Transporte como primeiro do carrossel."""
+    """Ordem dos cards em /transporte: Transporte, Comunicação e depois o resto."""
     ini = html.index('<div class="feature-items feature-carousel owl-carousel owl-theme">')
     sep = "<!-- End Single Item --><!-- Single Item -->"
     corpo_ini = html.index("<!-- Single Item -->", ini) + len("<!-- Single Item -->")
@@ -80,8 +80,10 @@ def transporte_primeiro(html):
         fim = html.index("<!-- End Single Item -->", fim + len(sep))
     cards = html[corpo_ini:fim].split(sep)
     assert len(cards) == 3, "esperava 3 cards no carrossel"
-    cards.sort(key=lambda c: 0 if "<h3>Secretaria de Transporte</h3>" in c else 1)  # ordenacao estavel
-    assert "<h3>Secretaria de Transporte</h3>" in cards[0]
+    ordem = ["<h3>Secretaria de Transporte</h3>", "<h3>Secretaria de Comunicação</h3>"]
+    cards.sort(key=lambda c: next((i for i, t in enumerate(ordem) if t in c), len(ordem)))  # ordenacao estavel
+    for i, t in enumerate(ordem):
+        assert t in cards[i], "card fora de ordem: " + t
     return html[:corpo_ini] + sep.join(cards) + html[fim:]
 
 
