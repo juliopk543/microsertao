@@ -26,6 +26,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      - name: Remove source-only files
+        run: rm -f fonte.html gerar-paginas.py
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:

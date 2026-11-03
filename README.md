@@ -12,7 +12,9 @@ Publicado em <https://www.microsertao.com.br>.
 O que está no repositório é exatamente o que vai ao ar.
 
 ```
-index.html      página única (todas as seções)
+fonte.html      página-fonte (todas as seções) — é aqui que se edita
+gerar-paginas.py gera index.html, transporte/ e microempreendedores/ a partir do fonte.html
+index.html      gerado: cópia de /transporte servida na raiz
 css/            folhas de estilo
 js/             scripts (jQuery, Bootstrap, plugins e o main do tema)
 images/         imagens, ícones e logos
@@ -36,7 +38,10 @@ python -m http.server 8000
 
 ## Editar
 
-Todo o conteúdo de texto e as imagens estão no `index.html`. Ao trocar uma
+Todo o conteúdo de texto e as imagens estão no `fonte.html`. Depois de editar,
+rode `python gerar-paginas.py` para gerar `index.html` (raiz, igual a
+/transporte), `transporte/index.html` e `microempreendedores/index.html`; não
+edite as páginas geradas à mão. Ao trocar uma
 imagem, coloque o arquivo em `images/` e atualize o `src` correspondente.
 Os caminhos são todos relativos — não use caminhos absolutos.
 

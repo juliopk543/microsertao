@@ -1155,6 +1155,34 @@
             }
         </style>
     </noscript>
+    <style>
+        /* /transporte: banner com fundo roxo */
+        .banner-area.bg-light-gradient { background: #490a7c; }
+        .banner-area.rectangular-shape::after { display: none; }
+        .banner-area.text-combo h2 { color: #fff; }
+        .banner-area.text-combo h2 span.brand-light { color: #8fb2ff; }
+        .banner-area.text-combo h2 span.banner-eyebrow { color: #d6c3ff; }
+        .banner-area.text-combo h2 span.banner-eyebrow::before { background: #d6c3ff; }
+        .banner-area.text-combo h2 span.banner-sub { color: rgba(255, 255, 255, 0.9); }
+        .banner-area::before { display: none; }
+        /* faixa da logo na cor do fundo do banner */
+        nav.navbar.navbar-default.bootsnav.navbar-fixed-light a.navbar-brand::before { background-color: #490a7c; background-image: none; }
+
+        /* mobile: fundo roxo encosta nas bordas e navbar da mesma cor */
+        @media only screen and (max-width: 991px) {
+            nav.navbar .navbar-brand img.logo.logo-responsive { height: 38px !important; }
+            .banner-area { margin-left: -15px; margin-right: -15px; width: calc(100% + 30px); max-width: none; }
+            nav.navbar.navbar-default.bootsnav { background: #490a7c; border-color: #490a7c; }
+            nav.navbar.navbar-default.bootsnav .navbar-toggle,
+            nav.navbar.navbar-default.bootsnav .navbar-toggle i,
+            nav.navbar.navbar-default.bootsnav .attr-nav > ul > li > a,
+            nav.navbar.navbar-default.bootsnav .attr-nav > ul > li > a i { color: #fff; }
+            nav.navbar.navbar-default.bootsnav .attr-nav > ul > li.side-menu,
+            nav.navbar.navbar-default.bootsnav .attr-nav { border-color: rgba(255, 255, 255, 0.25); }
+            nav.navbar.navbar-default.bootsnav .navbar-collapse { background: #490a7c; }
+            nav.navbar.navbar-default.bootsnav .navbar-collapse .nav > li > a { color: #fff; }
+        }
+    </style>
 </head>
 
 <body
@@ -1237,8 +1265,8 @@
                         <i class="fa fa-bars"></i>
                     </button>
                     <a class="navbar-brand" href="#home">
-                        <img src="images/coruripedbs.png" class="logo default" alt="IBRASO conexões">
-                        <img src="images/coruripedbs.png" class="logo logo-responsive" alt="IBRASO conexões">
+                        <img src="images/studio-microsertao.png?v=1" class="logo default" alt="StudioMicrosertão">
+                        <img src="images/studio-microsertao.png?v=1" class="logo logo-responsive" alt="StudioMicrosertão">
                     </a>
                 </div>
                 <!-- End Header Navigation -->
@@ -1414,12 +1442,12 @@
                                     <div class="col-lg-7 info">
                                         <div class="feature-items feature-carousel owl-carousel owl-theme">
                                             <!-- Single Item -->
-                                            <div class="item item-banner" data-thumb="images/lavajato.png">
+                                            <div class="item item-banner" data-thumb="images/I81nPteFTFaO.png">
                                                 <div class="icon" style="display: block; margin: -50px -50px 30px; line-height: 0;">
-                                                    <img src="images/ods8.jpg" alt="ODS 8" style="display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover;">
+                                                    <img src="images/Rota%20Universit%C3%A1ria.png?v=3" alt="Rota universitária" style="display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover;">
                                                 </div>
-                                                <h3>Secretaria de Comércio e Indústria</h3>
-                                                <p>Durante o atendimento em barbearias, salões, lava-jatos e demais estabelecimentos, campanhas de vacinação, inscrições para transporte escolar, eventos culturais, ações de alerta e conscientização são apresentadas à população via SECOM pelos aplicativos gratuitos dos microempreendedores, enquanto estiverem no ar.</p>
+                                                <h3>Secretaria de Transporte</h3>
+                                                <p>No aplicativo universitário oferecemos o monitoramento dos ônibus durante o percurso, gestão das carteirinhas digitais para a Secretaria de Transporte, avisos institucionais do município via SECOM e dicas importantes para seguir as regras durante o percurso.</p>
                                                 <div class="bottom">
                                                     <a class="btn-simple" href="#service"><i
                                                             class="fas fa-angle-right"></i> Saiba Mais </a>
@@ -1441,12 +1469,12 @@
                                             </div>
 
                                             <!-- End Single Item --><!-- Single Item -->
-                                            <div class="item item-banner" data-thumb="images/I81nPteFTFaO.png">
+                                            <div class="item item-banner" data-thumb="images/lavajato.png">
                                                 <div class="icon" style="display: block; margin: -50px -50px 30px; line-height: 0;">
-                                                    <img src="images/Rota%20Universit%C3%A1ria.png?v=3" alt="Rota universitária" style="display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover;">
+                                                    <img src="images/ods8.jpg" alt="ODS 8" style="display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover;">
                                                 </div>
-                                                <h3>Secretaria de Transporte</h3>
-                                                <p>No aplicativo universitário oferecemos o monitoramento dos ônibus durante o percurso, gestão das carteirinhas digitais para a Secretaria de Transporte, avisos institucionais do município via SECOM e dicas importantes para seguir as regras durante o percurso.</p>
+                                                <h3>Secretaria de Comércio e Indústria</h3>
+                                                <p>Durante o atendimento em barbearias, salões, lava-jatos e demais estabelecimentos, campanhas de vacinação, inscrições para transporte escolar, eventos culturais, ações de alerta e conscientização são apresentadas à população via SECOM pelos aplicativos gratuitos dos microempreendedores, enquanto estiverem no ar.</p>
                                                 <div class="bottom">
                                                     <a class="btn-simple" href="#service"><i
                                                             class="fas fa-angle-right"></i> Saiba Mais </a>
@@ -2206,6 +2234,157 @@
         })(jQuery);
     </script>
 
+    <!-- ===================================================================
+         /transporte: tag animada acima da frente do onibus (desktop e mobile).
+         Substitui o botao Vantagens. Uma tag unica alterna Check-in, Embarque,
+         Comunicados, Destino, Avisos e Localizacao com um pulso; o onibus desce
+         ate encostar na base do roxo. O carrossel de cards fica parado no
+         primeiro card (Rota Universitaria) ate o usuario chegar nele.
+         Injetado pelo gerar-paginas.py (nao existe no index.html).
+    =================================================================== -->
+    <style>
+        .banner-btn-desktop { display: none !important; }
+
+        .rota-tag {
+            position: absolute; z-index: 6; left: 0; top: 0; pointer-events: none;
+            height: auto !important; width: auto !important; /* o tema da altura cheia aos filhos do banner */
+            display: flex; flex-direction: column; align-items: center; gap: 9px;
+            /* o ponto fica centrado em left/top (--meio = metade do ponto) */
+            --meio: 8px;
+            transform: translate(-50%, calc(-100% + var(--meio)));
+            opacity: 0; transition: opacity .4s;
+        }
+        .rota-tag.pronta { opacity: 1; }
+        .rota-tag .rt-txt {
+            color: #fff; font-family: "Nunito", sans-serif; font-weight: 800; font-size: 11px;
+            letter-spacing: 3px; text-transform: uppercase; white-space: nowrap; line-height: 1;
+            padding-left: 3px; /* compensa o espacamento depois da ultima letra */
+        }
+        .rota-tag .rt-dot { position: relative; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #fff; background: #490a7c; box-sizing: border-box; }
+        .rota-tag .rt-dot::after { content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid #fff; opacity: 0; }
+        .rota-tag.hit .rt-txt { animation: rota-tag .6s ease-out; }
+        .rota-tag.hit .rt-dot::after { animation: rota-ping .9s ease-out; }
+
+        /* desktop: tag maior, no espaco livre acima do texto, entre a coluna e a frente do onibus */
+        @media only screen and (min-width: 992px) {
+            .rota-tag { --meio: 11px; gap: 14px; }
+            .rota-tag .rt-txt { font-size: 22px; letter-spacing: 6px; padding-left: 6px; }
+            .rota-tag .rt-dot { width: 22px; height: 22px; border-width: 4px; }
+            .rota-tag .rt-dot::after { inset: -4px; }
+        }
+
+        @keyframes rota-tag { 0% { opacity: 0; transform: scale(.6); } 60% { opacity: 1; transform: scale(1.12); } 100% { opacity: 1; transform: scale(1); } }
+        @keyframes rota-ping { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(3); opacity: 0; } }
+
+        /* mobile: espaco para a tag acima do onibus e onibus encostado na base do roxo
+           (no desktop o deslocamento e calculado no script) */
+        @media only screen and (max-width: 991px) {
+            .banner-area .thumb { margin-top: 64px; }
+            .banner-area .double-items { padding-bottom: 0 !important; }
+            .banner-area .banner-slider { margin-bottom: -2.7%; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .rota-tag.hit .rt-txt, .rota-tag.hit .rt-dot::after { animation: none; }
+        }
+    </style>
+    <script>
+        (function () {
+            var TAGS = ['Check-in', 'Embarque', 'Comunicados', 'Destino', 'Avisos', 'Localização'];
+            var TROCA = 2000;
+            var VAZIO_BASE = 0.041;  // faixa transparente embaixo dos pneus no Onibus.png (fracao da altura)
+            var calmo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            var banner = document.querySelector('.banner-area');
+            var slider = document.querySelector('.banner-area .banner-slider');
+            if (!banner || !slider) return;
+
+            var tag = document.createElement('div');
+            tag.className = 'rota-tag';
+            tag.setAttribute('aria-hidden', 'true');
+            tag.innerHTML = '<span class="rt-txt">' + TAGS[0] + '</span><span class="rt-dot"></span>';
+            banner.appendChild(tag);
+            var txt = tag.querySelector('.rt-txt');
+
+            // posicao no documento sem transform (a animacao fadeInRight desloca o getBoundingClientRect)
+            function pos(el) {
+                var x = 0, y = 0;
+                while (el) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; }
+                return { x: x, y: y };
+            }
+
+            function posicionar() {
+                var mobile = window.matchMedia('(max-width: 991px)').matches;
+                var b = pos(banner);
+                var h = slider.offsetHeight, w = slider.offsetWidth;
+                var x, y;
+                if (!mobile) {
+                    // desce o onibus ate os pneus encostarem na base do roxo
+                    slider.style.top = '0px';
+                    var s = pos(slider);
+                    var dy = (b.y + banner.offsetHeight) - (s.y + h * (1 - VAZIO_BASE));
+                    slider.style.top = Math.round(dy) + 'px';
+                    // tag no espaco livre acima do titulo, logo depois da coluna de texto
+                    var info = document.querySelector('.banner-area .info');
+                    var h2 = document.querySelector('.banner-area h2');
+                    x = pos(info).x - b.x + info.offsetWidth + 30;
+                    y = pos(h2).y - b.y - 44;
+                } else {
+                    slider.style.top = '';
+                    var s2 = pos(slider), th = pos(document.querySelector('.banner-area .thumb'));
+                    x = s2.x - b.x + w * 0.39;
+                    y = th.y - b.y - 14;
+                }
+                tag.style.left = Math.round(x) + 'px';
+                tag.style.top = Math.round(y) + 'px';
+                tag.classList.add('pronta');
+            }
+
+            var n = 0;
+            function trocar() {
+                n = (n + 1) % TAGS.length;
+                txt.textContent = TAGS[n];
+                tag.classList.remove('hit'); void tag.offsetWidth; tag.classList.add('hit');
+            }
+            if (!calmo) setInterval(trocar, TROCA);
+
+            var espera;
+            function agendar() { clearTimeout(espera); espera = setTimeout(posicionar, 120); }
+            window.addEventListener('resize', agendar);
+            if (window.ResizeObserver) new ResizeObserver(agendar).observe(banner);
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(agendar);
+            posicionar();
+
+            window.addEventListener('load', function () {
+                posicionar();
+                setTimeout(posicionar, 1200);
+                if (!window.jQuery) return;
+
+                // o carrossel fica parado no primeiro card (Rota Universitaria) ate o usuario
+                // chegar nele; dai em diante passa um card de cada vez.
+                // (o plugin de autoplay le settings.autoplay, recalculado de options a cada breakpoint)
+                var car = jQuery('.feature-carousel'), liberado = false;
+                var autoplay = function (sim) {
+                    var owl = car.data('owl.carousel');
+                    if (!owl) return;
+                    owl.options.autoplay = sim; owl.settings.autoplay = sim;
+                    car.trigger(sim ? 'play.owl.autoplay' : 'stop.owl.autoplay');
+                };
+                var segura = function () { if (!liberado) autoplay(false); };
+                segura();
+                car.on('initialized.owl.carousel', function () { setTimeout(segura, 0); });
+                var liberar = function () { if (!liberado) { liberado = true; autoplay(true); } };
+                if (window.IntersectionObserver && car[0]) {
+                    var io = new IntersectionObserver(function (ents) {
+                        if (ents[0].isIntersecting) { io.disconnect(); liberar(); }
+                    }, { threshold: 0.35 });
+                    io.observe(car[0]);
+                } else {
+                    liberar();
+                }
+            });
+        })();
+    </script>
 </body>
 
 </html><!-- Page cached by LiteSpeed Cache 7.6.2 on 2026-08-29 07:18:02 -->

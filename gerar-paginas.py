@@ -1,5 +1,6 @@
-# Gera /microempreendedores/ e /transporte/ a partir do index.html.
-# Rode sempre que alterar o index.html:  python gerar-paginas.py
+# Gera a raiz (index.html), /microempreendedores/ e /transporte/ a partir do fonte.html.
+# Rode sempre que alterar o fonte.html:  python gerar-paginas.py
+# A raiz e uma copia de /transporte (mesmo conteudo, com o endereco da raiz).
 import re
 from pathlib import Path
 
@@ -57,10 +58,13 @@ CSS_TRANSPORTE = """    <style>
     </style>
 """
 
+TRANSPORTE = {"css": CSS_TRANSPORTE, "logo": "images/studio-microsertao.png?v=1", "transporte_primeiro": True,
+              "rota": "parciais/transporte-rota.html"}  # texto novo + slide do onibus + fundo roxo + tag animada
+
 PAGINAS = {
     "microempreendedores": {"sub": SUB_MICRO, "img": IMG_MICRO},
-    "transporte": {"css": CSS_TRANSPORTE, "logo": "images/studio-microsertao.png?v=1", "transporte_primeiro": True,
-                   "rota": "parciais/transporte-rota.html"},  # texto novo + slide do onibus + fundo roxo + rota ate o card
+    "transporte": TRANSPORTE,
+    "": TRANSPORTE,  # raiz igual a /transporte
 }
 
 
@@ -87,7 +91,7 @@ def transporte_primeiro(html):
     return html[:corpo_ini] + sep.join(cards) + html[fim:]
 
 
-base = (RAIZ / "index.html").read_text(encoding="utf-8")
+base = (RAIZ / "fonte.html").read_text(encoding="utf-8")
 for pasta, trocas in PAGINAS.items():
     html = base
     for nome in ("banner-sub", "banner-img"):
@@ -106,10 +110,11 @@ for pasta, trocas in PAGINAS.items():
         bloco = (RAIZ / trocas["rota"]).read_text(encoding="utf-8")
         assert html.count("</body>") == 1, "esperava um unico </body>"
         html = html.replace("</body>", bloco + "</body>", 1)
-    url = SITE + pasta + "/"
-    html = html.replace('content="%s"' % SITE, 'content="%s"' % url, 1)
-    html = html.replace('rel="canonical" href="%s"' % SITE, 'rel="canonical" href="%s"' % url, 1)
-    html = html.replace("<head>\n", "<head>\n" + HEAD_EXTRA, 1)
+    if pasta:  # subpasta: endereco proprio e caminhos apontando para a raiz
+        url = SITE + pasta + "/"
+        html = html.replace('content="%s"' % SITE, 'content="%s"' % url, 1)
+        html = html.replace('rel="canonical" href="%s"' % SITE, 'rel="canonical" href="%s"' % url, 1)
+        html = html.replace("<head>\n", "<head>\n" + HEAD_EXTRA, 1)
     destino = RAIZ / pasta / "index.html"
     destino.parent.mkdir(exist_ok=True)
     destino.write_text(html, encoding="utf-8", newline="\n")
