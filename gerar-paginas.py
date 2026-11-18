@@ -59,14 +59,18 @@ CSS_TRANSPORTE = """    <style>
     </style>
 """
 
-TRANSPORTE = {"css": CSS_TRANSPORTE, "logo": "images/studio-microsertao.png?v=1", "transporte_primeiro": True,
+# Imagem de previa ao compartilhar o link: (arquivo, tipo, largura, altura)
+PREVIA_TRANSPORTE = ("bannerlink.png?v=2", "image/png", 941, 1672)
+PREVIA_TURISMO = ("bannerlink-turismo.jpeg?v=1", "image/jpeg", 828, 1194)
+
+TRANSPORTE = {"previa": PREVIA_TRANSPORTE, "css": CSS_TRANSPORTE, "logo": "images/studio-microsertao.png?v=1", "transporte_primeiro": True,
               "rota": "parciais/transporte-rota.html"}  # texto novo + slide do onibus + fundo roxo + tag animada
 
 PAGINAS = {
     "microempreendedores": {"sub": SUB_MICRO, "img": IMG_MICRO},
     "transporte": TRANSPORTE,
     "": TRANSPORTE,  # raiz igual a /transporte
-    "turismo": dict(TRANSPORTE, inicial=1),  # igual a /transporte, mas ja abre no 2o banner e no card de Turismo
+    "turismo": dict(TRANSPORTE, inicial=1, previa=PREVIA_TURISMO),  # igual a /transporte, mas ja abre no 2o banner e no card de Turismo
 }
 
 
@@ -115,6 +119,12 @@ for pasta, trocas in PAGINAS.items():
             bloco = "<script>window.BANNER_INICIAL = %d;</script>" % trocas["inicial"] + chr(10) + bloco
             html = html.replace("integração com o transporte universitário.", "integração com o setor gastronômico.", 1)
         html = html.replace("</body>", bloco + "</body>", 1)
+    if "previa" in trocas:
+        arq, tipo, larg, alt = trocas["previa"]
+        html = html.replace("images/bannerlink.jpg?v=1", "images/" + arq)
+        html = html.replace('content="image/jpeg"', 'content="%s"' % tipo, 1)
+        html = html.replace('og:image:width" content="941"', 'og:image:width" content="%d"' % larg, 1)
+        html = html.replace('og:image:height" content="1672"', 'og:image:height" content="%d"' % alt, 1)
     if pasta:  # subpasta: endereco proprio e caminhos apontando para a raiz
         url = SITE + pasta + "/"
         html = html.replace('content="%s"' % SITE, 'content="%s"' % url, 1)
