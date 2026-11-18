@@ -2413,6 +2413,70 @@
             });
         })();
     </script>
+
+    <!-- ===================================================================
+         /transporte: segundo banner no header. A cada poucos segundos o banner inteiro
+         desliza: o fundo roxo troca pelo "Papel de Parede Abstrato Azul Ciano" e o onibus
+         sai para dar lugar ao "Casal conectado no cafe". Depois volta ao primeiro.
+    =================================================================== -->
+    <style>
+        .banner-area { isolation: isolate; }
+        .banner-area .banner-bg2 {
+            position: absolute; inset: 0; z-index: -1; pointer-events: none;
+            background: #004b7c url("images/Papel%20de%20Parede%20Abstrato%20Azul%20Ciano.png") center / cover no-repeat;
+            opacity: 0; transition: opacity .9s ease;
+        }
+        .banner-area.b2 .banner-bg2 { opacity: 1; }
+        .banner-slider .casal-slide {
+            position: absolute; bottom: 4%; left: 0; right: 0; margin: 0 auto;
+            height: 96%; width: auto; max-width: 100%;
+            transform: translateX(100%); opacity: 0;
+            transition: transform .9s ease, opacity .9s ease;
+        }
+        .banner-area.b2 .banner-slider .casal-slide { transform: translateX(0); opacity: 1; }
+        .banner-area.b2 .banner-slider.slid .is-next { transform: translateX(-100%); opacity: 0; }
+        .banner-area.b2 .rota-tag { opacity: 0 !important; }
+        .banner-area .rota-tag { transition: opacity .4s; }
+        /* faixa da logo e navbar acompanham a cor do segundo banner */
+        nav.navbar.navbar-default.bootsnav a.navbar-brand::before { transition: background-color .9s ease; }
+        html.banner2 nav.navbar.navbar-default.bootsnav a.navbar-brand::before { background-color: #004b7c; }
+        @media only screen and (max-width: 991px) {
+            nav.navbar.navbar-default.bootsnav { transition: background-color .9s ease; }
+            html.banner2 nav.navbar.navbar-default.bootsnav,
+            html.banner2 nav.navbar.navbar-default.bootsnav .navbar-collapse { background: #004b7c; border-color: #004b7c; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .banner-area .banner-bg2, .banner-slider .casal-slide { transition: none; }
+        }
+    </style>
+    <script>
+        (function () {
+            var banner = document.querySelector('.banner-area');
+            var slider = document.querySelector('.banner-area .banner-slider');
+            if (!banner || !slider) return;
+            var bg = document.createElement('div');
+            bg.className = 'banner-bg2';
+            bg.setAttribute('aria-hidden', 'true');
+            banner.insertBefore(bg, banner.firstChild);
+            var img = document.createElement('img');
+            img.className = 'casal-slide';
+            img.decoding = 'async';
+            img.src = 'images/Casal%20conectado%20no%20caf%C3%A9-Photoroom.png';
+            img.alt = 'Casal usando o IBRASO conexões em um café';
+            slider.appendChild(img);
+            var calmo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (calmo) return;
+            var segundo = false;
+            // espera o onibus entrar (1s) e ficar um tempo; depois alterna a cada 6s
+            setTimeout(function () {
+                setInterval(function () {
+                    segundo = !segundo;
+                    banner.classList.toggle('b2', segundo);
+                    document.documentElement.classList.toggle('banner2', segundo);
+                }, 6000);
+            }, 3000);
+        })();
+    </script>
 </body>
 
 </html><!-- Page cached by LiteSpeed Cache 7.6.2 on 2026-08-29 07:18:02 -->
