@@ -1460,13 +1460,12 @@
                                             </div>
 
                                             <!-- End Single Item --><!-- Single Item -->
-                                            <div class="item item-banner" data-thumb="images/SEYlcgXkaRoy.png">
+                                            <div class="item item-banner" data-thumb="images/I81nPteFTFaO.png">
                                                 <div class="icon" style="display: block; margin: -50px -50px 30px; line-height: 0;">
-                                                    <img src="images/Conex%C3%A3o%20P%C3%BAblica%20Digital%20em%20Verde.png" alt="Campanhas publicitárias" style="display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover;">
+                                                    <img src="images/Caminho%20das%20%C3%81guas%20em%20Alagoas.png" alt="Secretaria de Turismo" style="display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover;">
                                                 </div>
-                                                <h3>Secretaria de Comunicação</h3>
-                                                <p>No painel próprio da SECOM oferecemos espaço para publicar, pausar e retirar avisos institucionais a qualquer momento, sem depender de intermediários. A integração com outras secretarias expande o alcance da comunicação para telas de atendimento do transporte universitário e no atendimento aos clientes do comércio regional via microempreendedores.</p>
-                                                </p>
+                                                <h3>Secretaria de Turismo</h3>
+                                                <p>No próprio painel Caminho das Águas, oferecemos o controle para divulgar rotas, passeios, praias e experiências nos municípios participantes. O setor gastronômico passa a contar gratuitamente com cardápios digitais acessados por QR Codes nas mesas, eliminando custos com impressão e facilitando atualizações de preços e produtos. O espaço institucional integra a SECOM para a divulgação de obras municipais aos visitantes, além de disponibilizar informações sobre marés e condições de banho.</p>
                                                 <div class="bottom">
                                                     <a class="btn-simple" href="#service"><i
                                                             class="fas fa-angle-right"></i> Saiba Mais </a>
@@ -1474,12 +1473,13 @@
                                             </div>
 
                                             <!-- End Single Item --><!-- Single Item -->
-                                            <div class="item item-banner" data-thumb="images/I81nPteFTFaO.png">
+                                            <div class="item item-banner" data-thumb="images/SEYlcgXkaRoy.png">
                                                 <div class="icon" style="display: block; margin: -50px -50px 30px; line-height: 0;">
-                                                    <img src="images/Caminho%20das%20%C3%81guas%20em%20Alagoas.png" alt="Secretaria de Turismo" style="display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover;">
+                                                    <img src="images/Conex%C3%A3o%20P%C3%BAblica%20Digital%20em%20Verde.png" alt="Campanhas publicitárias" style="display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover;">
                                                 </div>
-                                                <h3>Secretaria de Turismo</h3>
-                                                <p>No próprio painel Caminho das Águas, oferecemos o controle para divulgar rotas, passeios, praias e experiências nos municípios participantes. O setor gastronômico passa a contar gratuitamente com cardápios digitais acessados por QR Codes nas mesas, eliminando custos com impressão e facilitando atualizações de preços e produtos. O espaço institucional integra a SECOM para a divulgação de obras municipais aos visitantes, além de disponibilizar informações sobre marés e condições de banho.</p>
+                                                <h3>Secretaria de Comunicação</h3>
+                                                <p>No painel próprio da SECOM oferecemos espaço para publicar, pausar e retirar avisos institucionais a qualquer momento, sem depender de intermediários. A integração com outras secretarias expande o alcance da comunicação para telas de atendimento do transporte universitário e no atendimento aos clientes do comércio regional via microempreendedores.</p>
+                                                </p>
                                                 <div class="bottom">
                                                     <a class="btn-simple" href="#service"><i
                                                             class="fas fa-angle-right"></i> Saiba Mais </a>
@@ -2391,7 +2391,8 @@
                 var segura = function () { if (!liberado) autoplay(false); };
                 segura();
                 car.on('initialized.owl.carousel', function () { setTimeout(segura, 0); });
-                var liberar = function () { if (!liberado) { liberado = true; autoplay(true); } };
+                // no desktop (>=1000px) o carrossel nunca avanca sozinho: so o usuario arrasta.
+                var liberar = function () { if (!liberado) { liberado = true; if (window.innerWidth < 1000) autoplay(true); } };
                 if (window.IntersectionObserver && car[0]) {
                     var io = new IntersectionObserver(function (ents) {
                         if (ents[0].isIntersecting) { io.disconnect(); liberar(); }

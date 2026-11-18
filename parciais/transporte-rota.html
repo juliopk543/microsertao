@@ -137,7 +137,8 @@
                 var segura = function () { if (!liberado) autoplay(false); };
                 segura();
                 car.on('initialized.owl.carousel', function () { setTimeout(segura, 0); });
-                var liberar = function () { if (!liberado) { liberado = true; autoplay(true); } };
+                // no desktop (>=1000px) o carrossel nunca avanca sozinho: so o usuario arrasta.
+                var liberar = function () { if (!liberado) { liberado = true; if (window.innerWidth < 1000) autoplay(true); } };
                 if (window.IntersectionObserver && car[0]) {
                     var io = new IntersectionObserver(function (ents) {
                         if (ents[0].isIntersecting) { io.disconnect(); liberar(); }
