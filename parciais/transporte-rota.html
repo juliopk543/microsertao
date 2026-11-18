@@ -170,6 +170,13 @@
             opacity: 0; transition: opacity .9s ease;
         }
         .banner-area.b2 .banner-bg2 { opacity: 1; }
+        /* cores do titulo acompanham a paleta do segundo banner (ciano) */
+        .banner-area.text-combo h2 span.brand-light,
+        .banner-area.text-combo h2 span.banner-eyebrow { transition: color .9s ease; }
+        .banner-area.text-combo h2 span.banner-eyebrow::before { transition: background-color .9s ease; }
+        .banner-area.text-combo.b2 h2 span.brand-light { color: #3ee6ff; }
+        .banner-area.text-combo.b2 h2 span.banner-eyebrow { color: #9af3ff; }
+        .banner-area.text-combo.b2 h2 span.banner-eyebrow::before { background: #9af3ff; }
         .banner-slider .casal-slide {
             position: absolute; bottom: 4%; left: 0; right: 0; margin: 0 auto;
             height: 96%; width: auto; max-width: 100%;
