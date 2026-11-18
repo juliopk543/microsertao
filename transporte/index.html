@@ -2464,17 +2464,49 @@
             img.src = 'images/Casal%20conectado%20no%20caf%C3%A9-Photoroom.png';
             img.alt = 'Casal usando o IBRASO conexões em um café';
             slider.appendChild(img);
-            var calmo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (calmo) return;
-            var segundo = false;
-            // espera o onibus entrar (1s) e ficar um tempo; depois alterna a cada 6s
-            setTimeout(function () {
-                setInterval(function () {
-                    segundo = !segundo;
-                    banner.classList.toggle('b2', segundo);
-                    document.documentElement.classList.toggle('banner2', segundo);
-                }, 6000);
-            }, 3000);
+            // texto do subtitulo de cada banner
+            var sub = banner.querySelector('.banner-sub');
+            var TEXTOS = [sub ? sub.textContent : '', 'Canal digital de comunicação pública, integração com o setor gastronômico.'];
+            if (sub) sub.style.transition = 'opacity .3s ease';
+            var atual = 0, trocaTxt;
+            function mostrar(n) {
+                if (n === atual) return;
+                atual = n;
+                var segundo = n === 1;
+                banner.classList.toggle('b2', segundo);
+                document.documentElement.classList.toggle('banner2', segundo);
+                if (sub) {
+                    clearTimeout(trocaTxt);
+                    sub.style.opacity = '0';
+                    trocaTxt = setTimeout(function () { sub.textContent = TEXTOS[n]; sub.style.opacity = '1'; }, 300);
+                }
+            }
+            // banner 1 <-> card Secretaria de Transporte (1o); banner 2 <-> card Secretaria de Turismo (2o).
+            // Os dois seguem juntos: o card muda o banner e o deslize no banner muda o card.
+            // Nos demais cards o banner volta ao primeiro.
+            function ligar() {
+                var car = jQuery('.feature-carousel');
+                if (!car.length) return;
+                car.on('changed.owl.carousel', function (e) {
+                    if (!e.item || !e.property || e.property.name !== 'position') return;
+                    mostrar(e.relatedTarget.relative(e.item.index) === 1 ? 1 : 0);
+                });
+                var x0 = null, y0 = 0;
+                banner.addEventListener('touchstart', function (e) {
+                    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+                }, { passive: true });
+                banner.addEventListener('touchend', function (e) {
+                    if (x0 === null) return;
+                    var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+                    x0 = null;
+                    if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+                    var alvo = dx < 0 ? 1 : 0;       // desliza para a esquerda = proximo banner
+                    if (alvo === atual) return;
+                    mostrar(alvo);
+                    car.trigger('to.owl.carousel', [alvo, 400, true]);
+                }, { passive: true });
+            }
+            if (window.jQuery) ligar();
         })();
     </script>
 </body>
