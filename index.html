@@ -2475,6 +2475,7 @@
                 if (n === atual) return;
                 atual = n;
                 var segundo = n === 1;
+                try { history.replaceState(null, '', segundo ? '/turismo' : '/transporte'); } catch (err) {}
                 if (window.rotaTagsLista) window.rotaTagsLista(segundo ? TAGS2 : TAGS1);
                 banner.classList.toggle('b2', segundo);
                 document.documentElement.classList.toggle('banner2', segundo);
@@ -2510,6 +2511,13 @@
                 }, { passive: true });
             }
             if (window.jQuery) ligar();
+            // /turismo abre ja no segundo banner e no card de Turismo
+            if (window.BANNER_INICIAL === 1) {
+                mostrar(1);
+                window.addEventListener('load', function () {
+                    if (window.jQuery) setTimeout(function () { jQuery('.feature-carousel').trigger('to.owl.carousel', [1, 0, true]); }, 100);
+                });
+            }
         })();
     </script>
 </body>

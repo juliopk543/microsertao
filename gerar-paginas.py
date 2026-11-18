@@ -66,6 +66,7 @@ PAGINAS = {
     "microempreendedores": {"sub": SUB_MICRO, "img": IMG_MICRO},
     "transporte": TRANSPORTE,
     "": TRANSPORTE,  # raiz igual a /transporte
+    "turismo": dict(TRANSPORTE, inicial=1),  # igual a /transporte, mas ja abre no 2o banner e no card de Turismo
 }
 
 
@@ -110,6 +111,9 @@ for pasta, trocas in PAGINAS.items():
     if "rota" in trocas:
         bloco = (RAIZ / trocas["rota"]).read_text(encoding="utf-8")
         assert html.count("</body>") == 1, "esperava um unico </body>"
+        if trocas.get("inicial"):
+            bloco = "<script>window.BANNER_INICIAL = %d;</script>" % trocas["inicial"] + chr(10) + bloco
+            html = html.replace("integração com o transporte universitário.", "integração com o setor gastronômico.", 1)
         html = html.replace("</body>", bloco + "</body>", 1)
     if pasta:  # subpasta: endereco proprio e caminhos apontando para a raiz
         url = SITE + pasta + "/"
