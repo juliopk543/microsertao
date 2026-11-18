@@ -234,8 +234,8 @@
                     loop: false,
                     autoplay: false,
                     dots: false,
-                    mouseDrag: false,
-                    touchDrag: false
+                    mouseDrag: true,
+                    touchDrag: true
                 }
             }
         });

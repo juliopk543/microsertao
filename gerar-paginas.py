@@ -84,7 +84,7 @@ def transporte_primeiro(html):
     while html.startswith(sep, fim):  # avanca ate o ultimo card
         fim = html.index("<!-- End Single Item -->", fim + len(sep))
     cards = html[corpo_ini:fim].split(sep)
-    assert len(cards) == 3, "esperava 3 cards no carrossel"
+    assert len(cards) == 4, "esperava 4 cards no carrossel"
     ordem = ["<h3>Secretaria de Transporte</h3>", "<h3>Secretaria de Comunicação</h3>"]
     cards.sort(key=lambda c: next((i for i, t in enumerate(ordem) if t in c), len(ordem)))  # ordenacao estavel
     for i, t in enumerate(ordem):
