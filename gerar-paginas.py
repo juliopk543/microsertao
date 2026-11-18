@@ -55,6 +55,16 @@ CSS_TRANSPORTE = """    <style>
             nav.navbar.navbar-default.bootsnav .attr-nav { border-color: rgba(255, 255, 255, 0.25); }
             nav.navbar.navbar-default.bootsnav .navbar-collapse { background: #490a7c; }
             nav.navbar.navbar-default.bootsnav .navbar-collapse .nav > li > a { color: #fff; }
+            /* menu aberto: o tema deixa a lista em branco, entao o texto branco sumia */
+            nav.navbar.navbar-default.bootsnav #navbar-menu,
+            nav.navbar.navbar-default.bootsnav #navbar-menu .nav,
+            nav.navbar.navbar-default.bootsnav #navbar-menu .nav > li { background: #490a7c !important; border-color: rgba(255, 255, 255, 0.2) !important; }
+            nav.navbar.navbar-default.bootsnav #navbar-menu .nav > li > a,
+            nav.navbar.navbar-default.bootsnav #navbar-menu .nav > li > a:hover,
+            nav.navbar.navbar-default.bootsnav #navbar-menu .nav > li > a:focus { color: #fff !important; background: transparent !important; }
+            html.banner2 nav.navbar.navbar-default.bootsnav #navbar-menu,
+            html.banner2 nav.navbar.navbar-default.bootsnav #navbar-menu .nav,
+            html.banner2 nav.navbar.navbar-default.bootsnav #navbar-menu .nav > li { background: #004b7c !important; }
         }
     </style>
 """
