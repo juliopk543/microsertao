@@ -2368,6 +2368,12 @@
             }
 
             var n = 0;
+            // o segundo banner troca a lista de tags (window.rotaTagsLista)
+            window.rotaTagsLista = function (lista) {
+                TAGS = lista; n = 0;
+                tag.classList.remove('hit'); void tag.offsetWidth;
+                txt.textContent = TAGS[0]; tag.classList.add('hit');
+            };
             function trocar() {
                 n = (n + 1) % TAGS.length;
                 txt.textContent = TAGS[n];
@@ -2430,12 +2436,15 @@
         .banner-slider .casal-slide {
             position: absolute; bottom: 4%; left: 0; right: 0; margin: 0 auto;
             height: 96%; width: auto; max-width: 100%;
-            transform: translateX(100%); opacity: 0;
+            transform: scale(.9); transform-origin: 50% 100%; opacity: 0;
             transition: transform .9s ease, opacity .9s ease;
         }
-        .banner-area.b2 .banner-slider .casal-slide { transform: translateX(0); opacity: 1; }
-        .banner-area.b2 .banner-slider.slid .is-next { transform: translateX(-100%); opacity: 0; }
-        .banner-area.b2 .rota-tag { opacity: 0 !important; }
+        .banner-area.b2 .banner-slider .casal-slide { transform: scale(1); opacity: 1; }
+        .banner-area.b2 .banner-slider.slid .is-next { transform: scale(.9); opacity: 0; }
+        /* imagens do slide surgem (fade + leve crescimento) em vez de deslizar */
+        .banner-slider .is-next { transform: scale(.9); transform-origin: 50% 100%; }
+        .banner-slider.slid .is-active { transform: none; opacity: 0; }
+        .banner-slider.slid .is-next { transform: scale(1); opacity: 1; }
         .banner-area .rota-tag { transition: opacity .4s; }
         /* faixa da logo e navbar acompanham a cor do segundo banner */
         nav.navbar.navbar-default.bootsnav a.navbar-brand::before { transition: background-color .9s ease; }
@@ -2468,11 +2477,14 @@
             var sub = banner.querySelector('.banner-sub');
             var TEXTOS = [sub ? sub.textContent : '', 'Canal digital de comunicação pública, integração com o setor gastronômico.'];
             if (sub) sub.style.transition = 'opacity .3s ease';
+            var TAGS1 = ['Check-in', 'Embarque', 'Comunicados', 'Destino', 'Avisos', 'Localização'];
+            var TAGS2 = ['Cardápio digital', 'Rotas e passeios', 'Marés e praias', 'Cultura e região'];
             var atual = 0, trocaTxt;
             function mostrar(n) {
                 if (n === atual) return;
                 atual = n;
                 var segundo = n === 1;
+                if (window.rotaTagsLista) window.rotaTagsLista(segundo ? TAGS2 : TAGS1);
                 banner.classList.toggle('b2', segundo);
                 document.documentElement.classList.toggle('banner2', segundo);
                 if (sub) {
