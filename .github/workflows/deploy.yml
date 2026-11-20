@@ -35,7 +35,6 @@ jobs:
             mkdir -p "$d"
             cp manutencao.html "$d/index.html"
           done
-          cp manutencao.html 404.html
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
