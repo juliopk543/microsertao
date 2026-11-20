@@ -28,12 +28,12 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Remove source-only files
         run: rm -f fonte.html gerar-paginas.py
-      # MODO MANUTENÇÃO: para reativar o site, apague este passo.
-      - name: Modo manutenção
+      # MODO 404: para reativar o site, apague este passo.
+      - name: Modo 404 (site fora do ar)
         run: |
           for d in . transporte turismo microempreendedores dist; do
             mkdir -p "$d"
-            cp manutencao.html "$d/index.html"
+            cp 404.html "$d/index.html"
           done
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
