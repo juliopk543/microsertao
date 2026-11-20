@@ -79,7 +79,7 @@ TRANSPORTE = {"previa": PREVIA_TRANSPORTE, "css": CSS_TRANSPORTE, "logo": "image
 PAGINAS = {
     "microempreendedores": {"sub": SUB_MICRO, "img": IMG_MICRO},
     "transporte": TRANSPORTE,
-    "": TRANSPORTE,  # raiz igual a /transporte
+    "": dict(TRANSPORTE, inicial=1),  # raiz = /transporte, mas ja abre no 2o banner (Turismo)
     "turismo": dict(TRANSPORTE, inicial=1, previa=PREVIA_TURISMO),  # igual a /transporte, mas ja abre no 2o banner e no card de Turismo
 }
 
